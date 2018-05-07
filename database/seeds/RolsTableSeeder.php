@@ -4,7 +4,7 @@ use Illuminate\Database\Seeder;
 
 //use Uuid;
 
-use App\Rol;
+use App\Models\Rol;
 
 class RolsTableSeeder extends Seeder
 {
