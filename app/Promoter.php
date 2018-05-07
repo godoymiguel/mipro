@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Project extends Model
+class Promoter extends Model
 {
     public $incrementing = false;
 
@@ -14,16 +14,12 @@ class Project extends Model
      * @var array
      */
     protected $fillable = [
-        'id','name','user_id','active',
+        'id', 'name', 'type', 'cedula', 'email', 'model', 'project_id',
     ];
 
-    public function user()
+    public function project()
     {
-    	return $this->belongsTo(User::class);
+    	return $this->belongsTo(Project::class);
     }
 
-    public function promoters()
-    {
-    	return $this->hasMany(Promoter::class);
-    }
 }
