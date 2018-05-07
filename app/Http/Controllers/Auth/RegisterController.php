@@ -10,6 +10,8 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 
 use Uuid;
 
+use App\Rol;
+
 class RegisterController extends Controller
 {
     /*
@@ -32,6 +34,8 @@ class RegisterController extends Controller
      */
     protected $redirectTo = '/home';
 
+    protected $rol;
+
     /**
      * Create a new controller instance.
      *
@@ -40,6 +44,8 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+        $this->rol = new Rol();
+        
     }
 
     /**
@@ -57,6 +63,7 @@ class RegisterController extends Controller
             'cedula'    => 'required|integer|min:0|unique:users',
             'email'     => 'required|string|email|max:255|unique:users',
             'password'  => 'required|string|min:6|confirmed',
+            //'type'      => 'required',
         ]);
     }
 
@@ -68,7 +75,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-
         return User::create([
             'id'        => Uuid::generate()->string,
             'name'      => $data['name'],
@@ -77,6 +83,8 @@ class RegisterController extends Controller
             'cedula'    => $data['cedula'],
             'email'     => $data['email'],
             'password'  => Hash::make($data['password']),
+            'rol_id'    => $this->rol->defaultUuid(),
+            'type'      => $data['type'],
         ]);
     }
 }

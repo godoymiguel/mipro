@@ -17,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'id','name', 'lastname', 'username', 'cedula', 'email', 'password',
+        'id','name', 'lastname', 'username', 'cedula', 'email', 'password','rol_id','type','active','avatar'
     ];
 
     /**
@@ -28,4 +28,14 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function rol()
+    {
+        return $this->belongsTo(Rol::class);
+    }
+
+    public function projects()
+    {
+        return $this->hasMany(Project::class);
+    }
 }
