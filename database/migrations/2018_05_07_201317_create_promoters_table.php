@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUsersTable extends Migration
+class CreatePromotersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,23 +13,18 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('promoters', function (Blueprint $table) {
             $table->uuid('id');
             $table->primary('id');
-            $table->rememberToken();
             $table->timestamps();
             $table->string('name');
-            $table->string('lastname');
-            $table->string('username')->unique();
             $table->enum('type',['V','E','J']);
             $table->bigInteger('cedula')->unique();
             $table->string('email')->unique();
-            $table->string('password');
-            $table->boolean('active')->default(true);
-            $table->string('avatar')->nullable();
-            
-            $table->uuid('rol_id');            
-            $table->foreign('rol_id')->references('id')->on('rols');
+            $table->enum('model',['MEM','MET','MEF','MEE']);
+
+            $table->uuid('project_id');            
+            $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
         });
     }
 
@@ -40,6 +35,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('promoters');
     }
 }
