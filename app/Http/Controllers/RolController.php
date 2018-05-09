@@ -14,7 +14,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        //
+        //return Rol::all();
+        return view('admin.rol.index');
     }
 
     /**
@@ -24,7 +25,7 @@ class RolController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -35,7 +36,13 @@ class RolController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'value' =>  'required|string|max:255|unique:rols',
+            'title' =>  'required|string|max:255'
+        ]);
+        
+        $rol = Rol::create($request->all());
+        return response()->json($rol,201);
     }
 
     /**
@@ -46,7 +53,7 @@ class RolController extends Controller
      */
     public function show(Rol $rol)
     {
-        //
+        return $rol;
     }
 
     /**
@@ -57,7 +64,7 @@ class RolController extends Controller
      */
     public function edit(Rol $rol)
     {
-        //
+        return $rol;
     }
 
     /**
@@ -69,7 +76,9 @@ class RolController extends Controller
      */
     public function update(Request $request, Rol $rol)
     {
-        //
+        $rol->update($request->all());
+
+        return response()->json($rol,200);
     }
 
     /**
@@ -80,6 +89,8 @@ class RolController extends Controller
      */
     public function destroy(Rol $rol)
     {
-        //
+        $rol->delete();
+
+        return response()->json(null,204);
     }
 }
