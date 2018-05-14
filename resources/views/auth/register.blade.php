@@ -56,7 +56,15 @@
                         <div class="form-group row">
                             <label for="cedula" class="col-md-4 col-form-label text-md-right">{{ __('Cedula') }}</label>
 
-                            <div class="col-md-6">
+                            <div class="col-md-2">
+                                <select name="<type></type>" class="custom-select">
+                                    <option selected></option>
+                                    <option value="V">V -</option>
+                                    <option value="E">E -</option>
+                                    <option value="J">J -</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
                                 <input id="cedula" type="number" class="form-control{{ $errors->has('cedula') ? ' is-invalid' : '' }}" name="cedula" value="{{ old('cedula') }}" required autofocus>
 
                                 @if ($errors->has('cedula'))
