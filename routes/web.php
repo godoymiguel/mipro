@@ -24,3 +24,6 @@ Route::put('rol/{rol}/a','RolController@active')->name('rol.active');
 
 Route::resource('usuario', 'UserController');
 Route::put('usuario/{usuario}/a','UserController@active')->name('user.active');
+
+Route::resource('proyectos','ProjectController');
+Route::put('proyectos/{proyectos}/a','ProjectController@active')->name('proyectos.active');
