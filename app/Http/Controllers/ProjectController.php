@@ -102,7 +102,13 @@ class ProjectController extends Controller
      */
     public function update(Request $request, Project $project)
     {
-        //
+        $this->validate($request,[
+            'name' =>  'required|string|max:255',
+        ]);
+
+        $project->update();
+
+        return redirect()->route('proyectos.show',$project->id); 
     }
 
     /**
@@ -113,7 +119,6 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        dd($project);
         $project->delete();
         return redirect()->back();
     }

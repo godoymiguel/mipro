@@ -25,5 +25,5 @@ Route::put('rol/{rol}/a','RolController@active')->name('rol.active');
 Route::resource('usuario', 'UserController');
 Route::put('usuario/{usuario}/a','UserController@active')->name('user.active');
 
-Route::resource('proyectos','ProjectController');
-Route::put('proyectos/{proyectos}/a','ProjectController@active')->name('proyectos.active');
+Route::resource('proyectos','ProjectController')->parameters(['proyectos' => 'project']);
+Route::put('proyectos/{project}/a','ProjectController@active')->name('proyectos.active');
