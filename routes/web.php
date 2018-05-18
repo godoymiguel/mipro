@@ -29,3 +29,12 @@ Route::delete('/idea/{id}', 'IdeaController@delete')->name('idea.delete');
 Route::get('/idea/tabla', 'IdeaController@index')->name('idea.tabla');
 
 
+
+Route::resource('rol','RolController');
+Route::put('rol/{rol}/a','RolController@active')->name('rol.active');
+
+Route::resource('usuario', 'UserController');
+Route::put('usuario/{usuario}/a','UserController@active')->name('user.active');
+
+Route::resource('proyectos','ProjectController');
+Route::put('proyectos/{proyectos}/a','ProjectController@active')->name('proyectos.active');

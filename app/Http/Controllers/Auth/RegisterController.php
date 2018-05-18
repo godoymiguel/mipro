@@ -63,7 +63,7 @@ class RegisterController extends Controller
             'cedula'    => 'required|integer|min:0|unique:users',
             'email'     => 'required|string|email|max:255|unique:users',
             'password'  => 'required|string|min:6|confirmed',
-            //'type'      => 'required',
+            'type'      => 'required',
         ]);
     }
 
