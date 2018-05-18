@@ -27,3 +27,5 @@ Route::put('usuario/{usuario}/a','UserController@active')->name('user.active');
 
 Route::resource('proyectos','ProjectController')->parameters(['proyectos' => 'project']);
 Route::put('proyectos/{project}/a','ProjectController@active')->name('proyectos.active');
+
+Route::resource('promotor','PromoterController')->parameters(['promotor' => 'promoter']);
