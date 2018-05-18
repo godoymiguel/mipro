@@ -84,7 +84,7 @@ class RegisterController extends Controller
             'email'     => $data['email'],
             'password'  => Hash::make($data['password']),
             'rol_id'    => $this->rol->defaultUuid(),
-            'type'      => $data['type'],
+            'type'      => 'V',
         ]);
     }
 }

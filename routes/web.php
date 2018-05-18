@@ -18,3 +18,14 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+
+Route::post('/idea', 'IdeaController@store')->name('idea.store');
+Route::get('/idea', 'IdeaController@create')->name('idea');
+
+Route::get('/idea/{id}/edit', 'IdeaController@edit')->name('idea.edit');
+Route::put('/idea/{id}', 'IdeaController@update')->name('idea.update');
+Route::delete('/idea/{id}', 'IdeaController@delete')->name('idea.delete');
+Route::get('/idea/tabla', 'IdeaController@index')->name('idea.tabla');
+
+
