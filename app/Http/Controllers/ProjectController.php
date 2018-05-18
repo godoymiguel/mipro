@@ -88,7 +88,9 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        //
+        $method = 'edit';
+
+        return view('admin.project.create', compact('method','project'));
     }
 
     /**

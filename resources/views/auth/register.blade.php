@@ -57,7 +57,7 @@
                             <label for="cedula" class="col-md-4 col-form-label text-md-right">{{ __('Cedula') }}</label>
 
                             <div class="col-md-2">
-                                <select name="<type></type>" class="custom-select">
+                                <select name="type" class="custom-select">
                                     <option selected></option>
                                     <option value="V">V -</option>
                                     <option value="E">E -</option>
