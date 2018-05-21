@@ -7,7 +7,7 @@
             <div class="card">
                 <div class="card-header">{{ __('Idea') }}</div>
                 <div class="card-body">
-                    <form method="POST" action="{{ route('idea') }}">
+                    <form method="POST" action="{{ route('idea.store') }}">
                         @csrf
                         <p><h3 style="text-align:center">Nueva Idea</h3></p>
                         <div class="form-group row">
@@ -24,12 +24,10 @@
                         
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Cancelar') }}
-                                </button>
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Guardar') }}
-                                </button>
+                                 <a href="{{ route('proyectos.index') }}" type="button" class="btn btn-primary">
+                                        {{ __('Cancelar ') }}</a>
+                                <button class="btn btn-primary" type="summit">
+                                        {{ __('Guardar ') }}</button>
                             </div>
                         </div>
                         

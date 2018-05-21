@@ -26,7 +26,14 @@ class IdeaController extends Controller
      */
     public function create()
     {
-        return view('idea.idea');
+		$count=Idea::where('proyecto_id',"789a6f50-5aa8-11e8-bc75-efb4a09d8425")->count();
+		if($count>=3)
+		{
+			return redirect()->back();
+		}else
+		{
+			return view('idea.idea');
+		}
     }
 
     /**
@@ -39,8 +46,9 @@ class IdeaController extends Controller
     {
         $idea=new Idea($request->all());
         $idea->id=Uuid::generate()->string;
+        $idea->proyecto_id="789a6f50-5aa8-11e8-bc75-efb4a09d8425";
         $idea->save();
-        return view('idea.idea');
+        return redirect()->route('idea.tabla');
     }
 
     /**
@@ -83,8 +91,11 @@ class IdeaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Idea $idea)
     {
-        //
+        $idea->delete();
+        return redirect()->back();
+    
     }
 }
+

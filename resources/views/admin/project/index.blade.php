@@ -59,7 +59,7 @@
                                             @endif
                                             <form method="POST" action="{{ route('proyectos.destroy', $value->id) }}">
                                                 @csrf
-                                                    {{ method_field('Delete') }}
+                                                    {{ method_field('Destroy') }}
                                                     <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->name !!}?')">
                                                     Borrar
                                                     </button>

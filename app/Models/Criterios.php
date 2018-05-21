@@ -12,7 +12,7 @@ class Criterios extends Model
      * Los atributos BD de Criterios
      */
     protected $fillable = [
-        'id','valor',
+        'id', 'name', 'valor1', 'valor2', 'valor3',
     ];
 
     public function idea()

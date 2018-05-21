@@ -17,7 +17,10 @@ class CreateCriteriosTable extends Migration
 			$table->uuid('id');
 			$table->primary('id');
             $table->timestamps();
-            $table->Integer('valor');
+            $table->String('name');
+            $table->Integer('valor1');
+            $table->Integer('valor2');
+            $table->Integer('valor3');
 
             $table->uuid('idea_id');            
             $table->foreign('idea_id')->references('id')->on('ideas')->onDelete('cascade');

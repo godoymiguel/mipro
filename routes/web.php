@@ -25,7 +25,7 @@ Route::get('/idea', 'IdeaController@create')->name('idea');
 
 Route::get('/idea/{id}/edit', 'IdeaController@edit')->name('idea.edit');
 Route::put('/idea/{id}', 'IdeaController@update')->name('idea.update');
-Route::delete('/idea/{id}', 'IdeaController@delete')->name('idea.delete');
+Route::delete('/idea/{idea}', 'IdeaController@delete')->name('idea.delete');
 Route::get('/idea/tabla', 'IdeaController@index')->name('idea.tabla');
 
 
