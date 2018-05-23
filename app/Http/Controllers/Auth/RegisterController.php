@@ -56,6 +56,8 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
+        $data['username'] = strtoupper($data['username']);
+
         return Validator::make($data, [
             'name'      => 'required|string|max:255',
             'lastname'  => 'required|string|max:255',
@@ -79,7 +81,7 @@ class RegisterController extends Controller
             'id'        => Uuid::generate()->string,
             'name'      => $data['name'],
             'lastname'  => $data['lastname'],
-            'username'  => $data['username'],
+            'username'  => strtoupper($data['username']),
             'cedula'    => $data['cedula'],
             'email'     => $data['email'],
             'password'  => Hash::make($data['password']),
