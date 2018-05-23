@@ -29,7 +29,11 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        $project = Project::all();
+        if (Auth::user()->rol->value == 'TEACHER' || Auth::user()->rol->value == 'ADMIN') {
+            $project = Project::orderBy('created_at','DESC')->get();
+        } else {
+            $project = Project::where('user_id', Auth::user()->id)->orderBy('created_at','DESC')->get();
+        }
 
         return view('admin.project.index', compact('project'));
 
@@ -58,6 +62,10 @@ class ProjectController extends Controller
         $this->validate($request,[
             'name' =>  'required|string|max:255',
         ]);
+
+        Project::where('user_id', Auth::user()->id)
+                ->where('active',1)
+                ->update(['active'=>0]);
         
         $request->merge(array('user_id' => Auth::user()->id));
         //dd($request->all());
@@ -132,6 +140,10 @@ class ProjectController extends Controller
      */
     public function active(Request $request, Project $project)
     {
+        Project::where('user_id', Auth::user()->id)
+                ->where('active',1)
+                ->update(['active'=>0]);
+
         $project->update($request->all());
 
         return redirect()->back();

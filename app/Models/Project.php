@@ -17,6 +17,11 @@ class Project extends Model
         'id','name','user_id','active',
     ];
 
+    public function projectUser($user)
+    {
+        return $this->where('active',true)->where('user_id',$user)->value('id');
+    }
+
     public function user()
     {
     	return $this->belongsTo(User::class);
@@ -25,5 +30,10 @@ class Project extends Model
     public function promoters()
     {
     	return $this->hasMany(Promoter::class);
+    }
+
+    public function timeSeries()
+    {
+        return $this->hasMany(TimeSerie::class);
     }
 }
