@@ -61,7 +61,7 @@ class UserController extends Controller
     {
         $rol_id = $this->rol->searchUuid($request->rol_id);
 
-        $request->merge(array('rol_id' => $rol_id,'username' => strtoupper($request->username));
+        $request->merge(array('rol_id' => $rol_id,'username' => strtoupper($request->username)));
             
         $this->validate($request,[
             'name'      => 'required|string|max:255',

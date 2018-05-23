@@ -11,6 +11,20 @@ use Auth;
 
 class TimeSerieController extends Controller
 {
+
+    protected $project;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->project = new Project;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -18,7 +32,10 @@ class TimeSerieController extends Controller
      */
     public function index()
     {
-        //
+        $timeSerie = TimeSerie::where('project_id', $this->project->projectUser(Auth::user()->id))->OrderBy('year','ASC')->get();
+
+        return view('admin.em.timeSerie.index', compact('timeSerie'));
+
     }
 
     /**
@@ -28,7 +45,10 @@ class TimeSerieController extends Controller
      */
     public function create()
     {
-        //
+        $timeSerie =  new TimeSerie;
+        $method = 'create';
+
+        return view('admin.em.timeSerie.serie', compact('timeSerie','method'));
     }
 
     /**
@@ -39,7 +59,32 @@ class TimeSerieController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'year'          =>  'required|integer|min:0',
+            'production'    =>  'required|numeric',
+            'import'        =>  'required|numeric',
+            'existence'     =>  'required|numeric',
+            'export'        =>  'required|numeric',
+            'population'    =>  'required|numeric',
+            'price'         =>  'required|numeric',
+            'real_income'   =>  'required|numeric',
+        ]);
+
+        $apparent_consumption = $request->production +$request->import +$request->existence -$request->export;
+
+        $precapita_consumption = $apparent_consumption /$request->population;
+
+        $request->merge(array(
+            'id' => Uuid::generate()->string,
+            'model' => 'MEM',
+            'project_id' => $this->project->projectUser(Auth::user()->id),
+            'apparent_consumption' => number_format($apparent_consumption,2),
+            'precapita_consumption' => number_format($precapita_consumption,2),
+        ));
+        
+        $timeSerie = TimeSerie::create($request->all());
+
+        return redirect()->route('serietemporal.show',$timeSerie->id);
     }
 
     /**
@@ -50,7 +95,9 @@ class TimeSerieController extends Controller
      */
     public function show(timeSerie $timeSerie)
     {
-        //
+        $method = 'show';
+
+        return view('admin.em.timeSerie.serie', compact('timeSerie','method'));    
     }
 
     /**
@@ -61,7 +108,9 @@ class TimeSerieController extends Controller
      */
     public function edit(timeSerie $timeSerie)
     {
-        //
+        $method = 'edit';
+
+        return view('admin.em.timeSerie.serie', compact('timeSerie','method'));
     }
 
     /**
@@ -73,7 +122,29 @@ class TimeSerieController extends Controller
      */
     public function update(Request $request, timeSerie $timeSerie)
     {
-        //
+        $this->validate($request,[
+            'year'          =>  'required|integer|min:0',
+            'production'    =>  'required|numeric',
+            'import'        =>  'required|numeric',
+            'existence'     =>  'required|numeric',
+            'export'        =>  'required|numeric',
+            'population'    =>  'required|numeric',
+            'price'         =>  'required|numeric',
+            'real_income'   =>  'required|numeric',
+        ]);
+
+        $apparent_consumption = $request->production +$request->import +$request->existence -$request->export;
+
+        $precapita_consumption = $apparent_consumption /$request->population;
+
+        $request->merge(array(
+            'apparent_consumption' => number_format($apparent_consumption,2),
+            'precapita_consumption' => number_format($precapita_consumption,2),
+        ));
+        
+        $timeSerie->update($request->all());
+
+        return redirect()->route('serietemporal.show',$timeSerie->id);
     }
 
     /**
@@ -84,6 +155,8 @@ class TimeSerieController extends Controller
      */
     public function destroy(timeSerie $timeSerie)
     {
-        //
+        $timeSerie->delete();
+
+        return redirect()->back();
     }
 }

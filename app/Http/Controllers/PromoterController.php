@@ -65,12 +65,10 @@ class PromoterController extends Controller
             'email' =>  'required|email|max:255',
         ]);
 
-        $project = Auth::user()->projects->where('active',true)->first();
-
         $request->merge(array(
             'id' => Uuid::generate()->string,
             'model' => 'MEM',
-            'project_id' => $project->id
+            'project_id' => $this->project->projectUser(Auth::user()->id)
         ));
         
         $promoter = Promoter::create($request->all());
