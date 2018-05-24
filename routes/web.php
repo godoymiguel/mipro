@@ -23,12 +23,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::post('/idea', 'IdeaController@store')->name('idea.store');
 Route::get('/idea', 'IdeaController@create')->name('idea');
 
-Route::get('/idea/{id}/edit', 'IdeaController@edit')->name('idea.edit');
-Route::put('/idea/{id}', 'IdeaController@update')->name('idea.update');
+Route::get('/idea/{idea}/edit', 'IdeaController@edit')->name('idea.edit');
+Route::put('/idea/{idea}', 'IdeaController@update')->name('idea.update');
 Route::delete('/idea/{idea}', 'IdeaController@delete')->name('idea.delete');
 Route::get('/idea/tabla', 'IdeaController@index')->name('idea.tabla');
 
+Route::post('/idea/criterio', 'IdeaController@store')->name('idea.criterio.store');
+Route::get('/idea/criterio', 'CriterioController@create')->name('idea.criterio');
 
+Route::post('/canvas', 'CanvasController@store')->name('canvas.store');
+Route::get('/canvas', 'CanvasController@create')->name('canvas.create');
 
 Route::resource('rol','RolController');
 Route::put('rol/{rol}/a','RolController@active')->name('rol.active');

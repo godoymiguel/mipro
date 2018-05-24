@@ -46,44 +46,14 @@
                                 </tbody>
                             </table>
                             
-                            <script type="text/javascript">
-							    function sumar()
-								{
-									var valor1=verificar("A1");
-									var valor2=verificar("A2");
-									document.getElementById("total").value=parseFloat(valor1)+parseFloat(valor2);
-								}
-								
-								    function verificar(id)
-
-									{
-
-										var obj=document.getElementById(id);
-
-										if(obj.value=="")
-
-											value="0";
-
-										else
-
-											value=obj.value;
-
-									
-
-									}
-							</script>
-                            
-                            
-                            
-                            
                             
                              <p><h4> Valoración de Ideas (1-10) </h4></p>
                              <p>Elegir: 
                              
                              <input type="text" size="15" id="total" value="0" readonly="readonly" disabled value="0" ><br /><br /></p>
                              
-                             
-                             <a type="button" class="btn btn-primary btn-lg btn-block" href="{{ route('idea.edit', $value->id) }}"> Añadir Criterio</a>
+                             <a href="{{ route('idea.criterio') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Criterio</a>
+           
 
                             <table class="table">
                                 <thead class="thead-light">
@@ -93,10 +63,17 @@
 											<th scope="col">Idea 2</th>
 											<th scope="col">Idea 3</th>
 									</tr>
+									
+									@foreach($criterio as $key => $value)
+                                    <tr>    
+                                        <td>{!! $value->name !!}</td>
+									
+									</tr> 
+									  @endforeach
 									<tr> 
 										<td> Inversión Inicial</td>
-										<td><input type="number" name="A1" min="1" max="10" step="1" style="width:100px" onkeyup="sumar();" /></td>
-										<td><input type="number" name="A2" min="1" max="10" step="1" style="width:100px" onkeyup="sumar();" /></td>
+										<td><input type="number" name="A1" min="1" max="10" step="1" style="width:100px" /></td>
+										<td><input type="number" name="A2" min="1" max="10" step="1" style="width:100px" /></td>
 								        <td><input type="number" name="A3" min="1" max="10" step="1" style="width:100px"/></td>
 									</tr> 
 									
@@ -175,6 +152,7 @@
 										<td><input type="number" name="M2" min="1" max="10" step="1" style="width:100px"/></td>
 								        <td><input type="number" name="M3" min="1" max="10" step="1" style="width:100px"/></td>				
 								     </tr>
+								     
 								</thead>    
                             </table>
                             <div class="form-group row mb-0">

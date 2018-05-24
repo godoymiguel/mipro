@@ -3,11 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Idea;
-use App\Models\Criterios;
+use App\Models\Canvas;
 use Uuid;
 
-class IdeaController extends Controller
+class CanvasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,8 @@ class IdeaController extends Controller
      */
     public function index()
     {
-		$idea=Idea::all();
-        $criterio=Criterios::all();
-        return view('idea.idea_tabla', compact('idea', 'criterio'));
-       
+		$canvas=Canvas::all();
+        return view('canvas.canvas', compact('canvas'));
     }
 
     /**
@@ -29,14 +26,7 @@ class IdeaController extends Controller
      */
     public function create()
     {
-		$count=Idea::where('proyecto_id',"789a6f50-5aa8-11e8-bc75-efb4a09d8425")->count();
-		if($count>=3)
-		{
-			return redirect()->back();
-		}else
-		{
-			return view('idea.idea');
-		}
+        return view('canvas.canvas');
     }
 
     /**
@@ -47,11 +37,11 @@ class IdeaController extends Controller
      */
     public function store(Request $request)
     {
-        $idea=new Idea($request->all());
-        $idea->id=Uuid::generate()->string;
-        $idea->proyecto_id="789a6f50-5aa8-11e8-bc75-efb4a09d8425";
-        $idea->save();
-        return redirect()->route('idea.tabla');
+        $canvas=new Canvas($request->all());
+        $canvas->id=Uuid::generate()->string;
+        $canvas->proyecto_id="789a6f50-5aa8-11e8-bc75-efb4a09d8425";
+        $canvas->save();
+        return redirect()->route('canvas');
     }
 
     /**
@@ -71,10 +61,9 @@ class IdeaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Idea $idea)
+    public function edit($id)
     {
-
-        return view('idea.editar_idea',compact('idea'));
+        //
     }
 
     /**
@@ -84,15 +73,9 @@ class IdeaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Idea $idea)
+    public function update(Request $request, $id)
     {
-        $this->validate($request,[
-            'name' =>  'required|string|max:255',
-        ]);
-
-        $idea->update($request->all());
-
-        return redirect()->route('idea.tabla');
+        //
     }
 
     /**
@@ -101,11 +84,8 @@ class IdeaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Idea $idea)
+    public function destroy($id)
     {
-        $idea->delete();
-        return redirect()->back();
-    
+        //
     }
 }
-
