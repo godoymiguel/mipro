@@ -59,6 +59,10 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $rol_id = $this->rol->searchUuid($request->rol_id);
+
+        $request->merge(array('rol_id' => $rol_id,'username' => strtoupper($request->username)));
+            
         $this->validate($request,[
             'name'      => 'required|string|max:255',
             'lastname'  => 'required|string|max:255',
@@ -68,10 +72,6 @@ class UserController extends Controller
             'password'  => 'required|string|min:6|confirmed',
             'type'      => 'required',
         ]);
-
-        $rol_id = $this->rol->searchUuid($request->rol_id);
-
-        $request->merge(array('rol_id' => $rol_id));
 
         $user = new User($request->all());
         $user->id = Uuid::generate()->string;
@@ -132,7 +132,7 @@ class UserController extends Controller
         $user = User::find($id);
         $rol_id = $this->rol->searchUuid($request->rol_id);
 
-        $request->merge(array('rol_id' => $rol_id));
+        $request->merge(array('rol_id' => $rol_id,'username' => strtoupper($request->username)));
         //dd($request->all());
         $user->update($request->all());
 

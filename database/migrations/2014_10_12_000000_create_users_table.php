@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('lastname');
-            $table->string('username')->unique();
+            $table->string('username');
             $table->enum('type',['V','E','J']);
             $table->bigInteger('cedula')->unique();
             $table->string('email')->unique();

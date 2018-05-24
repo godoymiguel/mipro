@@ -27,5 +27,11 @@ class RolsTableSeeder extends Seeder
         	'value' => 'STUDENT',
         	'title' => 'Estudiante',
         ]);
+
+        Rol::create([
+            'id' => Uuid::generate()->string,
+            'value' => 'TEACHER',
+            'title' => 'Profesor',
+        ]);
     }
 }

@@ -50,7 +50,7 @@
                             <label for="username" class="col-md-4 col-form-label text-md-right">{{ __('Username') }}</label>
 
                             <div class="col-md-6">
-                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username', $user->username) }}" placeholder="dramirez" required autofocus {{$method == 'show' ? 'disabled' : null }}>
+                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username', $user->username) }}" placeholder="dramirez" style="text-transform:uppercase" required autofocus {{$method == 'show' ? 'disabled' : null }}>
 
                                 @if ($errors->has('username'))
                                     <span class="invalid-feedback">

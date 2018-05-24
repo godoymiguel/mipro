@@ -11,6 +11,8 @@ use Auth;
 
 class PromoterController extends Controller
 {
+
+    protected $project;
     /**
      * Create a new controller instance.
      *
@@ -18,7 +20,8 @@ class PromoterController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');        
+        $this->middleware('auth');
+        $this->project = new Project;
     }
 
     /**
@@ -28,7 +31,7 @@ class PromoterController extends Controller
      */
     public function index()
     {
-        $promoter = Promoter::all();
+        $promoter = Promoter::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
 
         return view('admin.em.promoter.index', compact('promoter'));
     }
@@ -62,12 +65,10 @@ class PromoterController extends Controller
             'email' =>  'required|email|max:255',
         ]);
 
-        $project = Project::where('user_id', Auth::user()->id)->first();
-
         $request->merge(array(
             'id' => Uuid::generate()->string,
             'model' => 'MEM',
-            'project_id' => $project->id
+            'project_id' => $this->project->projectUser(Auth::user()->id)
         ));
         
         $promoter = Promoter::create($request->all());

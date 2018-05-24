@@ -17,7 +17,7 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Usuario</th>
-                                        <th scope="col">Activo</th>
+                                        <th scope="col">Seleccionado</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -29,34 +29,25 @@
                                         <td>{!! $value->user->name .' '. $value->user->lastname!!}</td>
                                         <td>
                                             @if( $value->active == 1)
-                                                Activo
+                                               Si
                                             @else
-                                                Inactivo
+                                                No
                                             @endif
                                         </td>
                                         <td>
                                             <a type="button" class="btn btn-info" href="{{ route('proyectos.edit', $value->id) }}">
                                                 Editar
                                             </a>
-                                            @if($value->active)
-                                                <form method="POST" action="{{ route('proyectos.active', $value->id) }}">
-                                                @csrf
-                                                    {{ method_field('PUT') }}
-                                                    <input type="hidden" name="active" value="false">
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro Desea Inactivar el registro {!! $value->name !!}?')">
-                                                    Inactivar
-                                                    </button>
-                                                </form>
-                                            @else
-                                                <form method="POST" action="{{ route('proyectos.active', $value->id) }}">
-                                                @csrf
-                                                    {{ method_field('PUT') }}
+                                            
+                                            <form method="POST" action="{{ route('proyectos.active', $value->id) }}">
+                                            @csrf
+                                                {{ method_field('PUT') }}
                                                 <input type="hidden" name="active" value="true">
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro Desea Activar el registro {!! $value->name !!}?')">
-                                                Activar
+                                                <button type="submit" class="btn btn-success" >
+                                                Seleccionar
                                                 </button>
                                             </form>
-                                            @endif
+
                                             <form method="POST" action="{{ route('proyectos.destroy', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('Destroy') }}
