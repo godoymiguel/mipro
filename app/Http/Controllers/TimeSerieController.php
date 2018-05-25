@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 use Uuid;
 use Auth;
+use Excel;
 
 class TimeSerieController extends Controller
 {
@@ -158,5 +159,20 @@ class TimeSerieController extends Controller
         $timeSerie->delete();
 
         return redirect()->back();
+    }
+
+    public function import()
+    {
+        Excel::load('books.csv', function($reader) {
+ 
+            foreach ($reader->get() as $book) {
+                TimeSerie::create([
+                'name' => $book->title,
+                'author' =>$book->author,
+                'year' =>$book->publication_year
+                ]);
+            }
+        });
+        return redirect()->route('serietemporal.index',$timeSerie->id);
     }
 }
