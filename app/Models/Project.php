@@ -36,4 +36,9 @@ class Project extends Model
     {
         return $this->hasMany(TimeSerie::class);
     }
+
+    public function projections()
+    {
+        return $this->hasMany(Projection::class);
+    }
 }

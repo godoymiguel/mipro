@@ -32,7 +32,9 @@ Route::put('proyectos/{project}/a','ProjectController@active')->name('proyectos.
 //ESTUDIO DE MERCADO
 Route::resource('promotor','PromoterController')->parameters(['promotor' => 'promoter']);
 Route::resource('serietemporal','TimeSerieController')->parameters(['serietemporal'=>'timeSerie']);
-//Route::get('import', 'ImportController@import')->name('import.timeSerie');
+Route::get('import', 'TimeSerieController@csv')->name('import.csv');
+Route::post('import', 'TimeSerieController@import')->name('import');
+Route::resource('regresion','RegressionController')->parameters(['regresion'=>'regression']);
 Route::resource('proyeccion','ProjectionController')->parameters(['proyeccion'=>'projection']);
 
 //ESTUDIO TECNICO

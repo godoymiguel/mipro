@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Uuid;
 use Auth;
 use Excel;
+use Storage;
 
 class TimeSerieController extends Controller
 {
@@ -161,18 +162,50 @@ class TimeSerieController extends Controller
         return redirect()->back();
     }
 
-    public function import()
+    public function csv()
     {
-        Excel::load('books.csv', function($reader) {
+        return view('admin.em.timeSerie.csv');   
+    }
+
+    public function import(Request $request)
+    {
+        $this->validate($request,[
+            'file'  =>  'required|file',
+        ]);
+
+        TimeSerie::where('project_id', $this->project->projectUser(Auth::user()->id))->delete();
+
+        $file = $request->file('file');
+
+        //obtenemos el nombre del archivo
+        $nombre = $file->getClientOriginalName();
+ 
+        //indicamos que queremos guardar un nuevo archivo en el disco local
+        Storage::disk('local')->put($nombre,  \File::get($file));
+
+        Excel::load('storage/app/'. $nombre, function($reader) {
  
             foreach ($reader->get() as $book) {
                 TimeSerie::create([
-                'name' => $book->title,
-                'author' =>$book->author,
-                'year' =>$book->publication_year
+                    'year' => $book->ano,
+                    'production' => $book->produccion,
+                    'import' => $book->importaciones,
+                    'existence'=> $book->var_existencia,
+                    'export' => $book->exportacion,
+                    'population' => $book->poblacion,
+                    'price'=> $book->precio_del_bien,
+                    'real_income'=> $book->ingreso_real,
+                    'id' => Uuid::generate()->string,
+                    'model' => 'MEM',
+                    'project_id' => $this->project->projectUser(Auth::user()->id),
+                    'apparent_consumption' => $book->consumo_aparente,
+                    'precapita_consumption' => $book->consumo_percapita,
                 ]);
             }
         });
-        return redirect()->route('serietemporal.index',$timeSerie->id);
+
+        Storage::delete($nombre);
+
+        return redirect()->route('serietemporal.index');
     }
 }

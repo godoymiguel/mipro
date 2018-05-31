@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Projection;
 use App\Models\Project;
+use App\Models\Regression;
 use Illuminate\Http\Request;
 
 use Auth;
@@ -31,9 +32,18 @@ class ProjectionController extends Controller
      */
     public function index()
     {
-        $project = Project::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
+        $regression = Regression::where('project_id', $this->project->projectUser(Auth::user()->id))->first();
 
-        return view('admin.em.project.index', compact('project'));
+        if ($regression) {
+            $projection = Projection::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
+
+            return view('admin.em.projection.index', compact('projection','regression'));
+        } else {
+            return redirect()->route('regresion.index');
+        }
+        
+
+        
     }
 
     /**
@@ -43,11 +53,19 @@ class ProjectionController extends Controller
      */
     public function create()
     {
-        $projection = new Projection();
+        $regression = Regression::where('project_id', $this->project->projectUser(Auth::user()->id))->first();
+        
+        if ($regression) {
+            $projection = new Projection();
 
-        $method = 'create';
+            $method = 'create';
 
-        return view('admin.em.projection.projection',compact('projection','method'));
+            return view('admin.em.projection.projection',compact('projection','method'));
+        } else {
+            return redirect()->route('regresion.index');
+        }
+        
+        
     }
 
     /**
@@ -58,6 +76,8 @@ class ProjectionController extends Controller
      */
     public function store(Request $request)
     {
+        Projection::where('project_id', $this->project->projectUser(Auth::user()->id))->delete();
+
         $this->validate($request,[
             'year' =>  'required|integer|min:1',
             'number' =>  'required|numeric',
@@ -68,20 +88,32 @@ class ProjectionController extends Controller
         $request->merge(array(
             'id' => Uuid::generate()->string,
             'model' => 'MEM',
-            'project_id' => $this->project->projectUser(Auth::user()->id)
-            'gap' => $request->demand -$request->offer;
+            'project_id' => $this->project->projectUser(Auth::user()->id),
+            'gap' => $request->demand -$request->offer,
         ));
         
         $projection = Projection::create($request->all());
 
+        $regression = Regression::where('project_id', $this->project->projectUser(Auth::user()->id))->first();
+
         for ($i=0; $i < $request->number; $i++) { 
             $newProjection = new Projection;
+            $newProjection->id = Uuid::generate()->string;
+            $newProjection->model = $projection->model;
+            $newProjection->project_id = $projection->project_id;
             $newProjection->year = $projection->year + 1;
+            $newProjection->demand = $projection->demand *(1 +$regression->coefficient_r1);
+            $newProjection->offer = $projection->offer *(1 +$regression->coefficient_r2);
+            $newProjection->gap = $newProjection->demand -$newProjection->offer;
+            $newProjection->save();
+
+            $projection = $newProjection;
+
         }
 
         
 
-        return redirect()->route('promotor.index');
+        return redirect()->route('proyeccion.index');
     }
 
     /**
@@ -92,7 +124,7 @@ class ProjectionController extends Controller
      */
     public function show(Projection $projection)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -103,7 +135,7 @@ class ProjectionController extends Controller
      */
     public function edit(Projection $projection)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -115,7 +147,7 @@ class ProjectionController extends Controller
      */
     public function update(Request $request, Projection $projection)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -126,6 +158,6 @@ class ProjectionController extends Controller
      */
     public function destroy(Projection $projection)
     {
-        //
+        return redirect()->back();
     }
 }
