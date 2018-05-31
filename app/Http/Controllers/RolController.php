@@ -5,8 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 
+use Uuid;
+
 class RolController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');        
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +26,8 @@ class RolController extends Controller
      */
     public function index()
     {
-        //return Rol::all();
-        return view('admin.rol.index');
+        $rol = Rol::all();
+        return view('admin.rol.index', compact('rol'));
     }
 
     /**
@@ -25,7 +37,9 @@ class RolController extends Controller
      */
     public function create()
     {
-        
+        $method = 'create';
+        $rol = new Rol();
+        return view('admin.rol.create', compact('method','rol'));   
     }
 
     /**
@@ -40,9 +54,13 @@ class RolController extends Controller
             'value' =>  'required|string|max:255|unique:rols',
             'title' =>  'required|string|max:255'
         ]);
-        
-        $rol = Rol::create($request->all());
-        return response()->json($rol,201);
+        $rol = new Rol($request->all());
+        $rol->id = Uuid::generate()->string;
+        $rol->save();
+
+        return redirect()->route('rol.show',$rol->id);
+
+        //return response()->json($rol,201);
     }
 
     /**
@@ -53,7 +71,8 @@ class RolController extends Controller
      */
     public function show(Rol $rol)
     {
-        return $rol;
+        $method = 'show';
+        return view('admin.rol.create', compact('method','rol'));
     }
 
     /**
@@ -64,7 +83,9 @@ class RolController extends Controller
      */
     public function edit(Rol $rol)
     {
-        return $rol;
+        $method = 'edit';
+
+        return view('admin.rol.create', compact('method','rol'));
     }
 
     /**
@@ -76,9 +97,17 @@ class RolController extends Controller
      */
     public function update(Request $request, Rol $rol)
     {
-        $rol->update($request->all());
+        $this->validate($request,[
+            'value' =>  'required|string|max:255',
+            'title' =>  'required|string|max:255',
+            'active' => 'boolean'
+        ]);
 
-        return response()->json($rol,200);
+        $rol->update($request->all());
+        
+        return redirect()->route('rol.show',$rol->id);
+
+        //return response()->json($rol,200);
     }
 
     /**
@@ -90,7 +119,22 @@ class RolController extends Controller
     public function destroy(Rol $rol)
     {
         $rol->delete();
+        return redirect()->back();
+        //return response()->json(null,204);
+    }
 
-        return response()->json(null,204);
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Rol  $rol
+     * @return \Illuminate\Http\Response
+     */
+    public function active(Request $request, Rol $rol)
+    {
+        $rol->update($request->all());
+
+        return redirect()->back();
+        //return response()->json($rol,200);
     }
 }
