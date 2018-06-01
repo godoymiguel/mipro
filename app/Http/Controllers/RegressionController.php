@@ -12,6 +12,7 @@ use Auth;
 
 use MathPHP\Statistics\Regression as Regressions;
 use MathPHP\Functions\Map;
+use MathPHP\LinearAlgebra\MatrixFactory;
 
 class RegressionController extends Controller
 {
@@ -80,15 +81,42 @@ class RegressionController extends Controller
 
             # Third  Regression
 
-            $count = count($timeSerie);
+            $n = count($timeSerie);
             $x1y    = array_sum(Map\Multi::multiply($x1, $y));
             $x2y    = array_sum(Map\Multi::multiply($x2, $y));
             $x1x2    = array_sum(Map\Multi::multiply($x1, $x2));
             $powX1    = array_sum(Map\Multi::multiply($x1, $x1));
             $powX2    = array_sum(Map\Multi::multiply($x2, $x2));
             $x1 = array_sum($x1);
+            $x2 = array_sum($x2);
+            $y = array_sum($y);
 
-            dd($count,$x1,$x2,$y,$x1y);
+            # Determinant
+
+            $A = MatrixFactory::create([
+                [$y,$x1,$x2],
+                [$x1y,$powX1,$x1x2],
+                [$x2y,$x1x2,$powX2],
+            ]);
+            $B1 = MatrixFactory::create([
+                [$n,$y,$x2],
+                [$x1,$x1y,$x1x2],
+                [$x2,$x2y,$powX2],
+            ]);
+            $B2 = MatrixFactory::create([
+                [$n,$x1,$y],
+                [$x1,$powX1,$x1y],
+                [$x2,$x1x2,$x2y],
+            ]);
+            $S = MatrixFactory::create([
+                [$n,$x1,$x2],
+                [$x1,$powX1,$x1x2],
+                [$x2,$x1x2,$powX2],
+            ]);
+            
+            $A = $A->det()/$S->det();
+            $B1 = $B1->det()/$S->det();
+            $B2 = $B2->det()/$S->det();
 
             Regression::create([
                 'id' => Uuid::generate()->string,
@@ -96,8 +124,8 @@ class RegressionController extends Controller
                 'project_id' => $this->project->projectUser(Auth::user()->id),
                 'coefficient_r1' => $parametersR1['m'],
                 'coefficient_r2' => $parametersR2['m'],
-                'coefficient_r31' => 0.0,
-                'coefficient_r32' => 0.0,
+                'coefficient_r31' => $B1,
+                'coefficient_r32' => $B2,
             ]);
 
             return redirect()->back();

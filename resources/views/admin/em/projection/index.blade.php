@@ -21,7 +21,7 @@
                                             0%
                                         @endif
                                     </label>
-                                     <label for="coefficient_r1" class="col-md-8 col-form-label text-md-left">{{ __('Variación porcentual del consumo año tras año') }}</label>
+                                     <label for="coefficient_r1" class="col-md-9 col-form-label text-md-left">{{ __('Variación porcentual del consumo año tras año') }}</label>
                                 </div>
                             </div>
 
@@ -73,7 +73,7 @@
                                             {{ __('BIEN SUPERIOR') }}
                                         @endif
                                     </label>
-                                     <label for="coefficient_r1" class="col-md-6 col-form-label text-md-left">{{ __('ANTE VARIACIÓN DEL PRECIO') }}</label>
+                                     <label for="coefficient_r1" class="col-md-6 col-form-label text-md-left">{{ __('ANTE VARIACIÓN DE INGRESO') }}</label>
                                 </div>
                             </div>
 
