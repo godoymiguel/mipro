@@ -9,7 +9,9 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <div id="container"></div>
+                            <div id="containerDO"></div>
+                            <hr>
+                            <div id="containerG"></div>
                             <br>
                         </div>
                     </div>
@@ -26,8 +28,16 @@
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
 <script>
-	
-	Highcharts.chart('container', {
+	let demand = []
+	let offer = []
+	let gap = []
+	@foreach($projection as $key => $value)
+		demand.push({{$value->demand}})
+		offer.push({{$value->offer}})
+		gap.push({{$value->gap}})
+	@endforeach	
+		
+	Highcharts.chart('containerDO', {
 
 	    title: {
 	        text: 'Oferta y Demanda'
@@ -55,10 +65,10 @@
 
 	    series: [{
 	        name: 'Demanda',
-	        data: [43934, 52503, 57177, 69658, 97031, 119931, 137133, 154175]
+	        data: demand
 	    }, {
 	        name: 'Oferta',
-	        data: [12908, 5948, 8105, 11248, 8989, 11816, 18274, 18111]
+	        data: offer
 	    }],
 
 	    responsive: {
@@ -75,7 +85,43 @@
 	            }
 	        }]
 	    }
+	});
+	Highcharts.chart('containerG', {
+	    chart: {
+	        type: 'column'
+	    },
+	    title: {
+	        text: 'Brecha'
+	    },
+	    xAxis: {
+	        crosshair: true
+	    },
+	    yAxis: {
+	        title: {
+	            text: ''
+	        }
+	    },
+	    tooltip: {
+	        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+	        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+	            '<td style="padding:0"><b>{point.y:.3f}</b></td></tr>',
+	        footerFormat: '</table>',
+	        shared: true,
+	        useHTML: true
+	    },
+	    plotOptions: {
+	        series: {
+	            label: {
+	                connectorAllowed: false
+	            },
+	            pointStart: {{$year}}
+	        }
+	    },
+	    series: [{
+	        name: 'Brecha',
+	        data: gap
 
+	    }]
 	});
 </script>
 @endsection

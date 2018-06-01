@@ -54,16 +54,8 @@ class ProjectionController extends Controller
 
         if ($projection) {
             $year = $projection[0]->year;
-            $demand = array();
-            $offer = array();
-            $gap = array();
-            foreach ($projection as $key => $value) {
-                $demand = array_add($demand,$key,$value->demand);
-                $offer = array_add($offer,$key,$value->offer);
-                $gap = array_add($gap,$key,$value->gap);
-            }
 
-            return view('admin.em.marketGap.index', compact('year','demand','offer','gap'));
+            return view('admin.em.marketGap.index', compact('year','projection'));
         } else {
             return redirect()->route('proyeccion.index');
         }
