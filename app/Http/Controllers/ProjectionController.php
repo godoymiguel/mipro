@@ -41,9 +41,32 @@ class ProjectionController extends Controller
         } else {
             return redirect()->route('regresion.index');
         }
-        
+    }
 
-        
+    /**
+     * graf the specified resource from storage.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function marketGap()
+    {
+        $projection = Projection::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
+
+        if ($projection) {
+            $year = $projection[0]->year;
+            $demand = array();
+            $offer = array();
+            $gap = array();
+            foreach ($projection as $key => $value) {
+                $demand = array_add($demand,$key,$value->demand);
+                $offer = array_add($offer,$key,$value->offer);
+                $gap = array_add($gap,$key,$value->gap);
+            }
+
+            return view('admin.em.marketGap.index', compact('year','demand','offer','gap'));
+        } else {
+            return redirect()->route('proyeccion.index');
+        }
     }
 
     /**
@@ -159,5 +182,5 @@ class ProjectionController extends Controller
     public function destroy(Projection $projection)
     {
         return redirect()->back();
-    }
+    }    
 }

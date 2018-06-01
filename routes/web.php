@@ -36,5 +36,6 @@ Route::get('import', 'TimeSerieController@csv')->name('import.csv');
 Route::post('import', 'TimeSerieController@import')->name('import');
 Route::resource('regresion','RegressionController')->parameters(['regresion'=>'regression']);
 Route::resource('proyeccion','ProjectionController')->parameters(['proyeccion'=>'projection']);
+Route::get('brechaDeMercado', 'ProjectionController@marketGap')->name('marketGap');
 
 //ESTUDIO TECNICO
