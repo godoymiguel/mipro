@@ -49,6 +49,9 @@
                                 <a class="dropdown-item" href="{{ route('regresion.index') }}">- Regresión</a>
                                 <a class="dropdown-item" href="{{ route('proyeccion.index') }}">- Proyección</a>
                                 <a class="dropdown-item" href="{{ route('marketGap') }}">- Brecha de Mercado</a>
+                                <div class="dropdown-divider"></div>
+                                <h6 class="dropdown-header">Análisis Entorno</h6>
+                                <a class="dropdown-item" href="{{ route('pastel.index') }}">- PASTEL</a>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

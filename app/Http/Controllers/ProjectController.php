@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 use App\Models\User;
 use App\Models\Project;
-use Illuminate\Http\Request;
+use App\Models\DefaultPastel;
+use App\Models\Pastel;
 
 use Uuid;
 use Auth;
@@ -72,6 +75,10 @@ class ProjectController extends Controller
         $project = new Project($request->all());
         $project->id = Uuid::generate()->string;
         $project->save();
+
+        # ---Pastel Default---
+
+        $this->pastel_default($project->id);
 
         return redirect()->route('proyectos.show',$project->id);
     }
@@ -147,5 +154,25 @@ class ProjectController extends Controller
         $project->update($request->all());
 
         return redirect()->back();
+    }
+
+    /**
+     * Create the specified resource in pastel storage.
+     * @param  \App\Project  $project->id
+     *
+     */
+    public function pastel_default($project_id)
+    {
+        $defaultPastel = DefaultPastel::All();
+
+        foreach ($defaultPastel as $key => $value) {
+            Pastel::create([
+                'id' => Uuid::generate()->string,
+                'project_id' => $project_id,
+                'title' => $value->title,
+                'factor' => $value->factor,
+            ]);
+        }
+        
     }
 }
