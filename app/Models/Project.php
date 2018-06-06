@@ -58,4 +58,9 @@ class Project extends Model
     }
     
     
+
+    public function projections()
+    {
+        return $this->hasMany(Projection::class);
+    }
 }

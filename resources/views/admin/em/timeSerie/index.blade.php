@@ -10,7 +10,7 @@
                     <div class="form-group row">
                         <div class="col-md-12">
                             <a href="{{ route('serietemporal.create') }}" type="button" class="btn btn-primary btn-lg btn-inline">Agregar Dato a la Serie</a>
-                            <a href="{{ route('serietemporal.create') }}" type="button" class="btn btn-primary btn-lg btn-inline">Agregar Datos con .CSV</a>
+                            <a href="{{ route('import.csv') }}" type="button" class="btn btn-primary btn-lg btn-inline">Agregar Datos con .CSV</a>
                             <br>
                             <table class="table">
                                 <thead class="thead-light">

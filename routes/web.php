@@ -101,6 +101,12 @@ Route::put('proyectos/{project}/a','ProjectController@active')->name('proyectos.
 
 //ESTUDIO DE MERCADO
 Route::resource('promotor','PromoterController')->parameters(['promotor' => 'promoter']);
+Route::resource('pastel','PastelController')->parameters(['pastel'=>'pastel']);
 Route::resource('serietemporal','TimeSerieController')->parameters(['serietemporal'=>'timeSerie']);
+Route::get('import', 'TimeSerieController@csv')->name('import.csv');
+Route::post('import', 'TimeSerieController@import')->name('import');
+Route::resource('regresion','RegressionController')->parameters(['regresion'=>'regression']);
+Route::resource('proyeccion','ProjectionController')->parameters(['proyeccion'=>'projection']);
+Route::get('brechaDeMercado', 'ProjectionController@marketGap')->name('marketGap');
 
 //ESTUDIO TECNICO
