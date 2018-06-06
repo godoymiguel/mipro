@@ -31,9 +31,69 @@ class PastelController extends Controller
      */
     public function index()
     {
-        $pastel = Pastel::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
+        $pastel = Pastel::where('project_id', $this->project->projectUser(Auth::user()->id))->orderBy('id')->get();
 
-        return view('admin.em.pastel.index', compact('pastel'));
+        # Valor total Factor Politico
+        $political = $pastel->where('factor','P');
+        $total_p = ($political->where('value', 1 )->count() * 1 
+            +$political->where('value', 2 )->count() * 2 
+            +$political->where('value', 3 )->count() * 3 
+            +$political->where('value', 4 )->count() * 4 
+            +$political->where('value', 5 )->count() * 5)/$political->count();
+
+        # Valor total Factor Ambiental
+        $environmental = $pastel->where('factor','A');
+        $total_a = ($environmental->where('value', 1 )->count() * 1 
+            +$environmental->where('value', 2 )->count() * 2 
+            +$environmental->where('value', 3 )->count() * 3 
+            +$environmental->where('value', 4 )->count() * 4 
+            +$environmental->where('value', 5 )->count() * 5)/$environmental->count();
+
+         # Valor total Factor Sociocultural
+        $Sociocultural = $pastel->where('factor','S');
+        $total_s = ($Sociocultural->where('value', 1 )->count() * 1 
+            +$Sociocultural->where('value', 2 )->count() * 2 
+            +$Sociocultural->where('value', 3 )->count() * 3 
+            +$Sociocultural->where('value', 4 )->count() * 4 
+            +$Sociocultural->where('value', 5 )->count() * 5)/$Sociocultural->count();
+
+         # Valor total Factor Tecnologico
+        $technological = $pastel->where('factor','T');
+        $total_t = ($technological->where('value', 1 )->count() * 1 
+            +$technological->where('value', 2 )->count() * 2 
+            +$technological->where('value', 3 )->count() * 3 
+            +$technological->where('value', 4 )->count() * 4 
+            +$technological->where('value', 5 )->count() * 5)/$technological->count();
+
+         # Valor total Factor Economico
+        $economic = $pastel->where('factor','E');
+        $total_e = ($economic->where('value', 1 )->count() * 1 
+            +$economic->where('value', 2 )->count() * 2 
+            +$economic->where('value', 3 )->count() * 3 
+            +$economic->where('value', 4 )->count() * 4 
+            +$economic->where('value', 5 )->count() * 5)/$economic->count();
+
+         # Valor total Factor Legal
+        $Legal = $pastel->where('factor','L');
+        $total_l = ($Legal->where('value', 1 )->count() * 1 
+            +$Legal->where('value', 2 )->count() * 2 
+            +$Legal->where('value', 3 )->count() * 3 
+            +$Legal->where('value', 4 )->count() * 4 
+            +$Legal->where('value', 5 )->count() * 5)/$Legal->count();
+
+        # Indice de Riesgo 
+        $risk = ($pastel->where('value', 1 )->count()*1 
+            +$pastel->where('value', 2 )->count()*2 
+            +$pastel->where('value', 3 )->count()*3
+            +$pastel->where('value', 4 )->count()*4
+            +$pastel->where('value', 5 )->count()*5)/
+            ($pastel->where('value', 1 )->count() 
+            +$pastel->where('value', 2 )->count() 
+            +$pastel->where('value', 3 )->count()
+            +$pastel->where('value', 4 )->count()
+            +$pastel->where('value', 5 )->count());
+
+        return view('admin.em.pastel.index', compact('pastel','total_p','total_a','total_s','total_t','total_e','total_l','risk'));
     }
 
     /**
@@ -109,8 +169,10 @@ class PastelController extends Controller
     public function update(Request $request, Pastel $pastel)
     {
         $this->validate($request,[
-            'title' =>  'required|string|max:255',
-            'factor' =>  'required|string|max:255',
+            'title' =>  'sometimes|required|string|max:255',
+            'factor' =>  'sometimes|required|string|max:255',
+            'value' =>  'sometimes|required|string|max:255',
+            'justification' =>  'sometimes|required|string|max:255',
         ]);
 
         $pastel->update($request->all());
@@ -129,5 +191,17 @@ class PastelController extends Controller
         $pastel->delete();
 
         return redirect()->back();
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function value(Pastel $pastel)
+    {
+        $method = 'value';
+
+        return view('admin.em.pastel.pastel',compact('pastel','method'));
     }
 }

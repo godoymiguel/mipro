@@ -9,6 +9,33 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-12">
+                            <div class="form-group row">
+                                <div class="col-md-12">
+                                     <label for="coefficient_r1" class="col-form-label text-md-left">{{ __('Resultado de Factores')}}</label>
+                                </div>
+                                <div class="col-md-12">
+                                     <label for="coefficient_r1" class="col-form-label text-md-left">{{ __('Político: ') .' '. $total_p}}</label>
+                                </div>
+                                <div class="col-md-12">
+                                     <label for="coefficient_r1" class="col-form-label text-md-left">{{ __('Ambiental: ') .' '. $total_a}}</label>
+                                </div>
+                                <div class="col-md-12">
+                                     <label for="coefficient_r1" class="col-form-label text-md-left">{{ __('SocioCultural: ') .' '. $total_s}}</label>
+                                </div>
+                                <div class="col-md-12">
+                                     <label for="coefficient_r1" class="col-form-label text-md-left">{{ __('Tecnológico: ') .' '. $total_t}}</label>
+                                </div>
+                                <div class="col-md-12">
+                                     <label for="coefficient_r1" class="col-form-label text-md-left">{{ __('Económico: ') .' '. $total_e}}</label>
+                                </div>
+                                <div class="col-md-12">
+                                     <label for="coefficient_r1" class="col-form-label text-md-left">{{ __('Legal: ') .' '. $total_l}}</label>
+                                </div>
+                                <div class="col-md-12">
+                                     <label for="coefficient_r1" class="col-form-label text-md-left">{{ $risk .' '. __('Índice de Riesgo (cerca de 1 poco riesgo y cerca de 5 muy riesgoso)') }}</label>
+                                </div>
+                            </div>
+                            <br>
                             <a href="{{ route('pastel.create') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Variable a Factor</a>
                             <table class="table">
                                 <thead class="thead-light">
@@ -26,23 +53,23 @@
                                         <th scope="row">Político</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
-                                            @if($value->value=='V0')
+                                            @if($value->value== 0)
                                                 -
-                                            @elseif($value->value=='V1')
+                                            @elseif($value->value== 5)
                                                 Muy Negativo
-                                            @elseif($value->value=='V2')
+                                            @elseif($value->value== 4)
                                                 Negativo
-                                            @elseif($value->value=='V3')
+                                            @elseif($value->value== 3)
                                                 Neutral
-                                            @elseif($value->value=='V4')
+                                            @elseif($value->value== 2)
                                                 Positivo
-                                            @elseif($value->value=='V5')
+                                            @elseif($value->value== 1)
                                                 Muy Positivo
                                             @endif
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
+                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
                                                 Valorar
                                             </a>
                                             <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
@@ -63,23 +90,23 @@
                                         <th scope="row">Ambiental</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
-                                            @if($value->value=='V0')
+                                            @if($value->value== 0)
                                                 -
-                                            @elseif($value->value=='V1')
+                                            @elseif($value->value== 5)
                                                 Muy Negativo
-                                            @elseif($value->value=='V2')
+                                            @elseif($value->value== 4)
                                                 Negativo
-                                            @elseif($value->value=='V3')
+                                            @elseif($value->value== 3)
                                                 Neutral
-                                            @elseif($value->value=='V4')
+                                            @elseif($value->value== 2)
                                                 Positivo
-                                            @elseif($value->value=='V5')
+                                            @elseif($value->value== 1)
                                                 Muy Positivo
                                             @endif
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info" href="{{ route('pastel.edit', $value->id) }}">
+                                            <a type="button" class="btn btn-info" href="{{ route('pastel.value', $value->id) }}">
                                                 Valorar
                                             </a>
                                             <a type="button" class="btn btn-info" href="{{ route('pastel.edit', $value->id) }}">
@@ -100,23 +127,23 @@
                                         <th scope="row">SocioCultural</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
-                                            @if($value->value=='V0')
+                                            @if($value->value== 0)
                                                 -
-                                            @elseif($value->value=='V1')
+                                            @elseif($value->value== 5)
                                                 Muy Negativo
-                                            @elseif($value->value=='V2')
+                                            @elseif($value->value== 4)
                                                 Negativo
-                                            @elseif($value->value=='V3')
+                                            @elseif($value->value== 3)
                                                 Neutral
-                                            @elseif($value->value=='V4')
+                                            @elseif($value->value== 2)
                                                 Positivo
-                                            @elseif($value->value=='V5')
+                                            @elseif($value->value== 1)
                                                 Muy Positivo
                                             @endif
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
+                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
                                                 Valorar
                                             </a>
                                             <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
@@ -137,23 +164,23 @@
                                         <th scope="row">Tecnológico</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
-                                            @if($value->value=='V0')
+                                            @if($value->value== 0)
                                                 -
-                                            @elseif($value->value=='V1')
+                                            @elseif($value->value== 5)
                                                 Muy Negativo
-                                            @elseif($value->value=='V2')
+                                            @elseif($value->value== 4)
                                                 Negativo
-                                            @elseif($value->value=='V3')
+                                            @elseif($value->value== 3)
                                                 Neutral
-                                            @elseif($value->value=='V4')
+                                            @elseif($value->value== 2)
                                                 Positivo
-                                            @elseif($value->value=='V5')
+                                            @elseif($value->value== 1)
                                                 Muy Positivo
                                             @endif
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
+                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
                                                 Valorar
                                             </a>
                                             <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
@@ -174,23 +201,23 @@
                                         <th scope="row">Económico</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
-                                            @if($value->value=='V0')
+                                            @if($value->value== 0)
                                                 -
-                                            @elseif($value->value=='V1')
+                                            @elseif($value->value== 5)
                                                 Muy Negativo
-                                            @elseif($value->value=='V2')
+                                            @elseif($value->value== 4)
                                                 Negativo
-                                            @elseif($value->value=='V3')
+                                            @elseif($value->value== 3)
                                                 Neutral
-                                            @elseif($value->value=='V4')
+                                            @elseif($value->value== 2)
                                                 Positivo
-                                            @elseif($value->value=='V5')
+                                            @elseif($value->value== 1)
                                                 Muy Positivo
                                             @endif
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
+                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
                                                 Valorar
                                             </a>
                                             <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
@@ -211,23 +238,23 @@
                                         <th scope="row">Legal</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
-                                            @if($value->value=='V0')
+                                            @if($value->value== 0)
                                                 -
-                                            @elseif($value->value=='V1')
+                                            @elseif($value->value== 5)
                                                 Muy Negativo
-                                            @elseif($value->value=='V2')
+                                            @elseif($value->value== 4)
                                                 Negativo
-                                            @elseif($value->value=='V3')
+                                            @elseif($value->value== 3)
                                                 Neutral
-                                            @elseif($value->value=='V4')
+                                            @elseif($value->value== 2)
                                                 Positivo
-                                            @elseif($value->value=='V5')
+                                            @elseif($value->value== 1)
                                                 Muy Positivo
                                             @endif
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
+                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
                                                 Valorar
                                             </a>
                                             <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
