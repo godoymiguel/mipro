@@ -18,8 +18,8 @@ class CreateAntecedentesTable extends Migration
 			$table->primary('id');
             $table-> String('fuente');
             $table-> text('descripcion');
-            $table-> enum('tipo',['HistoriaBS','UsosBS','ConsumoTF','PrincipalesCC','PrincipalesFP','TecnologiaBS','TendenciasBS']);
-            $table-> enum('estudio',['MEM','MET','MEF','MEE']);
+            $table-> enum('tipo',['Historia del bien o servicio','Uso de aplicaciones del bien o servicio','Consumo: tasas y frecuencia','Principales consumidores o clientes','Principales fabricantes o prestadores','Tecnología asociada a la fabricación del bien o servicio','Tendencias del bien o servicio']);
+            $table-> enum('estudio',['MEM','MET','MEF','MEE'])->default('MEM');
             $table-> timestamps();
             
             $table->uuid('proyecto_id');            

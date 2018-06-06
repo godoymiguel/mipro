@@ -13,7 +13,7 @@ class Canvas extends Model
      * Atributos de la tabla Canvas
      */
     protected $fillable = [
-        'id', 'problema', 'solucion', 'indicadores', 'efectos','project_id'
+        'id', 'problema', 'solucion', 'indicadores', 'causas', 'efectos','project_id'
     ];
     
      /**

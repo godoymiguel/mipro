@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIdeasTable extends Migration
+class CreateInteresadosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,20 @@ class CreateIdeasTable extends Migration
      */
     public function up()
     {
-        Schema::create('ideas', function (Blueprint $table) {
-			$table->uuid('id')->required();
+        Schema::create('interesados', function (Blueprint $table) {
+            $table-> uuid('id');
 			$table->primary('id');
-            $table->timestamps();
-			$table->String('name')->required();
-            $table->Integer('valor')->nullable();            
-			$table->enum('estudio',['MEM','MET','MEF','MEE'])->default('MEM');
-						
+            $table-> String('grupo');
+            $table-> String('interesados');
+            $table-> String('problemas');
+            $table-> String('recursos');
+            $table-> String('conflictos');
+            $table->enum('estudio',['MEM','MET','MEF','MEE'])->default('MEM');
+            $table-> timestamps();
+            
             $table->uuid('proyecto_id');            
             $table->foreign('proyecto_id')->references('id')->on('projects')->onDelete('cascade');
+    
             
         });
     }
@@ -34,6 +38,6 @@ class CreateIdeasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ideas');
+        Schema::dropIfExists('interesados');
     }
 }

@@ -10,6 +10,8 @@
                     <form method="POST" action="{{ route('canvas.store') }}">
                         @csrf
 						<div>
+                         <a href="{{ route('home') }}" type="button" class="btn btn-primary"> {{ __('Cargar canvas ') }}</a>							
+							
 							<table class="table">
 							  <tr>
 								<th scope="tg-yw4l">Problema<br>

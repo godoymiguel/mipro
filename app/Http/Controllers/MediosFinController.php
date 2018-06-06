@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Canvas;
 use Uuid;
-use App\Models\Project;
 use Auth;
+use App\Models\Project;
+use App\Models\Arbol_Objetivos;
+use App\Models\MediosFin;
 
-class CanvasController extends Controller
+
+class MediosFinController extends Controller
 {
-	
 	protected $project;
     /**
      * Create a new controller instance.
@@ -25,6 +26,7 @@ class CanvasController extends Controller
     }
 	
 	
+	
     /**
      * Display a listing of the resource.
      *
@@ -32,8 +34,9 @@ class CanvasController extends Controller
      */
     public function index()
     {
-		$canvas=Canvas::all();
-        return view('canvas.canvas', compact('canvas'));
+        $ao=Arbol_Objetivos::all();
+        $mf=MediosFin::all();
+        return view('arbol_objetivo.arbolobjetivo_tabla', compact('ao','mf'));
     }
 
     /**
@@ -43,7 +46,7 @@ class CanvasController extends Controller
      */
     public function create()
     {
-        return view('canvas.canvas');
+        return view('arbol_objetivo.anadir_medio');
     }
 
     /**
@@ -54,11 +57,11 @@ class CanvasController extends Controller
      */
     public function store(Request $request)
     {
-        $canvas=new Canvas($request->all());
-        $canvas->id=Uuid::generate()->string;
-        $canvas->project_id=$this->project->projectUser(Auth::user()->id);
-        $canvas->save();
-        return redirect()->route('idea.tabla');
+        $mf=new MediosFin($request->all());
+        $mf->id=Uuid::generate()->string;
+        $mf->proyecto_id=$this->project->projectUser(Auth::user()->id);
+        $mf->save();
+        return redirect()->route('arbolobj.tabla');
     }
 
     /**
@@ -69,9 +72,7 @@ class CanvasController extends Controller
      */
     public function show($id)
     {
-        $method = 'show';
-
-        return view('canvas.canvas',compact('canvas','method'));
+        //
     }
 
     /**
@@ -80,9 +81,9 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(MediosFin $mf)
     {
-        //
+        return view('arbol_objetivo.editar_medio',compact('mf'));
     }
 
     /**
@@ -92,9 +93,10 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, MediosFin $mf)
     {
-        //
+        $mf->update($request->all());
+        return redirect()->route('arbolobj.tabla');
     }
 
     /**
@@ -103,8 +105,9 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(MediosFin $mf)
     {
-        //
+        $mf->delete();
+        return redirect()->route('arbolobj.tabla');
     }
 }

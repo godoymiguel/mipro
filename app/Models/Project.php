@@ -36,4 +36,26 @@ class Project extends Model
     {
         return $this->hasMany(TimeSerie::class);
     }
+    
+    public function canvas()
+    {
+        return $this->hasMany(Canvas::class);
+    }
+    
+    public function idea()
+    {
+        return $this->hasMany(Idea::class);
+    }
+    
+    public function criterio()
+    {
+        return $this->hasMany(Criterios::class);
+    }
+    
+    public function antecedentes()
+    {
+        return $this->hasMany(Antecedentes::class);
+    }
+    
+    
 }

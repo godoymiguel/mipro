@@ -1,14 +1,16 @@
 <?php
 
 namespace App\Http\Controllers;
+use Uuid;
+use Auth;
+use App\Models\Project;
+use App\Models\Arbol_Problema;
+use App\Models\CausasEfectos;
+
 
 use Illuminate\Http\Request;
-use App\Models\Canvas;
-use Uuid;
-use App\Models\Project;
-use Auth;
 
-class CanvasController extends Controller
+class CausasEfectosController extends Controller
 {
 	
 	protected $project;
@@ -32,8 +34,9 @@ class CanvasController extends Controller
      */
     public function index()
     {
-		$canvas=Canvas::all();
-        return view('canvas.canvas', compact('canvas'));
+        $ap=Arbol_Problema::all();
+        $cf=CausasEfectos::all();
+        return view('arbol_problema.arbolproblema_tabla', compact('ap','cf'));
     }
 
     /**
@@ -43,7 +46,7 @@ class CanvasController extends Controller
      */
     public function create()
     {
-        return view('canvas.canvas');
+        return view('arbol_problema.anadir_causa');
     }
 
     /**
@@ -54,11 +57,11 @@ class CanvasController extends Controller
      */
     public function store(Request $request)
     {
-        $canvas=new Canvas($request->all());
-        $canvas->id=Uuid::generate()->string;
-        $canvas->project_id=$this->project->projectUser(Auth::user()->id);
-        $canvas->save();
-        return redirect()->route('idea.tabla');
+        $cf=new CausasEfectos($request->all());
+        $cf->id=Uuid::generate()->string;
+        $cf->proyecto_id=$this->project->projectUser(Auth::user()->id);
+        $cf->save();
+        return redirect()->route('arbolprob.tabla');
     }
 
     /**
@@ -69,9 +72,7 @@ class CanvasController extends Controller
      */
     public function show($id)
     {
-        $method = 'show';
-
-        return view('canvas.canvas',compact('canvas','method'));
+        //
     }
 
     /**
@@ -80,9 +81,9 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(CausasEfectos $cf)
     {
-        //
+         return view('arbol_problema.editar_causa',compact('cf'));
     }
 
     /**
@@ -92,9 +93,10 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, CausasEfectos $cf)
     {
-        //
+        $cf->update($request->all());
+        return redirect()->route('arbolprob.tabla');
     }
 
     /**
@@ -103,8 +105,9 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(CausasEfectos $cf)
     {
-        //
+        $cf->delete();
+        return redirect()->route('arbolprob.tabla');
     }
 }

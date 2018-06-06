@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Canvas;
 use Uuid;
 use App\Models\Project;
+use App\Models\Interesados;
 use Auth;
 
-class CanvasController extends Controller
+class InteresadosController extends Controller
 {
 	
 	protected $project;
@@ -23,8 +23,8 @@ class CanvasController extends Controller
         $this->middleware('auth');
         $this->project = new Project;
     }
-	
-	
+    
+    
     /**
      * Display a listing of the resource.
      *
@@ -32,8 +32,8 @@ class CanvasController extends Controller
      */
     public function index()
     {
-		$canvas=Canvas::all();
-        return view('canvas.canvas', compact('canvas'));
+		$inte=Interesados::all();
+       	return view('interesados.tabla_interesados', compact('inte'));
     }
 
     /**
@@ -43,7 +43,7 @@ class CanvasController extends Controller
      */
     public function create()
     {
-        return view('canvas.canvas');
+        return view('interesados.anadir_interesados');
     }
 
     /**
@@ -54,11 +54,11 @@ class CanvasController extends Controller
      */
     public function store(Request $request)
     {
-        $canvas=new Canvas($request->all());
-        $canvas->id=Uuid::generate()->string;
-        $canvas->project_id=$this->project->projectUser(Auth::user()->id);
-        $canvas->save();
-        return redirect()->route('idea.tabla');
+        $inte=new Interesados($request->all());
+        $inte->id=Uuid::generate()->string;
+        $inte->proyecto_id=$this->project->projectUser(Auth::user()->id);
+        $inte->save();
+        return redirect()->route('interesados.tabla');
     }
 
     /**
@@ -69,9 +69,7 @@ class CanvasController extends Controller
      */
     public function show($id)
     {
-        $method = 'show';
-
-        return view('canvas.canvas',compact('canvas','method'));
+        //
     }
 
     /**
@@ -80,9 +78,9 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Interesados $inte)
     {
-        //
+        return view('interesados.editar_interesados',compact('inte'));
     }
 
     /**
@@ -92,9 +90,10 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Interesados $inte)
     {
-        //
+        $inte->update($request->all());
+        return redirect()->route('interesados.tabla');
     }
 
     /**
@@ -103,8 +102,9 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Interesados $inte)
     {
-        //
+        $inte->delete();
+        return redirect()->route('interesados.tabla');
     }
 }

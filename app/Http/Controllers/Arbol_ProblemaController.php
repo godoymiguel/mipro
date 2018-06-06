@@ -5,14 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Uuid;
 use Auth;
-use App\Models\Idea;
-use App\Models\Criterios;
 use App\Models\Project;
+use App\Models\Arbol_Problema;
+use App\Models\CausasEfectos;
 
-
-class IdeaController extends Controller
+class Arbol_ProblemaController extends Controller
 {
-	
 	protected $project;
     /**
      * Create a new controller instance.
@@ -34,19 +32,9 @@ class IdeaController extends Controller
      */
     public function index()
     {
-		$idea=Idea::all();
-        $criterio=Criterios::all();
-        
-        //Seleccion de la valoracion de la Idea 
-        $count=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->count();    
-        $mayor=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->max('valor');        
-        $seleccion=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->where('valor',$mayor)->first(); 
-        $seleccionado=$seleccion->name;
-        
-        return view('idea.idea_tabla', compact('idea', 'criterio', 'count', 'seleccionado'));
-        
-        
-       
+        $ap=Arbol_Problema::all();
+        $cf=CausasEfectos::all();
+       	return view('arbol_problema.arbolproblema_tabla', compact('ap', 'cf'));
     }
 
     /**
@@ -56,14 +44,16 @@ class IdeaController extends Controller
      */
     public function create()
     {
-		$count=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->count();
-		if($count>=3)
+		
+		$count=Arbol_Problema::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->count();
+		if($count>=1)
 		{
 			return redirect()->back();
 		}else
 		{
-			return view('idea.idea');
+			 return view('arbol_problema.anadir_problema');
 		}
+    
     }
 
     /**
@@ -73,12 +63,13 @@ class IdeaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        $idea=new Idea($request->all());
-        $idea->id=Uuid::generate()->string;
-        $idea->proyecto_id=$this->project->projectUser(Auth::user()->id);
-        $idea->save();
-        return redirect()->route('idea.tabla');
+    {		
+        $ap=new Arbol_Problema($request->all());
+        $ap->id=Uuid::generate()->string;
+        $ap->proyecto_id=$this->project->projectUser(Auth::user()->id);
+        $ap->save();
+        return redirect()->route('arbolprob.tabla');
+        
     }
 
     /**
@@ -98,11 +89,15 @@ class IdeaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Idea $idea)
+     
+     
+    public function edit(Arbol_Problema $ap)
     {
-
-        return view('idea.editar_idea',compact('idea'));
+	
+        return view('arbol_problema.editar_problema',compact('ap'));
     }
+    
+    
 
     /**
      * Update the specified resource in storage.
@@ -111,15 +106,13 @@ class IdeaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Idea $idea)
+    public function update(Request $request, Arbol_Problema $ap)
     {
-        $this->validate($request,[
-            'name' =>  'required|string|max:255',
+		$this->validate($request,[
+            'problema' =>  'required|string|max:255',
         ]);
-
-        $idea->update($request->all());
-
-        return redirect()->route('idea.tabla');
+        $ap->update($request->all());
+        return redirect()->route('arbolprob.tabla');
     }
 
     /**
@@ -128,11 +121,9 @@ class IdeaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Idea $idea)
+    public function delete(Arbol_Problema $ap)
     {
-        $idea->delete();
-        return redirect()->back();
-    
+        $ap->delete();
+        return redirect()->route('arbolprob.tabla');
     }
 }
-

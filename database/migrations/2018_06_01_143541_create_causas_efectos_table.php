@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCriteriosTable extends Migration
+class CreateCausasEfectosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,19 +13,19 @@ class CreateCriteriosTable extends Migration
      */
     public function up()
     {
-        Schema::create('criterios', function (Blueprint $table) {
+        Schema::create('causas_efectos', function (Blueprint $table) {
 			$table->uuid('id');
 			$table->primary('id');
-            $table->timestamps();
-            $table->String('name');
-            $table->Integer('valor1')->default(0);
-            $table->Integer('valor2')->default(0);
-            $table->Integer('valor3')->default(0);
+			$table->timestamps();
+            $table-> String('causa_directa')->nullable();
+            $table-> String('causa_indirecta')->nullable();
+            $table-> String('efecto_directo')->nullable();
+            $table-> String('efecto_indirecto')->nullable();
+            $table-> String('causa_raiz')->nullable();
             $table->enum('estudio',['MEM','MET','MEF','MEE'])->default('MEM');
 			
 			$table->uuid('proyecto_id');            
             $table->foreign('proyecto_id')->references('id')->on('projects')->onDelete('cascade');
-            
         });
     }
 
@@ -36,6 +36,6 @@ class CreateCriteriosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('criterios');
+        Schema::dropIfExists('causas_efectos');
     }
 }

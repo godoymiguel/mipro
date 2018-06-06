@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Canvas;
 use Uuid;
 use App\Models\Project;
+use App\Models\Antecedentes;
 use Auth;
 
-class CanvasController extends Controller
+class AntecedentesController extends Controller
 {
-	
 	protected $project;
     /**
      * Create a new controller instance.
@@ -32,8 +31,8 @@ class CanvasController extends Controller
      */
     public function index()
     {
-		$canvas=Canvas::all();
-        return view('canvas.canvas', compact('canvas'));
+       	$ante=Antecedentes::all();
+       	return view('antecedentes.tabla_antecedente', compact('ante'));
     }
 
     /**
@@ -43,7 +42,7 @@ class CanvasController extends Controller
      */
     public function create()
     {
-        return view('canvas.canvas');
+        return view('antecedentes.anadir_antecedente');
     }
 
     /**
@@ -54,11 +53,12 @@ class CanvasController extends Controller
      */
     public function store(Request $request)
     {
-        $canvas=new Canvas($request->all());
-        $canvas->id=Uuid::generate()->string;
-        $canvas->project_id=$this->project->projectUser(Auth::user()->id);
-        $canvas->save();
-        return redirect()->route('idea.tabla');
+        $ante=new Antecedentes($request->all());
+        $ante->id=Uuid::generate()->string;
+        $ante->proyecto_id=$this->project->projectUser(Auth::user()->id);
+        $ante->save();
+        return redirect()->route('a.tabla');
+        
     }
 
     /**
@@ -69,9 +69,7 @@ class CanvasController extends Controller
      */
     public function show($id)
     {
-        $method = 'show';
-
-        return view('canvas.canvas',compact('canvas','method'));
+        //
     }
 
     /**
@@ -80,9 +78,10 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Antecedentes $ante)
     {
-        //
+	
+        return view('antecedentes.editar_antecedente',compact('ante'));
     }
 
     /**
@@ -92,9 +91,10 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Antecedentes $ante)
     {
-        //
+        $ante->update($request->all());
+        return redirect()->route('a.tabla');
     }
 
     /**
@@ -103,8 +103,9 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function delete(Antecedentes $ante)
     {
-        //
+        $ante->delete();
+        return redirect()->route('a.tabla');
     }
 }
