@@ -18,7 +18,7 @@
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Cedula</th>
                                         <th scope="col">Correo</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

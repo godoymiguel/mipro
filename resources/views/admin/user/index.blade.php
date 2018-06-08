@@ -20,7 +20,7 @@
                                         <th scope="col">Correo</th>
                                         <th scope="col">Rol</th>
                                         <th scope="col">Estado</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

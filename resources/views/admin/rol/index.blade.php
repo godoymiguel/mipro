@@ -18,7 +18,7 @@
                                         <th scope="col">Rol</th>
                                         <th scope="col">Titulo</th>
                                         <th scope="col">Activo</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>

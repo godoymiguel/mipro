@@ -26,7 +26,7 @@
                                         <th scope="col">Consumo Precápita</th>
                                         <th scope="col">Precio del Bien</th>
                                         <th scope="col">Ingreso Real</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,6 +59,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <a href="{{ route('regresion.index') }}" type="button" class="btn btn-primary btn-lg btn-block">Regresión</a>
                         </div>
                     </div>
                 </div>
