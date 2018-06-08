@@ -2,11 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\CriterionIndustry;
+use App\Models\CriterionIndustry;
+use App\Models\Industry;
+use App\Models\Project;
+
 use Illuminate\Http\Request;
+
+use Auth;
 
 class CriterionIndustryController extends Controller
 {
+    protected $project;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->project = new Project;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +32,18 @@ class CriterionIndustryController extends Controller
      */
     public function index()
     {
-        //
+        $industry = Industry::where('project_id', $this->project->projectUser(Auth::user()->id))->OrderBy('id')->first();
+
+        $criterion = CriterionIndustry::where('industry_id', $industry->id)->OrderBy('id')->get();
+
+        $industry->suppliers = $criterion->where('criterion','SUPPLIERS')->sum('value');
+        $industry->competitors = $criterion->where('criterion','COMPETITORS')->sum('value');
+        $industry->consumers = $criterion->where('criterion','CONSUMERS')->sum('value');
+        $industry->new = $criterion->where('criterion','NEW')->sum('value');
+        $industry->substitutes = $criterion->where('criterion','SUBSTITUTES')->sum('value');
+        $industry->save();
+
+        return view('admin.em.industry.criterion.index', compact('industry','criterion')); 
     }
 
     /**
@@ -24,7 +53,7 @@ class CriterionIndustryController extends Controller
      */
     public function create()
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -35,7 +64,7 @@ class CriterionIndustryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -46,7 +75,7 @@ class CriterionIndustryController extends Controller
      */
     public function show(CriterionIndustry $criterionIndustry)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -57,7 +86,7 @@ class CriterionIndustryController extends Controller
      */
     public function edit(CriterionIndustry $criterionIndustry)
     {
-        //
+        return redirect()->back();
     }
 
     /**
@@ -69,7 +98,9 @@ class CriterionIndustryController extends Controller
      */
     public function update(Request $request, CriterionIndustry $criterionIndustry)
     {
-        //
+        $criterionIndustry->update($request->all());
+
+        return redirect()->back();
     }
 
     /**
@@ -80,6 +111,6 @@ class CriterionIndustryController extends Controller
      */
     public function destroy(CriterionIndustry $criterionIndustry)
     {
-        //
+        return redirect()->back();
     }
 }

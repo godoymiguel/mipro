@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Seeder;
 
+use App\Models\DefaultIndustry;
+
 class DefaultIndustryTableSeeder extends Seeder
 {
     /**

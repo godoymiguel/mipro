@@ -14,11 +14,16 @@ class Industry extends Model
      * @var array
      */
     protected $fillable = [
-        'id','model','project_id','name','title','value','criterion',
+        'id','model','project_id','name','suppliers','competitors','consumers','new','substitutes',
     ];
 
     public function project()
     {
     	return $this->belongsTo(Project::class);
+    }
+
+    public function criterion_industries()
+    {
+        return $this->hasMany(CriterionIndustry::class);
     }
 }

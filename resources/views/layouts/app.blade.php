@@ -44,14 +44,17 @@
                                 <h6 class="dropdown-header">Datos Emprendimiento</h6>
                                 <a class="dropdown-item" href="{{ route('promotor.index') }}">- Promotores</a>
                                 <div class="dropdown-divider"></div>
+                                <h6 class="dropdown-header">Análisis Entorno</h6>
+                                <a class="dropdown-item" href="{{ route('pastel.index') }}">- PASTEL</a>
+                                <div class="dropdown-divider"></div>
+                                <h6 class="dropdown-header">Análisis Industria</h6>
+                                <a class="dropdown-item" href="{{ route('industry.index') }}">- Atractivo de la Industria</a>
+                                <div class="dropdown-divider"></div>
                                 <h6 class="dropdown-header">Investigación de Mercado</h6>
                                 <a class="dropdown-item" href="{{ route('serietemporal.index') }}">- Serie Temporales</a>
                                 <a class="dropdown-item" href="{{ route('regresion.index') }}">- Regresión</a>
                                 <a class="dropdown-item" href="{{ route('proyeccion.index') }}">- Proyección</a>
                                 <a class="dropdown-item" href="{{ route('marketGap') }}">- Brecha de Mercado</a>
-                                <div class="dropdown-divider"></div>
-                                <h6 class="dropdown-header">Análisis Entorno</h6>
-                                <a class="dropdown-item" href="{{ route('pastel.index') }}">- PASTEL</a>
                             </ul>
                         </li>
                         <li class="nav-item dropdown">

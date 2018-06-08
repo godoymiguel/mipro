@@ -18,9 +18,12 @@ class CreateIndustriesTable extends Migration
             $table->primary('id');
             $table->timestamps();
             $table->string('name');
-            $table->string('title');
-            $table->integer('value')->nullable();
-            $table->enum('criterion',['SUPPLIERS','COMPETITORS','CONSUMERS','NEW','SUBSTITUTES']);
+            $table->integer('suppliers')->default(0);
+            $table->integer('competitors')->default(0);
+            $table->integer('consumers')->default(0);
+            $table->integer('new')->default(0);
+            $table->integer('substitutes')->default(0);
+            $table->enum('model',['MEM','MET','MEF','MEE'])->default('MEM');
 
             $table->uuid('project_id');            
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
