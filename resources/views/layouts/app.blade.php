@@ -40,7 +40,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                               Estudio Mercado
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <h6 class="dropdown-header">Datos Emprendimiento</h6>
                                 <a class="dropdown-item" href="{{ route('promotor.index') }}">- Promotores</a>
                                 <div class="dropdown-divider"></div>
@@ -55,7 +55,7 @@
                                 <a class="dropdown-item" href="{{ route('regresion.index') }}">- Regresión</a>
                                 <a class="dropdown-item" href="{{ route('proyeccion.index') }}">- Proyección</a>
                                 <a class="dropdown-item" href="{{ route('marketGap') }}">- Brecha de Mercado</a>
-                            </ul>
+                            </div>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -93,9 +93,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('proyectos.index') }}">Proyecto</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('usuario.index') }}">Usuario</a>
-                        </li>
+                        @if(Auth::user()->rol->value == 'ADMIN')
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Usuarios
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                  <a class="nav-link" href="{{ route('usuario.index') }}">Usuarios</a>
+                                  <a class="nav-link" href="{{ route('rol.index') }}">Roles</a>
+                                </div>
+                            </li>
+                        @endif
                         @endauth
                     </ul>
 
