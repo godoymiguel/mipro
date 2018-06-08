@@ -38,19 +38,18 @@
                             <br>
                             <a href="{{ route('pastel.create') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Variable a Factor</a>
                             <table class="table">
+                                <caption><h5><strong>Político</strong></h5></caption>
                                 <thead class="thead-light">
                                     <tr>
-                                        <th scope="col">Factor</th>
                                         <th scope="col">Variable</th>
                                         <th scope="col">Valor</th>
                                         <th scope="col">Justificacion</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($pastel->where('factor','P') as $key => $value)
                                     <tr>
-                                        <th scope="row">Político</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
                                             @if($value->value== 0)
@@ -69,25 +68,32 @@
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
-                                                Valorar
-                                            </a>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
-                                                Editar
-                                            </a>
+                                            <a type="button" class="btn btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">Valorar</a>
+                                            <a type="button" class="btn btn btn-warning btn-inline" href="{{ route('pastel.edit', $value->id) }}">Editar</a>
                                             <form method="POST" action="{{ route('pastel.destroy', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('Delete') }}
-                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">
-                                                    Borrar
-                                                    </button>
+                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">Borrar</button>
                                                 </form>
                                         </td>
                                     </tr>
                                     @endforeach
+                                </tbody>
+                            </table>
+                            <br><hr>
+                            <table class="table">
+                                <caption><h5><strong>Ambiental</strong></h5></caption>
+                                <thead class="thead-light">
+                                    <tr>                                        
+                                        <th scope="col">Variable</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Justificacion</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach($pastel->where('factor','A') as $key => $value)
                                     <tr>
-                                        <th scope="row">Ambiental</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
                                             @if($value->value== 0)
@@ -106,25 +112,32 @@
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info" href="{{ route('pastel.value', $value->id) }}">
-                                                Valorar
-                                            </a>
-                                            <a type="button" class="btn btn-info" href="{{ route('pastel.edit', $value->id) }}">
-                                                Editar
-                                            </a>
+                                            <a type="button" class="btn btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">Valorar</a>
+                                            <a type="button" class="btn btn btn-warning btn-inline" href="{{ route('pastel.edit', $value->id) }}">Editar</a>
                                             <form method="POST" action="{{ route('pastel.destroy', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('Delete') }}
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">
-                                                    Borrar
-                                                    </button>
+                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">Borrar</button>
                                                 </form>
                                         </td>
                                     </tr>
                                     @endforeach
+                                </tbody>
+                            </table>
+                            <br><hr>
+                            <table class="table">
+                                <caption><h5><strong>SocioCultural</strong></h5></caption>
+                                <thead class="thead-light">
+                                    <tr>                                        
+                                        <th scope="col">Variable</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Justificacion</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach($pastel->where('factor','S') as $key => $value)
                                     <tr>
-                                        <th scope="row">SocioCultural</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
                                             @if($value->value== 0)
@@ -143,25 +156,32 @@
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
-                                                Valorar
-                                            </a>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
-                                                Editar
-                                            </a>
+                                            <a type="button" class="btn btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">Valorar</a>
+                                            <a type="button" class="btn btn btn-warning btn-inline" href="{{ route('pastel.edit', $value->id) }}">Editar</a>
                                             <form method="POST" action="{{ route('pastel.destroy', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('Delete') }}
-                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">
-                                                    Borrar
-                                                    </button>
+                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">Borrar</button>
                                                 </form>
                                         </td>
                                     </tr>
                                     @endforeach
+                                </tbody>
+                            </table>
+                            <br><hr>
+                            <table class="table">
+                                <caption><h5><strong>Tecnológico</strong></h5></caption>
+                                <thead class="thead-light">
+                                    <tr>                                        
+                                        <th scope="col">Variable</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Justificacion</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach($pastel->where('factor','T') as $key => $value)
                                     <tr>
-                                        <th scope="row">Tecnológico</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
                                             @if($value->value== 0)
@@ -180,25 +200,32 @@
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
-                                                Valorar
-                                            </a>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
-                                                Editar
-                                            </a>
+                                            <a type="button" class="btn btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">Valorar</a>
+                                            <a type="button" class="btn btn btn-warning btn-inline" href="{{ route('pastel.edit', $value->id) }}">Editar</a>
                                             <form method="POST" action="{{ route('pastel.destroy', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('Delete') }}
-                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">
-                                                    Borrar
-                                                    </button>
+                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">Borrar</button>
                                                 </form>
                                         </td>
                                     </tr>
                                     @endforeach
+                                </tbody>
+                            </table>
+                            <br><hr>
+                            <table class="table">
+                                <caption><h5><strong>Económico</strong></h5></caption>
+                                <thead class="thead-light">
+                                    <tr>                                        
+                                        <th scope="col">Variable</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Justificacion</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach($pastel->where('factor','E') as $key => $value)
                                     <tr>
-                                        <th scope="row">Económico</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
                                             @if($value->value== 0)
@@ -217,25 +244,32 @@
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
-                                                Valorar
-                                            </a>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
-                                                Editar
-                                            </a>
+                                            <a type="button" class="btn btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">Valorar</a>
+                                            <a type="button" class="btn btn btn-warning btn-inline" href="{{ route('pastel.edit', $value->id) }}">Editar</a>
                                             <form method="POST" action="{{ route('pastel.destroy', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('Delete') }}
-                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">
-                                                    Borrar
-                                                    </button>
+                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">Borrar</button>
                                                 </form>
                                         </td>
                                     </tr>
                                     @endforeach
+                                </tbody>
+                            </table>
+                            <br><hr>
+                            <table class="table">
+                                <caption><h5><strong>Legal</strong></h5></caption>
+                                <thead class="thead-light">
+                                    <tr>                                        
+                                        <th scope="col">Variable</th>
+                                        <th scope="col">Valor</th>
+                                        <th scope="col">Justificacion</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
                                     @foreach($pastel->where('factor','L') as $key => $value)
                                     <tr>
-                                        <th scope="row">Legal</th>
                                         <td>{!! $value->title !!}</td>
                                         <td>
                                             @if($value->value== 0)
@@ -254,18 +288,12 @@
                                         </td>
                                         <td>{!! $value->justification !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">
-                                                Valorar
-                                            </a>
-                                            <a type="button" class="btn btn-info btn-inline" href="{{ route('pastel.edit', $value->id) }}">
-                                                Editar
-                                            </a>
+                                            <a type="button" class="btn btn btn-info btn-inline" href="{{ route('pastel.value', $value->id) }}">Valorar</a>
+                                            <a type="button" class="btn btn btn-warning btn-inline" href="{{ route('pastel.edit', $value->id) }}">Editar</a>
                                             <form method="POST" action="{{ route('pastel.destroy', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('Delete') }}
-                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">
-                                                    Borrar
-                                                    </button>
+                                                    <button type="submit" class="btn btn-danger btn-inline" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->year !!}?')">Borrar</button>
                                                 </form>
                                         </td>
                                     </tr>

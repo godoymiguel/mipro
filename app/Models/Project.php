@@ -41,4 +41,19 @@ class Project extends Model
     {
         return $this->hasMany(Projection::class);
     }
+
+    public function regressions()
+    {
+        return $this->hasMany(Projection::class);
+    }
+
+    public function pastels()
+    {
+        return $this->hasMany(Pastel::class);
+    }
+
+    public function industry()
+    {
+        return $this->hasOne(Industry::class);
+    }
 }

@@ -82,16 +82,21 @@ class PastelController extends Controller
             +$Legal->where('value', 5 )->count() * 5)/$Legal->count();
 
         # Indice de Riesgo 
+        $div = $pastel->where('value', 1 )->count() 
+            +$pastel->where('value', 2 )->count() 
+            +$pastel->where('value', 3 )->count()
+            +$pastel->where('value', 4 )->count()
+            +$pastel->where('value', 5 )->count();
+        if ($div == 0) {
+            $div = 1;
+        }
+        
         $risk = ($pastel->where('value', 1 )->count()*1 
             +$pastel->where('value', 2 )->count()*2 
             +$pastel->where('value', 3 )->count()*3
             +$pastel->where('value', 4 )->count()*4
             +$pastel->where('value', 5 )->count()*5)/
-            ($pastel->where('value', 1 )->count() 
-            +$pastel->where('value', 2 )->count() 
-            +$pastel->where('value', 3 )->count()
-            +$pastel->where('value', 4 )->count()
-            +$pastel->where('value', 5 )->count());
+            ($div);
 
         return view('admin.em.pastel.index', compact('pastel','total_p','total_a','total_s','total_t','total_e','total_l','risk'));
     }
