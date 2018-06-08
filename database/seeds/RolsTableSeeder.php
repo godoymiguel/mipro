@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Rol;
 
+
 class RolsTableSeeder extends Seeder
 {
     /**
@@ -33,5 +34,6 @@ class RolsTableSeeder extends Seeder
             'value' => 'TEACHER',
             'title' => 'Profesor',
         ]);
+        
     }
 }

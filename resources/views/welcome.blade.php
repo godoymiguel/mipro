@@ -71,15 +71,23 @@
                     @auth
                         <a href="{{ url('/home') }}">Home</a>
                     @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
+                        <a href="{{ route('login') }}">Entrar</a>
+                        <a href="{{ route('register') }}">Registrar</a>
                     @endauth
                 </div>
             @endif
 
             <div class="content">
                 <div class="title m-b-md">
-                    MIPRO
+                    Mipro
+                </div>
+
+                <div class="links">
+                    <a href="https://laravel.com/docs">Estudio de Mercado</a>
+                    <a href="https://laracasts.com">Estudio Técnico</a>
+                    <a href="https://laravel-news.com">Estudio Financiero</a>
+                    <a href="https://forge.laravel.com">Estudio Económico</a>
+                    <a href="https://github.com/laravel/laravel">Ayuda</a>
                 </div>
             </div>
         </div>
