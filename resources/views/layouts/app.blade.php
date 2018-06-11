@@ -82,7 +82,7 @@
 
 
 
-
+@auth
 <!--Inicio Menu deslizable -->
   <div id="menu-container">
    <div id="menu-wrapper">
@@ -143,7 +143,7 @@
    </ul>
    <!-- menu-list accordion-->
 </div>
-
+@endif
 
 
 <div>
