@@ -232,9 +232,9 @@
                                         <td>{!! $value->recursos !!}</td>
                                         <td>{!! $value->conflictos!!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info" href="{{ route('interesados.edit', $value->id) }}"> Editar</a>
-											<a type="button" class="btn btn-info" href="{{ route('interesados.edit', $value->id) }}"> Contacto</a>
-                                            
+                                           
+											<a type="button" class="btn btn-success" href="{{ route('interesados.edit', $value->id) }}"> Añadir Contacto</a>
+                                             <a type="button" class="btn btn-info" href="{{ route('interesados.edit', $value->id) }}"> Editar</a>
                                             <form method="POST" action="{{ route('interesados.delete', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
