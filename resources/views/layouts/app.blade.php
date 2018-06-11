@@ -12,21 +12,32 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('css')
+
+
+      <!-- Styles Menu deslizable-->
+     <link rel='stylesheet prefetch' href='https://fonts.googleapis.com/css?family=Dosis'>
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    @yield('css')
+     <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
+     <script src="{{ asset('js/index.js') }}" defer></script>
+
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,600" rel="stylesheet" type="text/css">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    @yield('css')
+
 </head>
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'MIPRO') }}
+                    {{ config('app.name', 'MIPRO - Modelo Integrado Proyecto de Inversión') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -34,67 +45,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-                        @auth
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Estudio Mercado
-                            </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <h6 class="dropdown-header">Datos Emprendimiento</h6>
-                                <a class="dropdown-item" href="{{ route('promotor.index') }}">- Promotores</a>
-                                <div class="dropdown-divider"></div>
-                                <h6 class="dropdown-header">Investigación de Mercado</h6>
-                                <a class="dropdown-item" href="{{ route('serietemporal.index') }}">- Serie Temporales</a>
-                                <a class="dropdown-item" href="{{ route('regresion.index') }}">- Regresión</a>
-                                <a class="dropdown-item" href="{{ route('proyeccion.index') }}">- Proyección</a>
-                                <a class="dropdown-item" href="{{ route('marketGap') }}">- Brecha de Mercado</a>
-                                <div class="dropdown-divider"></div>
-                                <h6 class="dropdown-header">Análisis Entorno</h6>
-                                <a class="dropdown-item" href="{{ route('pastel.index') }}">- PASTEL</a>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Estudio Tecnico
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Estudio Economico
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle disabled" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                              Estudio Financiero
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                              <a class="dropdown-item" href="#">Action</a>
-                              <a class="dropdown-item" href="#">Another action</a>
-                              <div class="dropdown-divider"></div>
-                              <a class="dropdown-item" href="#">Something else here</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('proyectos.index') }}">Proyecto</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('usuario.index') }}">Usuario</a>
-                        </li>
-                        @endauth
-                    </ul>
+
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -112,7 +63,7 @@
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Salir') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -126,6 +77,78 @@
             </div>
         </nav>
 
+
+
+
+
+
+
+<!--Inicio Menu deslizable -->
+  <div id="menu-container">
+   <div id="menu-wrapper">
+      <div id="hamburger-menu"><span></span><span></span><span></span></div>
+      <!-- hamburger-menu -->
+   </div>
+   <!-- menu-wrapper -->
+   <ul class="menu-list accordion">
+      <li id="nav1" class="toggle accordion-toggle"> 
+         <span class="icon-plus"></span>
+         <a class="menu-link" href="#">Gestión del Proyecto</a>
+      </li>
+      <!-- accordion-toggle -->
+      <ul class="menu-submenu accordion-content">
+         <li><a class="head" href="{{ route('usuario.index') }}">Usuarios</a></li>
+         <li><a class="head" href="{{ route('proyectos.index') }}">Proyectos</a></li>
+         <li><a class="head" href="{{ route('promotor.index') }}">Promotores</a></li>
+      </ul>
+     
+     
+      <!-- menu-submenu accordon-content-->
+      <li id="nav2" class="toggle accordion-toggle"> 
+         <span class="icon-plus"></span>
+         <a class="menu-link" href="#">Idea de Negocios</a>
+      </li>
+      <!-- accordion-toggle -->
+      <ul class="menu-submenu accordion-content">
+         <li><a class="head" href="{{ route('idea.tabla') }}">Idea</a></li>
+         <li><a class="head" href="{{ route('canvas.create') }}">Canvas</a></li>
+      </ul>
+    
+      <!-- menu-submenu accordon-content-->
+      <li id="nav3" class="toggle accordion-toggle"> 
+         <span class="icon-plus"></span>
+         <a class="menu-link" href="#">Estudio de Mercado</a>
+      </li>
+      
+      <!-- accordion-toggle -->
+      <ul class="menu-submenu accordion-content">
+         <li><a class="head" href="{{ route('a.tabla') }}">Antecedentes</a></li>
+         <li><a class="head" href="{{ route('contenedor.index') }}">Marco Lógico</a></li>
+         <li><a class="head" href="{{ route('pastel.index') }}">Análisis de Entorno</a></li>
+         <li><a class="head" href="{{ route('foda.tabla') }}">Análisis de Industria</a></li>
+         <li><a class="head">Investigación de Mercado</a></li>
+         <li><a class="head" href="{{ route('serietemporal.index') }}">- Serie Temporales</a></li>
+         <li><a class="head" href="{{ route('regresion.index') }}">- Regresión</a></li>
+         <li><a class="head" href="{{ route('proyeccion.index') }}">- Proyección</a></li>
+         <li><a class="head" href="{{ route('marketGap') }}">- Brecha de Mercado</a></li>
+
+      </ul> 
+      
+         
+         
+      </ul>
+      <!-- menu-submenu accordon-content-->
+   </ul>
+   <!-- menu-list accordion-->
+</div>
+
+
+
+<div>
+
+<!--Fin Menu deslizable -->
+
+
         <main class="py-4">
             @yield('content')
         </main>
@@ -134,3 +157,5 @@
     @yield('js')
 </body>
 </html>
+
+

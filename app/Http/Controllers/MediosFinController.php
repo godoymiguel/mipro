@@ -34,8 +34,8 @@ class MediosFinController extends Controller
      */
     public function index()
     {
-        $ao=Arbol_Objetivos::all();
-        $mf=MediosFin::all();
+        $ao=Arbol_Objetivos::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+        $mf=MediosFin::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
         return view('arbol_objetivo.arbolobjetivo_tabla', compact('ao','mf'));
     }
 
@@ -61,7 +61,7 @@ class MediosFinController extends Controller
         $mf->id=Uuid::generate()->string;
         $mf->proyecto_id=$this->project->projectUser(Auth::user()->id);
         $mf->save();
-        return redirect()->route('arbolobj.tabla');
+        return redirect()->route('contenedor.index');
     }
 
     /**
@@ -108,6 +108,6 @@ class MediosFinController extends Controller
     public function delete(MediosFin $mf)
     {
         $mf->delete();
-        return redirect()->route('arbolobj.tabla');
+        return redirect()->route('contenedor.index');
     }
 }

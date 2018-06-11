@@ -4,14 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Uuid;
-use App\Models\Project;
-use App\Models\Interesados;
 use Auth;
+use App\Models\Project;
+use App\Models\Arbol_Problema;
+use App\Models\CausasEfectos;
+use App\Models\Arbol_Objetivo;
+use App\Models\MediosFin;
+use App\Models\Interesados;
 
-class InteresadosController extends Controller
+
+class ContenedorController extends Controller
 {
-	
-	protected $project;
+    /**
+     * 
+     * 	protected $project;
     /**
      * Create a new controller instance.
      *
@@ -24,16 +30,20 @@ class InteresadosController extends Controller
         $this->project = new Project;
     }
     
-    
-    /**
+/* 
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-		$inte=Interesados::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
-       	return view('interesados.tabla_interesados', compact('inte'));
+        
+        $ap=Arbol_Problema::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+        $cf=CausasEfectos::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();   
+        $ao=Arbol_Objetivo::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+        $mf=MediosFin::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+        $inte=Interesados::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+        return view('arbol_problema.contenedor', compact('ap', 'cf', 'ao', 'mf', 'inte'));
     }
 
     /**
@@ -43,7 +53,7 @@ class InteresadosController extends Controller
      */
     public function create()
     {
-        return view('interesados.anadir_interesados');
+        //
     }
 
     /**
@@ -54,11 +64,7 @@ class InteresadosController extends Controller
      */
     public function store(Request $request)
     {
-        $inte=new Interesados($request->all());
-        $inte->id=Uuid::generate()->string;
-        $inte->proyecto_id=$this->project->projectUser(Auth::user()->id);
-        $inte->save();
-        return redirect()->route('contenedor.index');
+        //
     }
 
     /**
@@ -78,9 +84,9 @@ class InteresadosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Interesados $inte)
+    public function edit($id)
     {
-        return view('interesados.editar_interesados',compact('inte'));
+        //
     }
 
     /**
@@ -90,10 +96,9 @@ class InteresadosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Interesados $inte)
+    public function update(Request $request, $id)
     {
-        $inte->update($request->all());
-        return redirect()->route('interesados.tabla');
+        //
     }
 
     /**
@@ -102,9 +107,8 @@ class InteresadosController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Interesados $inte)
+    public function destroy($id)
     {
-        $inte->delete();
-        return redirect()->route('contenedor.index');
+        //
     }
 }

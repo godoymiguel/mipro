@@ -32,8 +32,8 @@ class Arbol_ObjetivoController extends Controller
      */
     public function index()
     {
-        $ao=Arbol_Objetivo::all();
-        $mf=MediosFin::all();
+        $ao=Arbol_Objetivo::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+        $mf=MediosFin::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
        	return view('arbol_objetivo.arbolobjetivo_tabla', compact('ao', 'mf'));
     }
 
@@ -67,7 +67,7 @@ class Arbol_ObjetivoController extends Controller
         $ao->id=Uuid::generate()->string;
         $ao->proyecto_id=$this->project->projectUser(Auth::user()->id);
         $ao->save();
-        return redirect()->route('arbolobj.tabla');
+        return redirect()->route('contenedor.index');
        
     }
 
@@ -119,6 +119,6 @@ class Arbol_ObjetivoController extends Controller
     public function delete(Arbol_Objetivo $ao)
     {
         $ao->delete();
-        return redirect()->route('arbolobj.tabla');
+        return redirect()->route('contenedor.index');
     }
 }

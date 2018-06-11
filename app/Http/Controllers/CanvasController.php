@@ -32,7 +32,7 @@ class CanvasController extends Controller
      */
     public function index()
     {
-		$canvas=Canvas::all();
+		$canvas=Canvas::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
         return view('canvas.canvas', compact('canvas'));
     }
 
@@ -41,9 +41,10 @@ class CanvasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Canvas $canvas)
     {
-        return view('canvas.canvas');
+		$canvas=Canvas::all();
+        return view('canvas.canvas', compact('canvas'));
     }
 
     /**

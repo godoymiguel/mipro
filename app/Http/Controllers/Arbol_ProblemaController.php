@@ -32,7 +32,7 @@ class Arbol_ProblemaController extends Controller
      */
     public function index()
     {
-        $ap=Arbol_Problema::all();
+        $ap=Arbol_Problema::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
         $cf=CausasEfectos::all();
        	return view('arbol_problema.arbolproblema_tabla', compact('ap', 'cf'));
     }
@@ -68,7 +68,7 @@ class Arbol_ProblemaController extends Controller
         $ap->id=Uuid::generate()->string;
         $ap->proyecto_id=$this->project->projectUser(Auth::user()->id);
         $ap->save();
-        return redirect()->route('arbolprob.tabla');
+        return redirect()->route('contenedor.index');
         
     }
 
@@ -124,6 +124,6 @@ class Arbol_ProblemaController extends Controller
     public function delete(Arbol_Problema $ap)
     {
         $ap->delete();
-        return redirect()->route('arbolprob.tabla');
+        return redirect()->route('contenedor.index');
     }
 }

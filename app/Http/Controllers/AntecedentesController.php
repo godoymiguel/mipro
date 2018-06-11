@@ -31,7 +31,7 @@ class AntecedentesController extends Controller
      */
     public function index()
     {
-       	$ante=Antecedentes::all();
+       	$ante=Antecedentes::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
        	return view('antecedentes.tabla_antecedente', compact('ante'));
     }
 

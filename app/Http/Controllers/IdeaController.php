@@ -34,15 +34,20 @@ class IdeaController extends Controller
      */
     public function index()
     {
-		$idea=Idea::all();
-        $criterio=Criterios::all();
+		$idea=Idea::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+        $criterio=Criterios::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
         
         //Seleccion de la valoracion de la Idea 
         $count=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->count();    
-        $mayor=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->max('valor');        
+        $mayor=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->max('valor');
         $seleccion=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->where('valor',$mayor)->first(); 
-        $seleccionado=$seleccion->name;
+        if ($seleccion == null){
+			$seleccionado = null;
+		}
+		else{
         
+			$seleccionado=$seleccion->name;
+		}
         return view('idea.idea_tabla', compact('idea', 'criterio', 'count', 'seleccionado'));
         
         

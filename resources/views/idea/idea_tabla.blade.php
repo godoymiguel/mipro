@@ -10,23 +10,23 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-12">
-<!--web-->
-							<p><h5>Introduzca las ideas del proyecto a emprender (máximo 3)</h5></p>
+
+							<p>a) Introduzca las ideas del proyecto a emprender (máximo 3)</p>
                             <a href="{{ route('idea') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Idea</a>
                             <br>
                             <table class="table">
                                 <thead class="thead-light">
-								<p><h4>Listado de ideas</h4></p>	
+								<p>Listado de ideas</p>	
                                     <tr>
 										<th scope="col">#</th>
-                                        <th scope="col">Idea</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col">Descripción</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($idea as $key => $value)
                                     <tr>    
-										<th scope="row">{!! $key+1 !!}</th>
+										<th scope="row">Idea {!! $key+1 !!}</th>
                                         <td>{!! $value->name !!}</td>
                                         <td>
                                             <a type="button" class="btn btn-info" href="{{ route('idea.edit', $value->id) }}"> Editar</a>
@@ -44,10 +44,12 @@
                             </table>
                             
                             
-                             <p><h4> Valoración de Ideas (1-10) </h4></p>
-                             <p>Elegir: 
+                             <p> b) Valoración de Ideas (1-10) </p>
+                             <p>Elegir la idea: 
                              
-                             <input type="text" size="15" id="total" value={{"$seleccionado"}} readonly="readonly" disabled value="0" ><br /><br /></p>
+                          
+                              <input type="text" size="15" id="total" value={{"$seleccionado"}} readonly="readonly" disabled value="0" ><br /><br /></p>
+                        
                              
                              <a href="{{ route('idea.criterio') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Criterio</a>
            
@@ -59,7 +61,7 @@
 											<th scope="col">Idea 1</th>
 											<th scope="col">Idea 2</th>
 											<th scope="col">Idea 3</th>
-											<th scope="col">Acciones</th>
+											<th scope="col"></th>
 
 									</tr>
                                 </thead>
@@ -95,15 +97,6 @@
 									</tr> 
 									  @endforeach
 									  
-                            </table>
-                            <div class="form-group row mb-0">
-								<div class="col-md-6 offset-md-4">
-                                 <a href="{{ route('canvas.create') }}" type="button" class="btn btn-primary">
-                                        {{ __('Cancelar ') }}</a>
-                                <a href="{{ route('a.tabla') }}" type="button" class="btn btn-primary">
-                                        {{ __('Siguiente ') }}</a>
-								</div>
-							</div>
 
 								     
                         </div>

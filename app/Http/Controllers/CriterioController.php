@@ -32,8 +32,8 @@ class CriterioController extends Controller
      */
     public function index()
     {
-		$idea=Idea::all();
-        $criterio=Criterios::all();
+		$idea=Idea::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+        $criterio=Criterios::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
         return view('idea.idea_tabla', compact('idea', 'criterio'));
                
     }

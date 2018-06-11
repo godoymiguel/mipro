@@ -34,7 +34,7 @@ class CausasEfectosController extends Controller
      */
     public function index()
     {
-        $ap=Arbol_Problema::all();
+        $ap=Arbol_Problema::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
         $cf=CausasEfectos::all();
         return view('arbol_problema.arbolproblema_tabla', compact('ap','cf'));
     }
@@ -61,7 +61,7 @@ class CausasEfectosController extends Controller
         $cf->id=Uuid::generate()->string;
         $cf->proyecto_id=$this->project->projectUser(Auth::user()->id);
         $cf->save();
-        return redirect()->route('arbolprob.tabla');
+        return redirect()->route('contenedor.index');
     }
 
     /**
@@ -108,6 +108,6 @@ class CausasEfectosController extends Controller
     public function delete(CausasEfectos $cf)
     {
         $cf->delete();
-        return redirect()->route('arbolprob.tabla');
+        return redirect()->route('contenedor.index');
     }
 }
