@@ -97,7 +97,9 @@
       </li>
       <!-- accordion-toggle -->
       <ul class="menu-submenu accordion-content">
+        @if(Auth::user()->rol->value == 'ADMIN')
          <li><a class="head" href="{{ route('usuario.index') }}">Usuarios</a></li>
+        @endif
          <li><a class="head" href="{{ route('proyectos.index') }}">Proyectos</a></li>
          <li><a class="head" href="{{ route('promotor.index') }}">Promotores</a></li>
       </ul>
