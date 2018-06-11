@@ -18,7 +18,7 @@
                                         <th scope="col">Rol</th>
                                         <th scope="col">Titulo</th>
                                         <th scope="col">Activo</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -36,7 +36,7 @@
                                         </td>
                                         <td>
                                             <a type="button" class="btn btn-info" href="{{ route('rol.edit', $value->id) }}">
-                                                E
+                                                Editar
                                             </a>
                                             @if($value->active)
                                                 <form method="POST" action="{{ route('rol.active', $value->id) }}">
@@ -44,7 +44,7 @@
                                                     {{ method_field('PUT') }}
                                                 <input type="hidden" name="active" value="false">
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro Desea Inactivar el registro {!! $value->title !!}?')">
-                                                I
+                                                Inactivar
                                                 </button>
                                             </form>
                                             @else
@@ -53,7 +53,7 @@
                                                     {{ method_field('PUT') }}
                                                 <input type="hidden" name="active" value="true">
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro Desea Activar el registro {!! $value->title !!}?')">
-                                                A
+                                                Activar
                                                 </button>
                                             </form>
                                             @endif

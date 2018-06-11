@@ -9,8 +9,13 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-12">
+                            @if($project->count() > 0)
+                                <a href="{{ route('promotor.create') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Promotores</a>
+                                <br>
+                            @endif
                             <a href="{{ route('proyectos.create') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Proyecto</a>
                             <br>
+                            
                             <table class="table">
                                 <thead class="thead-light">
                                     <tr>
@@ -18,7 +23,7 @@
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Usuario</th>
                                         <th scope="col">Seleccionado</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -50,7 +55,7 @@
 
                                             <form method="POST" action="{{ route('proyectos.destroy', $value->id) }}">
                                                 @csrf
-                                                    {{ method_field('Destroy') }}
+                                                    {{ method_field('DELETE') }}
                                                     <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->name !!}?')">
                                                     Borrar
                                                     </button>

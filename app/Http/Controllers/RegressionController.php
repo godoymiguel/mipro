@@ -36,7 +36,12 @@ class RegressionController extends Controller
      */
     public function index()
     {
-        $regression = Regression::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
+        $regression = Regression::where('project_id', $this->project->projectUser(Auth::user()->id))->first();
+
+        if (!$regression) {
+            $regression = new Regression;
+        }
+        //dd($regression);
 
         return view('admin.em.regression.index', compact('regression'));
     }
@@ -51,7 +56,7 @@ class RegressionController extends Controller
         $timeSerie = TimeSerie::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
 
         if ($timeSerie->count() < 1) {
-            return redirect()->route('serietemporal.index');
+            return redirect()->route('serietemporal.index')->withErrors('¡ERROR! Debe ingresar datos primero para hacer la regresión');
         } else {
             Regression::where('project_id', $this->project->projectUser(Auth::user()->id))->delete();
 

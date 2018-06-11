@@ -10,10 +10,12 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-12">
-
-							<p>a) Introduzca las ideas del proyecto a emprender (máximo 3)</p>
+<!--web-->                  
+                            @if($idea->count()<3)
+							<p><h5>Introduzca las ideas del proyecto a emprender (máximo 3)</h5></p>
                             <a href="{{ route('idea') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Idea</a>
                             <br>
+                            @endif
                             <table class="table">
                                 <thead class="thead-light">
 								<p>Listado de ideas</p>	
@@ -30,26 +32,24 @@
                                         <td>{!! $value->name !!}</td>
                                         <td>
                                             <a type="button" class="btn btn-info" href="{{ route('idea.edit', $value->id) }}"> Editar</a>
-                                            <form method="POST" action="{{ route('idea.delete', $value->id) }}">
+                                            <!--<form method="POST" action="{{ route('idea.delete', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar la idea {!! $value->name !!}?')">
                                                 Eliminar
                                                 </button>
-                                            </form>
+                                            </form>-->
                                         </td>
                                     </tr>
                                     @endforeach
                                 </tbody>
                             </table>
                             
-                            
-                             <p> b) Valoración de Ideas (1-10) </p>
+                            @if($idea->count()>=3)
+                             <p><h4> Valoración de Ideas (1-10) </h4></p>
                              <p>Elegir la idea: 
                              
-                          
-                              <input type="text" size="15" id="total" value={{"$seleccionado"}} readonly="readonly" disabled value="0" ><br /><br /></p>
-                        
+                             <input type="text" size="15" id="total" value="{!!$seleccionado!!}" readonly="readonly" disabled value="0" ><br /><br /></p>
                              
                              <a href="{{ route('idea.criterio') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Criterio</a>
            
@@ -97,6 +97,8 @@
 									</tr> 
 									  @endforeach
 									  
+                            @endif
+                            </table>
 
 								     
                         </div>

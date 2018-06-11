@@ -33,9 +33,9 @@ class ProjectController extends Controller
     public function index()
     {
         if (Auth::user()->rol->value == 'TEACHER' || Auth::user()->rol->value == 'ADMIN') {
-            $project = Project::orderBy('created_at','DESC')->get();
+            $project = Project::orderBy('created_at','ASC')->get();
         } else {
-            $project = Project::where('user_id', Auth::user()->id)->orderBy('created_at','DESC')->get();
+            $project = Project::where('user_id', Auth::user()->id)->orderBy('created_at','ASC')->get();
         }
 
         return view('admin.project.index', compact('project'));

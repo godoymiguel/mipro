@@ -4,6 +4,14 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-15">
+            @if($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{$errors->first()}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
             <div class="card">
                 <div class="card-header">{{ __('Serie Temporal') }}</div>
                 <div class="card-body">
@@ -26,7 +34,7 @@
                                         <th scope="col">Consumo Precápita</th>
                                         <th scope="col">Precio del Bien</th>
                                         <th scope="col">Ingreso Real</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -59,6 +67,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            <a href="{{ route('regresion.index') }}" type="button" class="btn btn-primary btn-lg btn-block">Regresión</a>
                         </div>
                     </div>
                 </div>
