@@ -8,6 +8,7 @@ use Auth;
 use App\Models\Idea;
 use App\Models\Criterios;
 use App\Models\Project;
+use App\Models\DefaultIdea;
 
 
 class IdeaController extends Controller
@@ -34,14 +35,18 @@ class IdeaController extends Controller
      */
     public function index()
     {
-		$idea=Idea::all();
-        $criterio=Criterios::all();
+		$idea=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->orderBy('id','ASC')->get();
+        $criterio=Criterios::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->orderBy('id','ASC')->get();
         
         //Seleccion de la valoracion de la Idea 
         $count=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->count();    
         $mayor=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->max('valor');        
         $seleccion=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->where('valor',$mayor)->first(); 
-        $seleccionado=$seleccion->name;
+        if ($seleccion == null) {
+            $seleccionado = null;
+        } else {
+            $seleccionado = $seleccion->name;
+        }
         
         return view('idea.idea_tabla', compact('idea', 'criterio', 'count', 'seleccionado'));
         
@@ -78,6 +83,21 @@ class IdeaController extends Controller
         $idea->id=Uuid::generate()->string;
         $idea->proyecto_id=$this->project->projectUser(Auth::user()->id);
         $idea->save();
+
+        $criterio = Criterios::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->get();
+
+        if ($criterio->count() <1) {
+            $criterion = DefaultIdea::all();
+
+            foreach ($criterion as $key => $value) {
+                Criterios::create([
+                    'id' => Uuid::generate()->string,
+                    'name' => $value->title,
+                    'proyecto_id' => $idea->proyecto_id,
+                ]);
+            }
+        }
+
         return redirect()->route('idea.tabla');
     }
 
@@ -131,6 +151,7 @@ class IdeaController extends Controller
     public function delete(Idea $idea)
     {
         $idea->delete();
+
         return redirect()->back();
     
     }
