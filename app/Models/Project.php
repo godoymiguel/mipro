@@ -57,8 +57,6 @@ class Project extends Model
         return $this->hasMany(Antecedentes::class);
     }
     
-    
-
     public function projections()
     {
         return $this->hasMany(Projection::class);
@@ -66,7 +64,7 @@ class Project extends Model
 
     public function regressions()
     {
-        return $this->hasMany(Projection::class);
+        return $this->hasMany(Regression::class);
     }
 
     public function pastels()
@@ -78,4 +76,32 @@ class Project extends Model
     {
         return $this->hasOne(Industry::class);
     }
+    
+    public function arbol_problema()
+    {
+        return $this->hasMany(Arbol_Problema::class);
+    }
+    
+    public function causas_efectos()
+    {
+        return $this->hasMany(CausasEfectos::class);
+    }
+    
+    public function arbol_objetivo()
+    {
+        return $this->hasMany(Arbol_Objetivo::class);
+    }
+    
+    public function medios_fin()
+    {
+        return $this->hasMany(MediosFin::class);
+    }
+    
+    public function interesados()
+    {
+        return $this->hasMany(Interesados::class);
+    }
+
+    
+    
 }

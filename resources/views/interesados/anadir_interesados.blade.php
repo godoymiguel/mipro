@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <form method="POST" action="{{ route('interesados.store') }}">
                         @csrf
-                        <p><h3 style="text-align:center">Nuevo Involucrado</h3></p>
+                        <p><h3 style="text-align:center">Nuevo Interesado</h3></p>
                         
                         <div class="form-group row">
                             <label for="fuente" class="col-md-4 col-form-label text-md-right">{{ __('Grupo') }}</label>
@@ -80,7 +80,7 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                 <a href="{{ route('interesados.tabla') }}" type="button" class="btn btn-primary">
+                                 <a href="{{ route('contenedor.index') }}" type="button" class="btn btn-primary">
                                         {{ __('Cancelar ') }}</a>
                                 <button class="btn btn-primary" type="summit">
                                         {{ __('Guardar ') }}</button>

@@ -7,6 +7,8 @@
             <div class="card">
                 <div class="card-header">{{ __('Marco Lógico') }}</div>
                 <div class="card-body">
+				    
+                    
                     <div class="form-group row">
                         <div class="col-md-12">
 							<p><h5 style="text-align:center">Árbol Problema</h5></p>
@@ -17,7 +19,7 @@
                                 <thead class="thead-light">	
                                     <tr>
                                         <th scope="col">Problema</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -30,7 +32,7 @@
                                              <form method="POST" action="{{ route('arbolprob.delete', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar {!! $value->problema!!}?')">
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar el problema: {!! $value->problema!!}?')">
                                                 Eliminar
                                                 </button>
                                             </form>  
@@ -55,7 +57,7 @@
 											<th scope="col">Efecto Directo</th>
 											<th scope="col">Efecto Indirecto</th>
 											<th scope="col">Causa Raiz</th>
-											<th scope="col">Acciones</th>
+											<th scope="col"></th>
 
 									</tr>
                                 </thead>
@@ -76,7 +78,7 @@
                                             <form method="POST" action="{{ route('causas.delete', $valor->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar la causa directa {!! $valor->causa_directa !!}?')">
+                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar la causa directa: {!! $valor->causa_directa !!}?')">
                                                 Eliminar
                                                 </button>
                                             </form>                                     

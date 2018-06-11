@@ -58,6 +58,8 @@ Route::get('/interesados/{inte}/edit', 'InteresadosController@edit')->name('inte
 Route::delete('/interesados/{inte}', 'InteresadosController@delete')->name('interesados.delete');
 Route::put('/interesados/{inte}/a', 'InteresadosController@update')->name('interesados.update');
 
+
+Route::get('/marcologico', 'ContenedorController@index')->name('contenedor.index');
 //Arbol del problema
 Route::get('/arbolproblema/tabla', 'Arbol_ProblemaController@index')->name('arbolprob.tabla');
 Route::get('/arbolproblema', 'Arbol_ProblemaController@create')->name('arbolprob.create');
@@ -88,6 +90,26 @@ Route::post('/medios', 'MediosFinController@store')->name('medios.store');
 Route::get('/medios/{mf}/edit', 'MediosFinController@edit')->name('medios.edit');
 Route::delete('/medios/{mf}', 'MediosFinController@delete')->name('medios.delete');
 Route::put('/medios/{mf}/a', 'MediosFinController@update')->name('medios.update');
+
+//FODA
+Route::post('/foda', 'FodaController@store')->name('foda.store');
+Route::get('/foda', 'FodaController@create')->name('foda.create');
+Route::get('/foda/tabla', 'FodaController@index')->name('foda.tabla');
+Route::delete('/foda/{foda}', 'FodaController@delete')->name('foda.delete');
+Route::put('/foda/{foda}', 'FodaController@update')->name('foda.update');
+//Foda-Fortaleza
+Route::get('/foda/fortaleza', 'FodaController@fortaleza')->name('fortaleza.create');
+Route::get('/foda/{foda}/editar_fortaleza', 'FodaController@editar_fortaleza')->name('fortaleza.edit');
+//Foda-oportunidad
+Route::get('/foda/oportunidad', 'FodaController@oportunidad')->name('oportunidad.create');
+Route::get('/foda/{foda}/editar_oportunidad', 'FodaController@editar_oportunidad')->name('oportunidad.edit');
+//Foda-debilidad
+Route::get('/foda/debilidad', 'FodaController@debilidad')->name('debilidad.create');
+Route::get('/foda/{foda}/editar_debilidad', 'FodaController@editar_debilidad')->name('debilidad.edit');
+//Foda-Amenaza
+Route::get('/foda/amenaza', 'FodaController@amenaza')->name('amenaza.create');
+Route::get('/foda/{foda}/editar_amenaza', 'FodaController@editar_amenaza')->name('amenaza.edit');
+
 
 //GESTION DE USUARIOS
 Route::resource('rol','RolController');

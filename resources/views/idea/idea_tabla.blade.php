@@ -18,17 +18,17 @@
                             @endif
                             <table class="table">
                                 <thead class="thead-light">
-								<p><h4>Listado de ideas</h4></p>	
+								<p>Listado de ideas</p>	
                                     <tr>
 										<th scope="col">#</th>
-                                        <th scope="col">Idea</th>
+                                        <th scope="col">Descripción</th>
                                         <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($idea as $key => $value)
                                     <tr>    
-										<th scope="row">{!! $key+1 !!}</th>
+										<th scope="row">Idea {!! $key+1 !!}</th>
                                         <td>{!! $value->name !!}</td>
                                         <td>
                                             <a type="button" class="btn btn-info" href="{{ route('idea.edit', $value->id) }}"> Editar</a>
@@ -99,14 +99,6 @@
 									  
                             </table>
                             @endif
-                            <div class="form-group row mb-0">
-								<div class="col-md-6 offset-md-4">
-                                 <a href="{{ route('canvas.create') }}" type="button" class="btn btn-primary">
-                                        {{ __('Cancelar ') }}</a>
-                                <a href="{{ route('a.tabla') }}" type="button" class="btn btn-primary">
-                                        {{ __('Siguiente ') }}</a>
-								</div>
-							</div>
 
 								     
                         </div>

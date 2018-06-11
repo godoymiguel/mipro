@@ -24,7 +24,7 @@
 										<th scope="col">Fuente Asociada</th>
                                         <th scope="col">Descripción</th>
                                         <th scope="col">Tipo</th>
-                                        <th scope="col">Acciones</th>
+                                        <th scope="col"></th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -35,10 +35,8 @@
                                         <td>{!! $value->descripcion !!}</td>
                                         <td>{!! $value->tipo !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info" href="{{ route('a.edit', $value->id) }}"> Editar</a>
-                                        
-                                            
-                                            <form method="POST" action="{{ route('a.delete', $value->id) }}">
+                                        <a type="button" class="btn btn-info" href="{{ route('a.edit', $value->id) }}"> Editar</a>
+                                        <form method="POST" action="{{ route('a.delete', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
                                                 <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar el antecedente {!! $value->fuente !!}?')">
@@ -55,18 +53,6 @@
                                 </tbody>
                             </table>
                             
-                            
-                             
-                            <div class="form-group row mb-0">
-								<div class="col-md-6 offset-md-4">
-                                 <a href="{{ route('idea.tabla') }}" type="button" class="btn btn-primary">
-                                        {{ __('Cancelar ') }}</a>
-                                 <a href="{{ route('arbolprob.tabla') }}" type="button" class="btn btn-primary">
-                                        {{ __('Siguiente ') }}</a>      
-                                        
-                                    
-								</div>
-							</div>
 
 								     
                         </div>
