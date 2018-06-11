@@ -16,9 +16,4 @@ class DefaultIndustry extends Model
     protected $fillable = [
         'id','title','criterion',
     ];
-
-    public function project()
-    {
-    	return $this->belongsTo(Project::class);
-    }
 }

@@ -56,7 +56,7 @@ class RegressionController extends Controller
         $timeSerie = TimeSerie::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
 
         if ($timeSerie->count() < 1) {
-            return redirect()->route('serietemporal.index');
+            return redirect()->route('serietemporal.index')->withErrors('¡ERROR! Debe ingresar datos primero para hacer la regresión');
         } else {
             Regression::where('project_id', $this->project->projectUser(Auth::user()->id))->delete();
 

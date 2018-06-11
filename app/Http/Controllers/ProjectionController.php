@@ -39,7 +39,7 @@ class ProjectionController extends Controller
 
             return view('admin.em.projection.index', compact('projection','regression'));
         } else {
-            return redirect()->route('regresion.index');
+            return redirect()->route('regresion.index')->withErrors('¡ERROR! Debe calcular regresión antes');
         }
     }
 
@@ -52,12 +52,12 @@ class ProjectionController extends Controller
     {
         $projection = Projection::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
 
-        if ($projection) {
+        if ($projection->count() > 1) {
             $year = $projection[0]->year;
 
             return view('admin.em.marketGap.index', compact('year','projection'));
         } else {
-            return redirect()->route('proyeccion.index');
+            return redirect()->route('proyeccion.index')->withErrors('¡ERROR! Debe calcular proyección antes');
         }
     }
 
@@ -77,7 +77,7 @@ class ProjectionController extends Controller
 
             return view('admin.em.projection.projection',compact('projection','method'));
         } else {
-            return redirect()->route('regresion.index');
+            return redirect()->route('regresion.index')->withErrors('¡ERROR! Debe calcular regresión antes');
         }
         
         

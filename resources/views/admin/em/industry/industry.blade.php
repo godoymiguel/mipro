@@ -18,10 +18,10 @@
                     @endif
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Industria') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name', $industry->name) }}" placeholder="Industrias Mipro" required autofocus {{$method == 'show' ? 'disabled' : null }}>
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name', $industry->name) }}" placeholder="Tecnología" required autofocus {{$method == 'show' ? 'disabled' : null }}>
 
                                 @if ($errors->has('name'))
                                     <span class="invalid-feedback">
