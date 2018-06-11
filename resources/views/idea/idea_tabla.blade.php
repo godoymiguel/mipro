@@ -97,8 +97,8 @@
 									</tr> 
 									  @endforeach
 									  
-                            @endif
                             </table>
+                            @endif
 
 								     
                         </div>
