@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Investigacion_CampoController;
+use App\Demand;
 use Illuminate\Http\Request;
 
-class InvestigacionCampoControllerController extends Controller
+class DemandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -41,10 +41,10 @@ class InvestigacionCampoControllerController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Investigacion_CampoController  $investigacion_CampoController
+     * @param  \App\Demand  $demand
      * @return \Illuminate\Http\Response
      */
-    public function show(Investigacion_CampoController $investigacion_CampoController)
+    public function show(Demand $demand)
     {
         //
     }
@@ -52,10 +52,10 @@ class InvestigacionCampoControllerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Investigacion_CampoController  $investigacion_CampoController
+     * @param  \App\Demand  $demand
      * @return \Illuminate\Http\Response
      */
-    public function edit(Investigacion_CampoController $investigacion_CampoController)
+    public function edit(Demand $demand)
     {
         //
     }
@@ -64,10 +64,10 @@ class InvestigacionCampoControllerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Investigacion_CampoController  $investigacion_CampoController
+     * @param  \App\Demand  $demand
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Investigacion_CampoController $investigacion_CampoController)
+    public function update(Request $request, Demand $demand)
     {
         //
     }
@@ -75,10 +75,10 @@ class InvestigacionCampoControllerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Investigacion_CampoController  $investigacion_CampoController
+     * @param  \App\Demand  $demand
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Investigacion_CampoController $investigacion_CampoController)
+    public function destroy(Demand $demand)
     {
         //
     }

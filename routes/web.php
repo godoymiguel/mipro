@@ -141,4 +141,9 @@ Route::resource('proyeccion','ProjectionController')->parameters(['proyeccion'=>
 
 Route::get('brechaDeMercado', 'ProjectionController@marketGap')->name('marketGap');
 
+Route::resource('investigation','InvestigationController');
+Route::resource('population','PopulationController');
+Route::resource('demand','DemandController');
+Route::resource('offer','OfferController');
+
 //ESTUDIO TECNICO
