@@ -55,7 +55,7 @@ class PopulationController extends Controller
             $population =  new Population;
             $method = 'create';
 
-            return view('admin.em.population.population', compact('investigation','population','method'));
+            return view('admin.em.investigation.population.population', compact('investigation','population','method'));
         }
     }
 
@@ -68,7 +68,6 @@ class PopulationController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'title' =>  'required|string',
             'size' =>  'required|string',
             'list' =>  'required',
             'sample_point' =>  'required|integer',
@@ -80,13 +79,13 @@ class PopulationController extends Controller
             'error' =>  'required|integer',
         ]);
 
-        $standardNormal = new Continuous\StandardNormal($request->level);
+        $standardNormal = new Continuous\StandardNormal();
 
-        dd($standardNormal);
+        $standardNormal = $standardNormal->inverse($request->level/100);
 
         if ($request->know_population == 1) {
-            $M1 = ($request->size)*($request->proportion)*(1-$request->proportion)*(pow($standardNormal,2));
-            $M2 = ($request->size-1)*(pow($request->error,2))+(pow($standardNormal,2))*$request->proportion*(1-$request->proportion);
+            $M1 = ($request->size)*($request->proportion/100)*(1-$request->proportion/100)*(pow($standardNormal,2));
+            $M2 = ($request->size-1)*(pow($request->error/100,2))+(pow($standardNormal,2))*$request->proportion/100*(1-$request->proportion/100);
 
             if ($M2 == 0) {
                 $M2 = 1;
@@ -94,12 +93,12 @@ class PopulationController extends Controller
             $sample_size = $M1/$M2;
 
         } else {
-            $sample_size = ($request->proportion*(1-$request->proportion)*(pow($standardNormal,2))/(pow($request->error,2));
-        }        
+            $sample_size = (($request->proportion/100)*(1-$request->proportion/100)*(pow($standardNormal,2)))/(pow($request->error/100,2));
+        }     
 
         $request->merge(array(
             'id' => Uuid::generate()->string,
-            'sample_size' => $sample_size,
+            'sample_size' => number_format($sample_size),
         ));
         
         $population = Population::create($request->all());
@@ -117,7 +116,7 @@ class PopulationController extends Controller
     {
         $method = 'show';
 
-        return view('admin.em.population.population', compact('population','method'));
+        return view('admin.em.investigation.population.population', compact('population','method'));
     }
 
     /**
@@ -130,7 +129,7 @@ class PopulationController extends Controller
     {
         $method = 'edit';
 
-        return view('admin.em.population.population', compact('population','method'));
+        return view('admin.em.investigation.population.population', compact('population','method'));
     }
 
     /**
@@ -143,7 +142,15 @@ class PopulationController extends Controller
     public function update(Request $request, Population $population)
     {
         $this->validate($request,[
-            'title' =>  'required|string',
+            'size' =>  'required|string',
+            'list' =>  'required',
+            'sample_point' =>  'required|integer',
+            'units' =>  'required|string',
+            'type_sampling' =>  'required|string',
+            'know_population' =>  'required',
+            'proportion' =>  'required|integer',
+            'level' =>  'required|integer',
+            'error' =>  'required|integer',
         ]);
         
         $population->update($request->all());

@@ -38,8 +38,10 @@ class InvestigationController extends Controller
         if ($investigation) {
 
             $population = Population::where('investigation_id', $investigation->id)->OrderBy('id')->get();
+
+            //dd($investigation->populations,$population);
            
-            return view('admin.em.investigation.index', compact('investigation','population'));
+            return view('admin.em.investigation.index', compact('investigation'));
         } else {
             return redirect()->route('investigation.create');
         } 

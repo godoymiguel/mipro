@@ -18,12 +18,11 @@ class CreatePopulationsTable extends Migration
             $table->primary('id');
             $table->timestamps();
             $table->enum('model',['MEM','MET','MEF','MEE'])->default('MEM');
-            $table->enum('population',['P1','P2']);
             $table->integer('size');
             $table->boolean('list');
             $table->integer('sample_point');
             $table->string('units');
-            $table->enum('type_sampling',['PROBALIBISTICO','NO_PROBALIBISTICO']);
+            $table->enum('type_sampling',['PROBABILISTICO','NO_PROBABILISTICO']);
             $table->boolean('know_population');
             $table->integer('proportion');
             $table->integer('level');

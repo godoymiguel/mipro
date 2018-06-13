@@ -24,7 +24,7 @@ class Investigation extends Model
 
     public function populations()
     {
-        return $this->hasMany(Populations::class);
+        return $this->hasMany(Population::class);
     }
 
     public function demands()
