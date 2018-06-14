@@ -130,11 +130,13 @@
          <li><a class="head" href="{{ route('pastel.index') }}">Análisis de Entorno</a></li>
          <li><a class="head" href="{{ route('foda.tabla') }}">Análisis de Industria</a></li>
          <li><a class="head">Investigación de Mercado</a></li>
+         <li><a class="head">Enfoque Cuantitativo</a></li>
          <li><a class="head" href="{{ route('serietemporal.index') }}">- Serie Temporales</a></li>
          <li><a class="head" href="{{ route('regresion.index') }}">- Regresión</a></li>
          <li><a class="head" href="{{ route('proyeccion.index') }}">- Proyección</a></li>
          <li><a class="head" href="{{ route('marketGap') }}">- Brecha de Mercado</a></li>
-
+         <li><a class="head">Enfoque Cualitativo</a></li>
+         <li><a class="head" href="{{ route('investigation.index') }}">- Ficha de Campo</a></li>
       </ul> 
       
          

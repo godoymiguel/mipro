@@ -63,58 +63,64 @@
                                      <label for="units" class="col-md-12 col-form-label text-md-left">{{ __('Unidades de Análisis:') }}</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="units" class="col-md-12 col-form-label">{{ $value->title }}</label>
+                                    <label for="units" class="col-md-12 col-form-label">{{ $value->units }}</label>
                                 </div>                                
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                     <label for="coefficient_r1" class="col-md-12 col-form-label text-md-left">{{ __('Tipo de Muestreo:') }}</label>
+                                     <label for="type_sampling" class="col-md-12 col-form-label text-md-left">{{ __('Tipo de Muestreo:') }}</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="coefficient_r1" class="col-md-12 col-form-label">{{ $value->title }}</label>
+                                    <label for="type_sampling" class="col-md-12 col-form-label">@if($value->type_sampling == 'PROBABILISTICO') Probabilistico
+                                        @else No Probabilistico
+                                        @endif</label>
                                 </div>                                
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                     <label for="coefficient_r1" class="col-md-12 col-form-label text-md-left">{{ __('Conoces la Población:') }}</label>
+                                     <label for="know_population" class="col-md-12 col-form-label text-md-left">{{ __('Conoces la Población:') }}</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="coefficient_r1" class="col-md-12 col-form-label">{{ $value->title }}</label>
+                                    <label for="know_population" class="col-md-12 col-form-label">
+                                        @if($value->know_population == 1) Si
+                                        @else No
+                                        @endif
+                                    </label>
                                 </div>                                
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                     <label for="coefficient_r1" class="col-md-12 col-form-label text-md-left">{{ __('Proporción a Favor:') }}</label>
+                                     <label for="proportion" class="col-md-12 col-form-label text-md-left">{{ __('Proporción a Favor:') }}</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="coefficient_r1" class="col-md-12 col-form-label">{{ $value->title }}</label>
+                                    <label for="proportion" class="col-md-12 col-form-label">{{ $value->proportion }}</label>
                                 </div>                                
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                     <label for="coefficient_r1" class="col-md-12 col-form-label text-md-left">{{ __('Nivel de Confianza:') }}</label>
+                                     <label for="level" class="col-md-12 col-form-label text-md-left">{{ __('Nivel de Confianza:') }}</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="coefficient_r1" class="col-md-12 col-form-label">{{ $value->title }}</label>
+                                    <label for="level" class="col-md-12 col-form-label">{{ $value->level }}</label>
                                 </div>                                
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                     <label for="coefficient_r1" class="col-md-12 col-form-label text-md-left">{{ __('Error Máximo:') }}</label>
+                                     <label for="error" class="col-md-12 col-form-label text-md-left">{{ __('Error Máximo:') }}</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="coefficient_r1" class="col-md-12 col-form-label">{{ $value->title }}</label>
+                                    <label for="error" class="col-md-12 col-form-label">{{ $value->error }}</label>
                                 </div>                                
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                     <label for="coefficient_r1" class="col-md-12 col-form-label text-md-left">{{ __('Tamaño de la Muestra:') }}</label>
+                                     <label for="sample_size" class="col-md-12 col-form-label text-md-left">{{ __('Tamaño de la Muestra:') }}</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="coefficient_r1" class="col-md-12 col-form-label">{{ $value->title }}</label>
+                                    <label for="sample_size" class="col-md-12 col-form-label">{{ $value->sample_size }}</label>
                                 </div>                                
                             </div>
-                            <a href="{{ route('investigation.edit',$value->id) }}" type="button" class="btn btn-primary btn-md btn-block">Editar Datos de Población</a>
+                            <a href="{{ route('population.edit',$value->id) }}" type="button" class="btn btn-primary btn-md btn-block">Editar Datos de Población</a>
                             @endforeach
                             @if($investigation->populations->count() < 2)
                                 <a href="{{ route('population.create') }}" type="button" class="btn btn-primary btn-md btn-block">Agregar Datos de Población</a>
