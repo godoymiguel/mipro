@@ -8,6 +8,7 @@ use Uuid;
 use App\Models\Project;
 use Auth;
 
+
 class CanvasController extends Controller
 {
 	
@@ -30,9 +31,8 @@ class CanvasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-		$canvas=Canvas::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+    public function index(Canvas $canvas){
+		$canvas=Canvas::where('project_id', $this->project->projectUser(Auth::user()->id))->get();
         return view('canvas.canvas', compact('canvas'));
     }
 
@@ -43,8 +43,26 @@ class CanvasController extends Controller
      */
     public function create(Canvas $canvas)
     {
-		$canvas=Canvas::all();
-        return view('canvas.canvas', compact('canvas'));
+		$canvas=Canvas::where('project_id',$this->project->projectUser(Auth::user()->id))->first();
+		
+		if($canvas != null )
+		{
+			/***$errors = "Canvas Editado!!";
+			return redirect()->route('canvas.edit', $canvas->id)->withErrors($errors);*/
+			
+			
+			/**Mensaje*/
+			 \Session::flash('flash_message','¡Canvas Guardado!.');	
+			return redirect()->route('canvas.edit', $canvas->id);
+			
+			
+		}else
+		{
+			         $method = 'create';
+			         $canvas = new Canvas();
+					 return view('canvas.canvas', compact('method', 'canvas'));
+		}
+
     }
 
     /**
@@ -59,7 +77,7 @@ class CanvasController extends Controller
         $canvas->id=Uuid::generate()->string;
         $canvas->project_id=$this->project->projectUser(Auth::user()->id);
         $canvas->save();
-        return redirect()->route('idea.tabla');
+        return redirect()->route('canvas.create');
     }
 
     /**
@@ -70,9 +88,6 @@ class CanvasController extends Controller
      */
     public function show($id)
     {
-        $method = 'show';
-
-        return view('canvas.canvas',compact('canvas','method'));
     }
 
     /**
@@ -81,9 +96,11 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Canvas $canvas)
     {
-        //
+        $method = 'edit';
+        return view('canvas.canvas', compact('method','canvas'));
+        
     }
 
     /**
@@ -93,9 +110,10 @@ class CanvasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Canvas $canvas)
     {
-        //
+        $canvas->update($request->all());
+        return redirect()->route('canvas.create');
     }
 
     /**

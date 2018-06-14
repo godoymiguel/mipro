@@ -64,7 +64,7 @@ class IdeaController extends Controller
     {
 		$count=Idea::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->count();
 		if($count>=3)
-		{
+		{			
 			return redirect()->back();
 		}else
 		{

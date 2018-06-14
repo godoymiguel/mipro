@@ -24,7 +24,7 @@
 						</script>
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                 <a href="{{ route('arbolprob.tabla') }}" type="button" class="btn btn-primary">
+                                 <a href="{{ route('contenedor.index') }}" type="button" class="btn btn-primary">
                                         {{ __('Cancelar ') }}</a>
                                 <button class="btn btn-primary" type="summit">
                                         {{ __('Guardar ') }}</button>

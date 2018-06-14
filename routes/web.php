@@ -22,6 +22,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 //Canvas
 Route::post('/canvas', 'CanvasController@store')->name('canvas.store');
 Route::get('/canvas', 'CanvasController@create')->name('canvas.create');
+Route::get('/canvas/{canvas}/edit', 'CanvasController@edit')->name('canvas.edit');
+Route::put('/canvas/{canvas}', 'CanvasController@update')->name('canvas.update');
+
 
 //Tabla de idea
 Route::post('/idea', 'IdeaController@store')->name('idea.store');
@@ -59,6 +62,7 @@ Route::delete('/interesados/{inte}', 'InteresadosController@delete')->name('inte
 Route::put('/interesados/{inte}/a', 'InteresadosController@update')->name('interesados.update');
 
 
+//Contenedor del arbol del problema - objetivos - interesados
 Route::get('/marcologico', 'ContenedorController@index')->name('contenedor.index');
 //Arbol del problema
 Route::get('/arbolproblema/tabla', 'Arbol_ProblemaController@index')->name('arbolprob.tabla');
@@ -109,6 +113,22 @@ Route::get('/foda/{foda}/editar_debilidad', 'FodaController@editar_debilidad')->
 //Foda-Amenaza
 Route::get('/foda/amenaza', 'FodaController@amenaza')->name('amenaza.create');
 Route::get('/foda/{foda}/editar_amenaza', 'FodaController@editar_amenaza')->name('amenaza.edit');
+
+//Contenedor Marketing Producto
+Route::get('/contenedorproducto', 'ContenedorProductoController@index')->name('contenedorprod.index');
+//Producto
+Route::get('/producto', 'ProductoController@create')->name('producto.create');
+Route::post('/producto', 'ProductoController@store')->name('producto.store');
+Route::get('/producto/{prod}/edit', 'ProductoController@edit')->name('producto.edit');
+Route::put('/producto/{prod}/update', 'ProductoController@update')->name('producto.update');
+//Precio
+Route::get('/precio', 'PrecioController@create')->name('precio.create');
+Route::post('/precio', 'PrecioController@store')->name('precio.store');
+Route::get('/precio/{prec}/edit', 'PrecioController@edit')->name('precio.edit');
+Route::put('/precio/{prec}/update', 'PrecioController@update')->name('precio.update');
+
+
+
 
 
 //GESTION DE USUARIOS

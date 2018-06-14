@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'MIPRO') }}</title>
+    <title>{{ config('app.name', 'MIPRO Modelo Integrado Proyecto de Inversión') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
@@ -128,7 +128,7 @@
          <li><a class="head" href="{{ route('a.tabla') }}">Antecedentes</a></li>
          <li><a class="head" href="{{ route('contenedor.index') }}">Marco Lógico</a></li>
          <li><a class="head" href="{{ route('pastel.index') }}">Análisis de Entorno</a></li>
-         <li><a class="head" href="{{ route('foda.tabla') }}">Análisis de Industria</a></li>
+         <li><a class="head" href="{{ route('foda.tabla') }}">Análisis de Empresa</a></li>
          <li><a class="head">Investigación de Mercado</a></li>
          <li><a class="head">Enfoque Cuantitativo</a></li>
          <li><a class="head" href="{{ route('serietemporal.index') }}">- Serie Temporales</a></li>
@@ -150,10 +150,12 @@
 
 
 <div>
-
 <!--Fin Menu deslizable -->
 
 
+
+
+	<div>
         <main class="py-4">
             @yield('content')
         </main>
