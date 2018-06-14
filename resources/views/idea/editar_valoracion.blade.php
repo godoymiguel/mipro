@@ -11,6 +11,7 @@
                         @csrf
 						{{ method_field('PUT') }}
                         <p><h3 style="text-align:center">Valoracion de Ideas</h3></p>
+                        <p><h6 style="text-align:center"> (minimo 1 - máximo 10)</h6></p>
                         <div class="form-group row">
 
                           <table class="table">

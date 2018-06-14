@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Canvas;
 use Uuid;
 use App\Models\Project;
+use App\Models\Producto;
+use App\Models\Precio;
+use App\Models\Distribucion;
+use App\Models\Publicidad;
 use Auth;
 
-class CanvasController extends Controller
-{
-	
+class ContenedorProductoController extends Controller
+{	
 	protected $project;
     /**
      * Create a new controller instance.
@@ -23,8 +25,6 @@ class CanvasController extends Controller
         $this->middleware('auth');
         $this->project = new Project;
     }
-	
-	
     /**
      * Display a listing of the resource.
      *
@@ -32,8 +32,11 @@ class CanvasController extends Controller
      */
     public function index()
     {
-		$canvas=Canvas::all();
-        return view('canvas.canvas', compact('canvas'));
+		$prod=Producto::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+		$prec=Precio::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+		$dis=Distribucion::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+		$pub=Publicidad::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
+        return view('producto.contenedor_prod', compact('prod', 'prec', 'dis', 'pub'));
     }
 
     /**
@@ -43,7 +46,7 @@ class CanvasController extends Controller
      */
     public function create()
     {
-        return view('canvas.canvas');
+        //
     }
 
     /**
@@ -54,11 +57,7 @@ class CanvasController extends Controller
      */
     public function store(Request $request)
     {
-        $canvas=new Canvas($request->all());
-        $canvas->id=Uuid::generate()->string;
-        $canvas->project_id=$this->project->projectUser(Auth::user()->id);
-        $canvas->save();
-        return redirect()->route('idea.tabla');
+        //
     }
 
     /**
@@ -69,9 +68,7 @@ class CanvasController extends Controller
      */
     public function show($id)
     {
-        $method = 'show';
-
-        return view('canvas.canvas',compact('canvas','method'));
+        //
     }
 
     /**

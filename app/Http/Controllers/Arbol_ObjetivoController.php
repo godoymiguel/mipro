@@ -119,6 +119,7 @@ class Arbol_ObjetivoController extends Controller
     public function delete(Arbol_Objetivo $ao)
     {
         $ao->delete();
+        MediosFin::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->delete();
         return redirect()->route('contenedor.index');
     }
 }

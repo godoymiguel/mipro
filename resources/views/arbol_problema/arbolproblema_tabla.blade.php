@@ -12,8 +12,10 @@
                     <div class="form-group row">
                         <div class="col-md-12">
 							<p><h5 style="text-align:center">Árbol Problema</h5></p>
+							@if($ap->count()<1)
 							<p>a) Introduzca el problema del proyecto (Máximo 1): </p>
                             <a href="{{ route('arbolprob.create') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Problema</a>
+                            @endif
                             <br>
                             <table class="table">
                                 <thead class="thead-light">	
@@ -42,7 +44,7 @@
                                 </tbody>
                             </table>
                             
-                            
+                            @if($ap->count()>=1)
                              <br>
                              <br>
                              <p>b) Introduzca las causas y los efectos relacionados al proyecto: </p>
@@ -89,6 +91,8 @@
 									  @endforeach
 									  
                             </table>
+                            
+                            @endif
                             <div class="form-group row mb-0">
 								<div class="col-md-6 offset-md-4">
                                  <a href="{{ route('a.tabla') }}" type="button" class="btn btn-primary">

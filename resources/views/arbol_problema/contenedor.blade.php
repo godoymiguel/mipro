@@ -22,8 +22,10 @@
 							                    <div class="form-group row">
                         <div class="col-md-12">
 							<p><h5 style="text-align:center">Árbol Problema</h5></p>
+							@if($ap->count()<1)
 							<p>a) Introduzca el problema del proyecto (Máximo 1): </p>
                             <a href="{{ route('arbolprob.create') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Problema</a>
+                            @endif
                             <br>
                             <table class="table">
                                 <thead class="thead-light">	
@@ -51,6 +53,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                            
+                            
+                            @if($ap->count()>=1)
                             
                             
                              <br>
@@ -99,7 +104,7 @@
 									  @endforeach
 									  
                             </table>
-
+							@endif
 
 						 </div>		     
                         </div>
@@ -111,10 +116,11 @@
 					  <div id="your-tab-id-2">
 					   <div class="form-group row">
                         <div class="col-md-12">
+							@if($ao->count()<1)
 							<p><h5 style="text-align:center">Árbol Objetivos</h5></p>
 							<p>a) Introduzca el objetivo del proyecto (Máximo 1): </p>
- 
                             <a href="{{ route('arbolobj.create') }}" type="button" class="btn btn-primary btn-lg btn-block" onClick="this.disabled='disabled'">Agregar Objetivo</a>
+                            @endif
                             <br>
                             <table class="table">
                                 <thead class="thead-light">	
@@ -146,6 +152,7 @@
                             
                              <br>
                              <br>
+                             @if($ao->count()>=1)
                              <p>b) Introduzca los medios y fines relacionados al proyecto: </p>
                              <a href="{{ route('medios.create') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Medios y Fin</a>
            
@@ -191,7 +198,7 @@
 									  @endforeach
 									  
                             </table>
-
+							@endif
 							</div>
 							</div>	     
                        

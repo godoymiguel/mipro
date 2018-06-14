@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Uuid;
-use Auth;
 use App\Models\Project;
-use App\Models\Arbol_Problema;
-use App\Models\CausasEfectos;
+use App\Models\Producto;
+use Auth;
 
-class Arbol_ProblemaController extends Controller
+class ProductoController extends Controller
 {
 	protected $project;
     /**
@@ -23,6 +22,7 @@ class Arbol_ProblemaController extends Controller
         $this->middleware('auth');
         $this->project = new Project;
     }
+    
 	
 	
     /**
@@ -32,9 +32,7 @@ class Arbol_ProblemaController extends Controller
      */
     public function index()
     {
-        $ap=Arbol_Problema::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
-        $cf=CausasEfectos::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
-       	return view('arbol_problema.arbolproblema_tabla', compact('ap', 'cf'));
+        //
     }
 
     /**
@@ -44,16 +42,17 @@ class Arbol_ProblemaController extends Controller
      */
     public function create()
     {
-		
-		$count=Arbol_Problema::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->count();
+		$method = 'create';
+		$count=Producto::where('proyecto_id',$this->project->projectUser(Auth::user()->id))->count();
 		if($count>=1)
 		{
-			return redirect()->back();
+			
+			return redirect()->back();		
 		}else
 		{
-			 return view('arbol_problema.anadir_problema');
+			$prod = new Producto;
+			 return view('producto.anadir_producto', compact('method','prod'));
 		}
-    
     }
 
     /**
@@ -63,13 +62,12 @@ class Arbol_ProblemaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {		
-        $ap=new Arbol_Problema($request->all());
-        $ap->id=Uuid::generate()->string;
-        $ap->proyecto_id=$this->project->projectUser(Auth::user()->id);
-        $ap->save();
-        return redirect()->route('contenedor.index');
-        
+    {
+        $prod=new Producto($request->all());
+        $prod->id=Uuid::generate()->string;
+        $prod->proyecto_id=$this->project->projectUser(Auth::user()->id);
+        $prod->save();
+        return redirect()->route('contenedorprod.index');
     }
 
     /**
@@ -89,15 +87,11 @@ class Arbol_ProblemaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-     
-     
-    public function edit(Arbol_Problema $ap)
+    public function edit(Producto $prod)
     {
-	
-        return view('arbol_problema.editar_problema',compact('ap'));
+        $method = 'edit';
+        return view('producto.anadir_producto', compact('method','prod'));
     }
-    
-    
 
     /**
      * Update the specified resource in storage.
@@ -106,13 +100,10 @@ class Arbol_ProblemaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Arbol_Problema $ap)
+    public function update(Request $request, Producto $prod)
     {
-		$this->validate($request,[
-            'problema' =>  'required|string|max:255',
-        ]);
-        $ap->update($request->all());
-        return redirect()->route('arbolprob.tabla');
+        $prod->update($request->all());
+        return redirect()->route('contenedorprod.index'); 
     }
 
     /**
@@ -121,10 +112,8 @@ class Arbol_ProblemaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function delete(Arbol_Problema $ap)
+    public function destroy($id)
     {
-        $ap->delete();
-        CausasEfectos::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->delete();
-        return redirect()->route('contenedor.index');
+        //
     }
 }

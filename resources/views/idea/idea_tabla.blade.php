@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-12">
-<!--web-->                  
+							
                             @if($idea->count()<3)
 							<p><h5>Introduzca las ideas del proyecto a emprender (máximo 3)</h5></p>
                             <a href="{{ route('idea') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Idea</a>
@@ -45,7 +45,7 @@
                                 </tbody>
                             </table>
                             
-                            @if($idea->count()>=3)
+                            @if($idea->count()>=1)
                              <p><h4> Valoración de Ideas (1-10) </h4></p>
                              <p>Elegir la idea: 
                              

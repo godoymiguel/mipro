@@ -16,12 +16,13 @@ class CreateCanvasTable extends Migration
         Schema::create('canvas', function (Blueprint $table) {
 			$table->uuid('id');
             $table->primary('id');
-            $table->timestamps();
-            $table->string('problema');
-			$table->string('solucion');
-			$table->string('indicadores');
-			$table->string('causas');
-			$table->string('efectos');
+            $table->text('problema')->nullable();
+			$table->text('solucion')->nullable();
+			$table->text('indicadores')->nullable();
+			$table->text('causas')->nullable();
+			$table->text('efectos')->nullable();
+			$table->enum('estudio',['MEM','MET','MEF','MEE'])->default('MEM');
+            $table-> timestamps();
             
             $table->uuid('project_id');            
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
