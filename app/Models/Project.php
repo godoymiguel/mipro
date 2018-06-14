@@ -102,6 +102,8 @@ class Project extends Model
         return $this->hasMany(Interesados::class);
     }
 
-    
-    
+    public function investigation()
+    {
+        return $this->hasOne(Investigation::class);
+    }    
 }

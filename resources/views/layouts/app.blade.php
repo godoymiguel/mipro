@@ -82,7 +82,7 @@
 
 
 
-
+@auth
 <!--Inicio Menu deslizable -->
   <div id="menu-container">
    <div id="menu-wrapper">
@@ -96,9 +96,13 @@
          <a class="menu-link" href="#">Gestión del Proyecto</a>
       </li>
       <!-- accordion-toggle -->
-      <ul class="menu-submenu accordion-content">
+      <ul class="menu-submenu accordion-content">        
          <li><a class="head" href="{{ route('proyectos.index') }}">Proyectos</a></li>
          <li><a class="head" href="{{ route('promotor.index') }}">Promotores</a></li>
+         @if(Auth::user()->rol->value == 'ADMIN')
+         <li><a class="head" href="{{ route('usuario.index') }}">Usuarios</a></li>
+         <li><a class="head" href="{{ route('rol.index') }}">Roles</a></li>
+        @endif
       </ul>
      
      
@@ -140,8 +144,10 @@
    </ul>
    <!-- menu-list accordion-->
 </div>
+@endif
 
 
+<div>
 <!--Fin Menu deslizable -->
 
 

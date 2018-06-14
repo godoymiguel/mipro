@@ -88,7 +88,7 @@
 
                             <div class="form-group row">
                                 <div class="col-md-8">
-                                     <label for="coefficient_r1" class="col-md-12 col-form-label text-md-left">{{ __('VAMENAZA DE LOS SUSTITUTOS:') }}</label>
+                                     <label for="coefficient_r1" class="col-md-12 col-form-label text-md-left">{{ __('AMENAZA DE LOS SUSTITUTOS:') }}</label>
                                 </div>
                                 <div class="col-md-2">
                                     <label for="coefficient_r1" class="col-md-12 col-form-label text-md-left">
