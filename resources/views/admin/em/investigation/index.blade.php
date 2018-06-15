@@ -93,15 +93,15 @@
                                      <label for="proportion" class="col-md-12 col-form-label text-md-left">{{ __('Proporción a Favor:') }}</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="proportion" class="col-md-12 col-form-label">{{ $value->proportion }}</label>
+                                    <label for="proportion" class="col-md-12 col-form-label">{{ $value->proportion }} %</label>
                                 </div>                                
                             </div>
                             <div class="form-group row">
                                 <div class="col-md-6">
-                                     <label for="level" class="col-md-12 col-form-label text-md-left">{{ __('Nivel de Confianza:') }}</label>
+                                     <label for="level" class="col-md-12 col-form-label text-md-left">{{ __('Nivel de Confianza:') }} %</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="level" class="col-md-12 col-form-label">{{ $value->level }}</label>
+                                    <label for="level" class="col-md-12 col-form-label">{{ $value->level }} %</label>
                                 </div>                                
                             </div>
                             <div class="form-group row">
@@ -109,7 +109,7 @@
                                      <label for="error" class="col-md-12 col-form-label text-md-left">{{ __('Error Máximo:') }}</label>
                                 </div>
                                 <div class="col-md-6">
-                                    <label for="error" class="col-md-12 col-form-label">{{ $value->error }}</label>
+                                    <label for="error" class="col-md-12 col-form-label">{{ $value->error }} %</label>
                                 </div>                                
                             </div>
                             <div class="form-group row">
@@ -124,7 +124,8 @@
                             @endforeach
                             @if($investigation->populations->count() < 2)
                                 <a href="{{ route('population.create') }}" type="button" class="btn btn-primary btn-md btn-block">Agregar Datos de Población</a>
-                                
+                            @else
+                                <a href="{{ route('demand.index') }}" type="button" class="btn btn-primary btn-md btn-block">Demanda</a>
                             @endif
                             
                             

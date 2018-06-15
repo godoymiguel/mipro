@@ -27,13 +27,13 @@ class Investigation extends Model
         return $this->hasMany(Population::class);
     }
 
-    public function demands()
+    public function demand()
     {
-        return $this->hasMany(Demand::class);
+        return $this->hasOne(Demand::class);
     }
 
-    public function offers()
+    public function offer()
     {
-        return $this->hasMany(Offer::class);
+        return $this->hasOne(Offer::class);
     }
 }
