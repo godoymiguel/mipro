@@ -19,10 +19,10 @@ class CreateOffersTable extends Migration
             $table->timestamps();
             $table->enum('model',['MEM','MET','MEF','MEE'])->default('MEM');
             $table->integer('competitors');
-            $table->integer('capacity');
-            $table->integer('people_served');
-            $table->integer('rate');
-            $table->integer('offer');
+            $table->float('capacity');
+            $table->float('people_served');
+            $table->float('rate');
+            $table->float('offer');
 
             $table->uuid('investigation_id');            
             $table->foreign('investigation_id')->references('id')->on('investigations')->onDelete('cascade');

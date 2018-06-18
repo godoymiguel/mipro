@@ -2,11 +2,30 @@
 
 namespace App\Http\Controllers;
 
-use App\Offer;
+use App\Models\Offer;
 use Illuminate\Http\Request;
+
+use App\Models\Investigation;
+use App\Models\Project;
+
+use Auth;
+use Uuid;
 
 class OfferController extends Controller
 {
+    protected $project;
+
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+        $this->project = new Project;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,7 +33,13 @@ class OfferController extends Controller
      */
     public function index()
     {
-        //
+        $investigation = Investigation::where('project_id', $this->project->projectUser(Auth::user()->id))->OrderBy('id')->first();
+
+        if ($investigation->offer) {
+            return view('admin.em.investigation.offer.index', compact('investigation'));
+        } else {
+            return redirect()->route('offer.create');
+        }
     }
 
     /**
@@ -24,7 +49,20 @@ class OfferController extends Controller
      */
     public function create()
     {
-        //
+        $investigation = Investigation::where('project_id', $this->project->projectUser(Auth::user()->id))->OrderBy('id')->first();
+
+        if ($investigation) {
+            if ($investigation->offer) {
+                return redirect()->route('offer.edit',$investigation->offer->id);
+            } else {
+                $investigation->offer =  new offer;
+                $method = 'create';
+
+                return view('admin.em.investigation.offer.offer', compact('investigation','method'));
+            }
+        } else {
+            return redirect()->route('investigation.create');            
+        }
     }
 
     /**
@@ -35,7 +73,23 @@ class OfferController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'competitors' => 'required|min:0',
+            'capacity' => 'required|min:0',
+            'people_served' => 'required|min:0',
+            'rate' => 'required|min:0'
+        ]);
+
+        $offer = $request->competitors *$request->people_served;
+
+        $request->merge(array(
+            'id' => Uuid::generate()->string,
+            'offer'  =>  $offer,
+        ));
+        
+        $offer = Offer::create($request->all());
+
+        return redirect()->route('offer.show',$offer->id);
     }
 
     /**
@@ -46,7 +100,11 @@ class OfferController extends Controller
      */
     public function show(Offer $offer)
     {
-        //
+        $method = 'show';
+
+        $investigation = Investigation::where('project_id', $this->project->projectUser(Auth::user()->id))->OrderBy('id')->first();
+
+        return view('admin.em.investigation.offer.offer', compact('offer','method','investigation'));
     }
 
     /**
@@ -57,7 +115,11 @@ class OfferController extends Controller
      */
     public function edit(Offer $offer)
     {
-        //
+        $method = 'edit';
+
+        $investigation = Investigation::where('project_id', $this->project->projectUser(Auth::user()->id))->OrderBy('id')->first();
+
+        return view('admin.em.investigation.offer.offer', compact('offer','method','investigation'));
     }
 
     /**
@@ -69,7 +131,22 @@ class OfferController extends Controller
      */
     public function update(Request $request, Offer $offer)
     {
-        //
+        $this->validate($request,[
+            'competitors' => 'required|min:0',
+            'capacity' => 'required|min:0',
+            'people_served' => 'required|min:0',
+            'rate' => 'required|min:0'
+        ]);
+
+        $offer = $request->total_population *($request->population/100) *($request->age/100) *($request->interested/100);
+
+        $request->merge(array(
+            'offer'  =>  $offer,
+        ));
+        
+        $offer->update($request->all());
+
+        return redirect()->route('offer.show',$offer->id);
     }
 
     /**
@@ -80,6 +157,8 @@ class OfferController extends Controller
      */
     public function destroy(Offer $offer)
     {
-        //
+        $offer->delete();
+
+        return redirect()->back();
     }
 }

@@ -122,10 +122,12 @@
                             </div>
                             <a href="{{ route('population.edit',$value->id) }}" type="button" class="btn btn-primary btn-md btn-block">Editar Datos de Población</a>
                             @endforeach
+                            <hr>
                             @if($investigation->populations->count() < 2)
                                 <a href="{{ route('population.create') }}" type="button" class="btn btn-primary btn-md btn-block">Agregar Datos de Población</a>
                             @else
                                 <a href="{{ route('demand.index') }}" type="button" class="btn btn-primary btn-md btn-block">Demanda</a>
+                                <a href="{{ route('offer.index') }}" type="button" class="btn btn-primary btn-md btn-block">Oferta</a>
                             @endif
                             
                             
