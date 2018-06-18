@@ -14,7 +14,7 @@ class Demand extends Model
      * @var array
      */
     protected $fillable = [
-        'id','model','investigation_id','total_population','population','population_detail','age','age_detail','interested','interested_detail','potential_market','buy','buy_detail','available_market','entry','entry_detail','qualified_market','cup',
+        'id','model','investigation_id','total_population','total_detail','population','population_detail','age','age_detail','interested','interested_detail','potential_market','buy','buy_detail','available_market','entry','entry_detail','qualified_market','cup',
     ];
 
     public function investigation()

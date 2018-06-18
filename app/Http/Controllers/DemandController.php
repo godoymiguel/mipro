@@ -36,7 +36,7 @@ class DemandController extends Controller
         $investigation = Investigation::where('project_id', $this->project->projectUser(Auth::user()->id))->OrderBy('id')->first();
 
         if ($investigation->demand) {
-            return view('admin.em.demand.index', compact('investigation'));
+            return view('admin.em.investigation.demand.index', compact('investigation'));
         } else {
             return redirect()->route('demand.create');
         } 
@@ -51,14 +51,17 @@ class DemandController extends Controller
     {
         $investigation = Investigation::where('project_id', $this->project->projectUser(Auth::user()->id))->OrderBy('id')->first();
 
-        if ($investigation->demand) {
-            return redirect()->route('demand.edit',$investigation->demand->id);
+        if ($investigation) {
+            if ($investigation->demand) {
+                return redirect()->route('demand.edit',$investigation->demand->id);
+            } else {
+                $investigation->demand =  new Demand;
+                $method = 'create';
 
+                return view('admin.em.investigation.demand.demand', compact('investigation','method'));
+            }
         } else {
-            $investigation->demand =  new Demand;
-            $method = 'create';
-
-            return view('admin.em.investigation.demand.demand', compact('investigation','method'));
+            return redirect()->route('investigation.create');            
         }
     }
 
@@ -71,19 +74,19 @@ class DemandController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'total_population' => 'required|string|min:0',
+            'total_population' => 'required|min:0',
             'total_detail' =>  'required|string',
-            'population' => 'required|string|min:0',
+            'population' => 'required|min:0',
             'population_detail' =>  'required|string',
-            'age' => 'required|string|min:0',
+            'age' => 'required|min:0',
             'age_detail' =>  'required|string',
-            'interested' => 'required|string|min:0',
+            'interested' => 'required|min:0',
             'interested_detail' =>  'required|string',
-            'buy' => 'required|string|min:0',
+            'buy' => 'required|min:0',
             'buy_detail' =>  'required|string',
-            'entry' => 'required|string|min:0',
+            'entry' => 'required|min:0',
             'entry_detail' =>  'required|string',
-            'cup' => 'required|string|min:0',
+            'cup' => 'required|min:0',
         ]);
 
         $potential_market = $request->total_population *($request->population/100) *($request->age/100) *($request->interested/100);
@@ -138,19 +141,19 @@ class DemandController extends Controller
     public function update(Request $request, Demand $demand)
     {
         $this->validate($request,[
-            'total_population' => 'required|string|min:0',
+            'total_population' => 'required|min:0',
             'total_detail' =>  'required|string',
-            'population' => 'required|string|min:0',
+            'population' => 'required|min:0',
             'population_detail' =>  'required|string',
-            'age' => 'required|string|min:0',
+            'age' => 'required|min:0',
             'age_detail' =>  'required|string',
-            'interested' => 'required|string|min:0',
+            'interested' => 'required|min:0',
             'interested_detail' =>  'required|string',
-            'buy' => 'required|string|min:0',
+            'buy' => 'required|min:0',
             'buy_detail' =>  'required|string',
-            'entry' => 'required|string|min:0',
+            'entry' => 'required|min:0',
             'entry_detail' =>  'required|string',
-            'cup' => 'required|string|min:0',
+            'cup' => 'required|min:0',
         ]);
 
         $potential_market = $request->total_population *($request->population/100) *($request->age/100) *($request->interested/100);
