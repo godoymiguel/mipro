@@ -112,7 +112,7 @@ class Arbol_ProblemaController extends Controller
             'problema' =>  'required|string|max:255',
         ]);
         $ap->update($request->all());
-        return redirect()->route('arbolprob.tabla');
+        return redirect()->route('contenedor.index');
     }
 
     /**

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDistribucionsTable extends Migration
+class CreateContactosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,10 @@ class CreateDistribucionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('distribucions', function (Blueprint $table) {
+        Schema::create('contactos', function (Blueprint $table) {
             $table-> uuid('id');
 			$table-> primary('id');
-            $table-> enum('fabricante',['SI','NO'])->nullable();
-            $table-> enum('mayorista',['SI','NO'])->nullable();
-            $table-> enum('minorista',['SI','NO'])->nullable();
-            $table-> enum('consumidor',['SI','NO'])->nullable();
-            $table-> enum('esperar_cliente',['SI','NO'])->nullable();
-            $table-> enum('buscar_cliente',['SI','NO'])->nullable();
+
             $table-> enum('estudio',['MEM','MET','MEF','MEE'])->default('MEM');
             $table-> timestamps();
             
@@ -37,6 +32,6 @@ class CreateDistribucionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('distribucions');
+        Schema::dropIfExists('contactos');
     }
 }

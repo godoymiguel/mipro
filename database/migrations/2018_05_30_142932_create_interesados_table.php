@@ -21,6 +21,10 @@ class CreateInteresadosTable extends Migration
             $table-> String('problemas');
             $table-> String('recursos');
             $table-> String('conflictos');
+            $table-> String('nombre')->nullable();
+            $table-> String('correo')->nullable();
+            $table-> String('telefono')->nullable();
+            $table-> text('responsabilidad')->nullable();
             $table->enum('estudio',['MEM','MET','MEF','MEE'])->default('MEM');
             $table-> timestamps();
             

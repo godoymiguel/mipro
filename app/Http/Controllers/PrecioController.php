@@ -61,7 +61,12 @@ class PrecioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+		
+        $prec=new Precio($request->all());
+        $prec->id=Uuid::generate()->string;
+        $prec->proyecto_id=$this->project->projectUser(Auth::user()->id);
+        $prec->save();
+        return redirect()->route('contenedorprod.index');
     }
 
     /**
@@ -81,9 +86,11 @@ class PrecioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Precio $prec)
     {
-        //
+		
+        $method = 'edit';
+        return view('producto.anadir_precio', compact('method','prec'));
     }
 
     /**
@@ -93,9 +100,10 @@ class PrecioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Precio $prec)
     {
-        //
+        $prec->update($request->all());
+        return redirect()->route('contenedorprod.index');
     }
 
     /**

@@ -51,7 +51,7 @@ Route::get('/antecedentes', 'AntecedentesController@create')->name('a.create');
 Route::post('/antecedentes', 'AntecedentesController@store')->name('a.store');
 Route::get('/antecedentes/{ante}/edit', 'AntecedentesController@edit')->name('a.edit');
 Route::delete('/antecedentes/{ante}', 'AntecedentesController@delete')->name('a.delete');
-Route::put('/antecedentesS/{ante}/a', 'AntecedentesController@update')->name('a.update');
+Route::put('/antecedentesS/{ante}/update', 'AntecedentesController@update')->name('a.update');
 
 //Interesados
 Route::get('/interesados/tabla', 'InteresadosController@index')->name('interesados.tabla');
@@ -60,7 +60,10 @@ Route::post('/interesados', 'InteresadosController@store')->name('interesados.st
 Route::get('/interesados/{inte}/edit', 'InteresadosController@edit')->name('interesados.edit');
 Route::delete('/interesados/{inte}', 'InteresadosController@delete')->name('interesados.delete');
 Route::put('/interesados/{inte}/a', 'InteresadosController@update')->name('interesados.update');
-
+//Interesados-Contacto
+Route::get('/interesados/contacto', 'InteresadosController@contacto_create')->name('contacto.create');
+Route::get('/interesados/contacto/{inte}/edit', 'InteresadosController@contacto_edit')->name('contacto.edit');
+Route::put('/interesados/contacto/{inte}/update', 'InteresadosController@update')->name('contacto.update');
 
 //Contenedor del arbol del problema - objetivos - interesados
 Route::get('/marcologico', 'ContenedorController@index')->name('contenedor.index');
@@ -127,8 +130,30 @@ Route::post('/precio', 'PrecioController@store')->name('precio.store');
 Route::get('/precio/{prec}/edit', 'PrecioController@edit')->name('precio.edit');
 Route::put('/precio/{prec}/update', 'PrecioController@update')->name('precio.update');
 
+//Distribucion
+Route::get('/distribucion', 'DistribucionController@create')->name('dis.create');
+Route::post('/distribucion', 'DistribucionController@store')->name('dis.store');
+Route::get('/distribucion/{dis}/edit', 'DistribucionController@edit')->name('dis.edit');
+Route::put('/distribucion/{dis}/update', 'DistribucionController@update')->name('dis.update');
+Route::delete('/distribucion/{dis}', 'DistribucionController@delete')->name('dis.delete');
+
+//Distribucion-Bien
+Route::get('/distribucion/bien', 'DistribucionController@bien')->name('bien.create');
+Route::get('/distribucion/{dis}/editar_bien', 'DistribucionController@editar_bien')->name('bien.edit');
+
+//Distribucion-Servicio
+Route::get('/distribucion/servicio', 'DistribucionController@servicio')->name('servicio.create');
+Route::get('/distribucion/{dis}/editar_servicio', 'DistribucionController@editar_servicio')->name('servicio.edit');
+
+//Publicidad
+Route::get('/publicidad', 'PublicidadController@create')->name('publicidad.create');
+Route::post('/publicidad', 'PublicidadController@store')->name('publicidad.store');
+Route::get('/publicidad/{pub}/edit', 'PublicidadController@edit')->name('publicidad.edit');
+Route::put('/publicidad/{pub}/update', 'PublicidadController@update')->name('publicidad.update');
 
 
+Route::get('/subiendo_magen', 'ImageController@resizeImage')->name('imagen.create');
+Route::post('/cargar_imagen',['as'=>'cargar_imagen','uses'=>'ImageController@cargar_imagen']);
 
 
 //GESTION DE USUARIOS

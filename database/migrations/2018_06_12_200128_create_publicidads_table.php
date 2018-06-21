@@ -20,7 +20,7 @@ class CreatePublicidadsTable extends Migration
             $table-> text('slogan');
             $table-> text('medios');
             $table-> text('promocion');
-            $table-> string('logo');
+            $table-> string('logo')->nullable();
             $table-> enum('estudio',['MEM','MET','MEF','MEE'])->default('MEM');
             $table-> timestamps();
             

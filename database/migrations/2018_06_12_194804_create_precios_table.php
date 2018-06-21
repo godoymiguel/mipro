@@ -16,11 +16,12 @@ class CreatePreciosTable extends Migration
         Schema::create('precios', function (Blueprint $table) {
             $table-> uuid('id');
 			$table-> primary('id');
-            $table-> boolean('competencia');
-            $table-> boolean('costo');
-            $table-> boolean('desnatar');
-            $table-> boolean('fijo');
-            $table-> boolean('precio');
+			$table-> enum('competencia',['SI','NO']);
+			$table-> enum('costo',['SI','NO']);
+			$table-> enum('desnatar',['SI','NO']);
+			$table-> enum('diferenciacion',['SI','NO']);
+			$table-> enum('fijo',['SI','NO']);
+            $table-> text('precio');
             $table-> enum('estudio',['MEM','MET','MEF','MEE'])->default('MEM');
             $table-> timestamps();
             
