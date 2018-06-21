@@ -18,9 +18,10 @@
                             {{ method_field('PUT') }}
                     @endif	
                      
+						<p>Los campos con asterisco son obligatorios (*) </p>
 						
 					     <div class="form-group row">
-                            <label for="basico" class="col-md-4 col-form-label text-md-right">{{ __('Producto Básico') }}</label>
+                            <label for="basico" class="col-md-4 col-form-label text-md-right">{{ __('Producto Básico (*) ') }}</label>
                             <div class="col-md-6">
                                <p><textarea id="basico" cols="19.5" rows="5" class="form-control{{ $errors->has('basico') ? ' is-invalid' : '' }}" name="basico" required autofocus>{{ old('basico', $prod->basico) }}</textarea></p>
                                 @if ($errors->has('basico'))
@@ -33,7 +34,7 @@
                             
                             
                           <div class="form-group row">
-                            <label for="aumentado" class="col-md-4 col-form-label text-md-right">{{ __('Producto Aumentado') }}</label>
+                            <label for="aumentado" class="col-md-4 col-form-label text-md-right">{{ __('Producto Aumentado (*) ') }}</label>
                             <div class="col-md-6">
                                <p><textarea id="aumentado" cols="19.5" rows="5" class="form-control{{ $errors->has('aumentado') ? ' is-invalid' : '' }}" name="aumentado" value="{{ old('aumentado') }}" required autofocus>{{ old('aumentado', $prod->aumentado) }}</textarea></p>
                                 @if ($errors->has('aumentado'))
@@ -45,7 +46,7 @@
                          </div> 
                          
                          <div class="form-group row">
-                            <label for="psicologico" class="col-md-4 col-form-label text-md-right">{{ __('Producto Psicológico') }}</label>
+                            <label for="psicologico" class="col-md-4 col-form-label text-md-right">{{ __('Producto Psicológico (*) ') }}</label>
                             <div class="col-md-6">
                                <p><textarea id="psicologico" cols="19.5" rows="5" class="form-control{{ $errors->has('psicologico') ? ' is-invalid' : '' }}" name="psicologico" value="{{ old('psicologico') }}" required autofocus>{{ old('psicologico', $prod->psicologico) }}</textarea></p>
                                 @if ($errors->has('psicologico'))
@@ -57,7 +58,7 @@
                          </div>   
                          
                          <div class="form-group row">
-                            <label for="comparativa" class="col-md-4 col-form-label text-md-right">{{ __('Ventaja Comparativa') }}</label>
+                            <label for="comparativa" class="col-md-4 col-form-label text-md-right">{{ __('Ventaja Comparativa (*) ') }}</label>
                             <div class="col-md-6">
                                <p><textarea id="comparativa" cols="19.5" rows="5" class="form-control{{ $errors->has('comparativa') ? ' is-invalid' : '' }}" name="comparativa" value="{{ old('comparativa') }}" required autofocus>{{ old('comparativa', $prod->comparativa) }}</textarea></p>
                                 @if ($errors->has('comparativa'))
@@ -69,7 +70,7 @@
                          </div>  
 						 
 						 <div class="form-group row">
-                            <label for="competitiva" class="col-md-4 col-form-label text-md-right">{{ __('Ventaja Competitiva') }}</label>
+                            <label for="competitiva" class="col-md-4 col-form-label text-md-right">{{ __('Ventaja Competitiva (*) ') }}</label>
                             <div class="col-md-6">
                                <p><textarea id="comparativa" cols="19.5" rows="5" class="form-control{{ $errors->has('competitiva') ? ' is-invalid' : '' }}" name="competitiva" value="{{ old('competitiva') }}" required autofocus>{{ old('competitiva', $prod->competitiva) }}</textarea></p>
                                 @if ($errors->has('comparativa'))

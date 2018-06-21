@@ -3,10 +3,13 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card">
                 <div class="card-header">{{ __('Marco Lógico') }}</div>
                 <div class="card-body">
+					
+				<!--Botones-->
+				<link href="{{asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
 					
 					<!-----TAB 1----->
 					
@@ -27,11 +30,12 @@
                             <a href="{{ route('arbolprob.create') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Problema</a>
                             @endif
                             <br>
-                            <table class="table">
+                            <table class="table" cellspacing="0" cellpadding="0" >
                                 <thead class="thead-light">	
                                     <tr>
                                         <th scope="col">Problema</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Editar</th>
+                                        <th scope="col">Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -39,13 +43,16 @@
                                     <tr>    
                                         <td>{!! $value->problema !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info" href="{{ route('arbolprob.edit', $value->id) }}"> Editar</a>
-      
+                                            <a aria-label="Editar" type="button" class="btn btn-info" href="{{ route('arbolprob.edit', $value->id) }}" >
+                                            <span class="glyphicon glyphicon-pencil"></span></a>
+										</td>
+										 
+										<td>
                                              <form method="POST" action="{{ route('arbolprob.delete', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar el problema: {!! $value->problema!!}?')">
-                                                Eliminar
+                                                <button aria-label="Eliminar" type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar el problema: {!! $value->problema!!}?')">
+                                                <span class="glyphicon glyphicon-trash"></span> </button>
                                                 </button>
                                             </form>  
                                         </td>                                         
@@ -72,7 +79,8 @@
 											<th scope="col">Efecto Directo</th>
 											<th scope="col">Efecto Indirecto</th>
 											<th scope="col">Causa Raiz</th>
-											<th scope="col"></th>
+											<th scope="col">Editar</th>
+											<th scope="col">Eliminar</th>
 
 									</tr>
                                 </thead>
@@ -88,13 +96,16 @@
                                         <td>{!! $valor->causa_raiz !!}</td>
                                         
                                         <td>
-                                           <a type="button" class="btn btn-info" href="{{ route('causas.edit', $valor->id) }}"> Editar</a>
-                                           
+                                           <a aria-label="Editar" type="button" class="btn btn-info" href="{{ route('causas.edit', $valor->id) }}">
+                                           <span class="glyphicon glyphicon-pencil"></span></a>
+                                        </td>
+                                        
+                                        <td>
                                             <form method="POST" action="{{ route('causas.delete', $valor->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar la causa directa: {!! $valor->causa_directa !!}?')">
-                                                Eliminar
+                                                <button aria-label="Editar" type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar la causa directa: {!! $valor->causa_directa !!}?')">
+                                                <span class="glyphicon glyphicon-trash"></span> </button>
                                                 </button>
                                             </form>                                     
                                         
@@ -126,7 +137,8 @@
                                 <thead class="thead-light">	
                                     <tr>
                                         <th scope="col">Objetivo</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Editar</th>
+                                        <th scope="col">Eliminar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -134,13 +146,15 @@
                                     <tr>    
                                         <td>{!! $value->objetivo !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info" href="{{ route('arbolobj.edit', $value->id) }}"> Editar</a>
-      
+                                            <a aria-label="Editar" type="button" class="btn btn-info" href="{{ route('arbolobj.edit', $value->id) }}">
+                                            <span class="glyphicon glyphicon-pencil"></span></a>
+										</td>
+										<td>
                                              <form method="POST" action="{{ route('arbolobj.delete', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar el objetivo: {!! $value->objetivo!!}?')">
-                                                Eliminar
+                                                <button aria-label="Eliminar" type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar el objetivo: {!! $value->objetivo!!}?')">
+                                                <span class="glyphicon glyphicon-trash"></span> </button>
                                                 </button>
                                             </form>  
                                         </td>                                         
@@ -165,8 +179,8 @@
 											<th scope="col">Medio Directo</th>
 											<th scope="col">Fin Indirecto</th>
 											<th scope="col">Fin Raiz</th>
-											<th scope="col"></th>
-
+											<th scope="col">Editar</th>
+											<th scope="col">Eliminar</th>
 									</tr>
                                 </thead>
                                 <tbody>
@@ -182,13 +196,16 @@
                                         
                                         
                                         <td>
-                                           <a type="button" class="btn btn-info" href="{{ route('medios.edit', $valor->id) }}"> Editar</a>
+                                           <a aria-label="Editar" type="button" class="btn btn-info" href="{{ route('medios.edit', $valor->id) }}">
+                                           <span class="glyphicon glyphicon-pencil"></span></a>
                                            
+                                        </td>
+                                        <td>
                                             <form method="POST" action="{{ route('medios.delete', $valor->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar la actividad: {!! $valor->actividad !!}?')">
-                                                Eliminar
+                                                <button aria-label="Eliminar" type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar la actividad: {!! $valor->actividad !!}?')">
+                                                <span class="glyphicon glyphicon-trash"></span> </button>
                                                 </button>
                                             </form>                                     
                                         
@@ -216,6 +233,8 @@
 							
                             <a href="{{ route('interesados.create') }}" type="button" class="btn btn-primary btn-lg btn-block">Agregar Interesado</a>
                             <br>
+
+                            @if($inte->count()>=1)
                             <table class="table">
                                 <thead class="thead-light">
 								<br><br>
@@ -225,41 +244,119 @@
                                         <th scope="col">Interesados</th>
                                         <th scope="col">Problemas Percibidos</th>
                                         <th scope="col">Recursos y Mandatos</th>
-                                        <th scope="col">Conflictos Potenciales</th>
-                                        <th scope="col"></th>
+                                        <th scope="col">Conflictos Potenciales</th>                                  
+                                        <th scope="col">Editar</th>
+                                        <th scope="col">Eliminar</th>
+                                        <th scope="col">Añadir Contacto</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach($inte as $key => $value)
+                                   @foreach($inte as $key => $value) 
                                     <tr>    
                                         <td>{!! $value->grupo !!}</td>
                                         <td>{!! $value->interesados !!}</td>
                                         <td>{!! $value->problemas!!}</td>
                                         <td>{!! $value->recursos !!}</td>
                                         <td>{!! $value->conflictos!!}</td>
-                                        <td>
+                                        
+                                        
+                                       
+                                        <td>    
+                                            <a aria-label="Editar" type="button" class="btn btn-info" href="{{ route('interesados.edit', $value->id) }}"> 
+                                             <span class="glyphicon glyphicon-pencil"></span></a>
+                                        </td>
+                                        
+                                        <td>    
                                            
-											<a type="button" class="btn btn-success" href="{{ route('interesados.edit', $value->id) }}"> Añadir Contacto</a>
-                                             <a type="button" class="btn btn-info" href="{{ route('interesados.edit', $value->id) }}"> Editar</a>
                                             <form method="POST" action="{{ route('interesados.delete', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('DELETE') }}
-                                                <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar el interesado {!! $value->interesados !!}?')">
-                                                Eliminar
-                                                </button>
+                                                <button aria-label="Eliminar" type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro desea eliminar el interesado {!! $value->interesados !!}?')">
+												<span class="glyphicon glyphicon-trash"></span> </button>
                                             </form>
                                         </td>
+                                        
+                                        <td>
+                                        	<a aria-label="Contacto" type="button" class="btn btn-success" href="{{ route('contacto.edit', $value->id) }}"> 
+                                        	 <span class="glyphicon glyphicon-user"></span></a>
+                                        </td>    
+ 
                                     </tr>
+                            
                                     @endforeach
                                 </tbody>
                             </table>
+							@endif
+                            
+                            @foreach($inte as $key => $value)
+                            @if($value->nombre!=null)
+                            
+                             <table class="table">
+                                <thead class="thead-light">
+								<br><br>
+								<p>Listado de Contactos:</p>	
+                                    <tr>
+										<th scope="col">Nombre</th>
+                                        <th scope="col">Correo</th>
+                                        <th scope="col">Telefono/Celular</th>
+                                        <th scope="col">Responsabilidad</th>
+                                        <th scope="col">Editar</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach($inte as $key => $value)
+                                    
+                                    <tr>    
+                                        <td>{!! $value->nombre !!}</td>
+                                        <td>{!! $value->correo !!}</td>
+                                        <td>{!! $value->telefono!!}</td>
+                                        <td>{!! $value->responsabilidad !!}</td>
+                                        
+                                        <td>    
+                                            <a aria-label="Editar" type="button" class="btn btn-info" href="{{ route('contacto.edit', $value->id) }}"> 
+                                             <span class="glyphicon glyphicon-pencil"></span></a>
+                                        </td>
+                                        
+                                    </tr>
+										
+                                    @endforeach
+                                 @endif  
+                                </tbody>
+                            </table>
+						@endforeach
  
-     
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
                         </div>
 					  </div>
 					 </div><!-- /.content_holder -->
 					</div><!-- /.tabs_holder -->
+					
+					        <table align="center">
+								<tr>
+									<td>
+										<a href="{{ route('a.tabla') }}"  type="button"  class="btn btn-primary">
+										<span class="glyphicon glyphicon-triangle-left"></span></a>
+									</td>
+									<td>
+										 <a href="{{ route('pastel.index') }}" type="button"  class="btn btn-primary">
+										<span class="glyphicon glyphicon-triangle-right"></span></a>
+									</td>
+								</tr>
+							</table>
+					
+					
 
 					<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.min.js"></script>
 					<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.10/jquery-ui.min.js"></script>

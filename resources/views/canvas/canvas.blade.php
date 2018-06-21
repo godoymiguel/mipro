@@ -5,6 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
+				
+				<!--Botones-->
+				<link href="{{asset('css/bootstrap.css') }}" rel="stylesheet" media="screen">
+				
                 <div class="card-header">{{ __('Modelo de Negocios Canvas') }}</div>
                				
                 <div class="card-body">
@@ -82,7 +86,6 @@
 							  </tr>								  
 							</table>
 						</div>
-			
 
 						@if($method == 'create' || $method == 'edit')          
                         <div class="form-group row mb-0">
@@ -92,6 +95,20 @@
                         </div>
                         @endif
                         
+                        
+                          <table align="center">
+								<tr>
+									<td>
+										<a href="{{ route('idea.tabla') }}"  type="button"  class="btn btn-primary">
+										<span class="glyphicon glyphicon-triangle-left"></span></a>
+									</td>
+									<td>
+										 <a href="{{ route('a.tabla') }}" type="button"  class="btn btn-primary">
+										<span class="glyphicon glyphicon-triangle-right"></span></a>
+									</td>
+								</tr>
+							</table>
+
 
               
                 </div>
