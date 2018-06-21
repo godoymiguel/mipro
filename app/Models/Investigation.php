@@ -36,4 +36,9 @@ class Investigation extends Model
     {
         return $this->hasOne(Offer::class);
     }
+
+    public function projection()
+    {
+        return $this->hasMany(ProjectionInvestigation::class);
+    }
 }

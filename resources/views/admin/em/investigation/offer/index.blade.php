@@ -4,8 +4,16 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if($errors->any())
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+              {{$errors->first()}}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            @endif
             <div class="card">
-                <div class="card-header">{{ __('Investigación de Campo') }}</div>
+                <div class="card-header">{{ __('Investigación de Campo - Oferta') }}</div>
                 <div class="card-body">
                     <div class="form-group row">
                         <div class="col-md-12">
@@ -64,6 +72,7 @@
                             <hr>
                             <a href="{{ route('investigation.index') }}" type="button" class="btn btn-primary btn-md btn-block">Investigacion</a>
                             <a href="{{ route('demand.index') }}" type="button" class="btn btn-primary btn-md btn-block">Demanda</a>
+                            <a href="{{ route('projectionInvestigation.index') }}" type="button" class="btn btn-primary btn-md btn-block">Proyección</a>
                             
                             
                         </div>

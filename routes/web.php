@@ -165,5 +165,7 @@ Route::resource('investigation','InvestigationController');
 Route::resource('population','PopulationController');
 Route::resource('demand','DemandController');
 Route::resource('offer','OfferController');
+Route::resource('projectionInvestigation','ProjectionInvestigationController');
+Route::get('marketGapInvestigation/{investigation}', 'ProjectionInvestigationController@marketGap')->name('marketGap.investigation');
 
 //ESTUDIO TECNICO
