@@ -6,7 +6,6 @@ use Illuminate\Database\Seeder;
 
 use App\Models\Rol;
 
-
 class RolsTableSeeder extends Seeder
 {
     /**
@@ -28,12 +27,5 @@ class RolsTableSeeder extends Seeder
         	'value' => 'STUDENT',
         	'title' => 'Estudiante',
         ]);
-
-        Rol::create([
-            'id' => Uuid::generate()->string,
-            'value' => 'TEACHER',
-            'title' => 'Profesor',
-        ]);
-        
     }
 }

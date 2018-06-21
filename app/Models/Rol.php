@@ -26,9 +26,4 @@ class Rol extends Model
     {
         return $this->where('value','STUDENT')->value('id');
     }
-
-    public function searchUuid($value)
-    {
-        return $this->where('value',$value)->value('id');
-    }
 }
