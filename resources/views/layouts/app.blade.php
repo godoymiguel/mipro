@@ -98,7 +98,7 @@
       <!-- accordion-toggle -->
       <ul class="menu-submenu accordion-content">        
          <li><a class="head" href="{{ route('proyectos.index') }}">Proyectos</a></li>
-         <li><a class="head" href="{{ route('promotor.index') }}">Promotores</a></li>
+         <li><a class="head" href="{{ route('promotor.index') }}">Datos Emprendimiento</a></li>
          @if(Auth::user()->rol->value == 'ADMIN')
          <li><a class="head" href="{{ route('usuario.index') }}">Usuarios</a></li>
          <li><a class="head" href="{{ route('rol.index') }}">Roles</a></li>

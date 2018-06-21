@@ -116,7 +116,9 @@ class PopulationController extends Controller
     {
         $method = 'show';
 
-        return view('admin.em.investigation.population.population', compact('population','method'));
+        $investigation = Investigation::where('project_id', $this->project->projectUser(Auth::user()->id))->first();
+
+        return view('admin.em.investigation.population.population', compact('investigation','population','method'));
     }
 
     /**
@@ -129,7 +131,9 @@ class PopulationController extends Controller
     {
         $method = 'edit';
 
-        return view('admin.em.investigation.population.population', compact('population','method'));
+        $investigation = Investigation::where('project_id', $this->project->projectUser(Auth::user()->id))->first();
+
+        return view('admin.em.investigation.population.population', compact('investigation','population','method'));
     }
 
     /**

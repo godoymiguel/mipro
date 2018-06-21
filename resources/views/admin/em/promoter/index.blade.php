@@ -29,15 +29,11 @@
                                         <td>{!! $value->type .'-'. $value->cedula !!}</td>
                                         <td>{!! $value->email !!}</td>
                                         <td>
-                                            <a type="button" class="btn btn-info" href="{{ route('promotor.edit', $value->id) }}">
-                                                Editar
-                                            </a>
+                                            <a type="button" class="btn btn-info" href="{{ route('promotor.edit', $value->id) }}">Editar</a>
                                             <form method="POST" action="{{ route('promotor.destroy', $value->id) }}">
                                                 @csrf
                                                     {{ method_field('Delete') }}
-                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->name !!}?')">
-                                                    Borrar
-                                                    </button>
+                                                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Seguro Desea Eliminar el registro {!! $value->name !!}?')">Borrar</button>
                                                 </form>
                                         </td>
                                     </tr>
