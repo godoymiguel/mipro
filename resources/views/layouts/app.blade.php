@@ -134,7 +134,7 @@
          <li><a class="head" href="{{ route('regresion.index') }}">- Regresión</a></li>
          <li><a class="head" href="{{ route('proyeccion.index') }}">- Proyección</a></li>
          <li><a class="head" href="{{ route('marketGap') }}">- Brecha de Mercado</a></li>
-
+		 <li><a class="head" href="{{ route('contenedorprod.index') }}">Plan de Marketing</a></li>
       </ul> 
       
          

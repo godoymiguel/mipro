@@ -11,6 +11,7 @@ use App\Models\Distribucion;
 use App\Models\Publicidad;
 use Auth;
 
+
 class ContenedorProductoController extends Controller
 {	
 	protected $project;

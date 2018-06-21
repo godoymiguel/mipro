@@ -12,7 +12,7 @@ class Interesados extends Model
      * Atributos de la tabla Interesados
      */
     protected $fillable = [
-        'id', 'grupo', 'interesados', 'problemas', 'recursos', 'conflictos', 'estudio', 'proyecto_id',
+        'id', 'grupo', 'interesados', 'problemas', 'recursos', 'conflictos', 'nombre', 'correo', 'telefono', 'responsabilidad', 'estudio', 'proyecto_id',
     ];
     
      /**
@@ -22,7 +22,11 @@ class Interesados extends Model
     {
     	return $this->belongsTo(Project::class);
     }
-
+   
+    public function contactos()
+    {
+    	return $this->hasMany(Contacto::class);
+    }
     
 }
 

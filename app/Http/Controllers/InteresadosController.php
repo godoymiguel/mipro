@@ -32,8 +32,7 @@ class InteresadosController extends Controller
      */
     public function index()
     {
-		$inte=Interesados::where('proyecto_id', $this->project->projectUser(Auth::user()->id))->get();
-       	return view('interesados.tabla_interesados', compact('inte'));
+
     }
 
     /**
@@ -45,6 +44,20 @@ class InteresadosController extends Controller
     {
         return view('interesados.anadir_interesados');
     }
+    
+    
+    public function contacto_create(Interesados $inte)
+    {
+		$method = 'create';
+		return view('interesados.anadir_contacto', compact('method', 'inte'));
+
+	}
+	
+	public function contacto_edit(Interesados $inte)
+    {
+        $method = 'edit';
+        return view('interesados.anadir_contacto', compact('method','inte'));
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -54,6 +67,7 @@ class InteresadosController extends Controller
      */
     public function store(Request $request)
     {
+	
         $inte=new Interesados($request->all());
         $inte->id=Uuid::generate()->string;
         $inte->proyecto_id=$this->project->projectUser(Auth::user()->id);
@@ -93,7 +107,7 @@ class InteresadosController extends Controller
     public function update(Request $request, Interesados $inte)
     {
         $inte->update($request->all());
-        return redirect()->route('interesados.tabla');
+        return redirect()->route('contenedor.index');
     }
 
     /**

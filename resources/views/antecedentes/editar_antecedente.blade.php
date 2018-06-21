@@ -33,15 +33,14 @@
                             <div class="col-md-6">
 			
 								<p> <select id="tipo" name="tipo" class="form-control{{ $errors->has('tipo') ? ' is-invalid' : '' }}">
-								
-								   <option value= "Historia del bien o servicio"> Historia del bien o servicio </option> 
-								   <option value= "Uso de aplicaciones del bien o servicio"> Uso de aplicaciones del bien o servicio</option> 
-								   <option value= "Consumo: tasas y frecuencia">Consumo: tasas y frecuencia</option>
-								   <option value= "Principales consumidores o clientes">Principales consumidores o clientes</option> 
-								   <option value= "Principales fabricantes o prestadores">Principales fabricantes o prestadores</option> 
-								   <option value= "Tecnología asociada a la fabricación del bien o servicio">Tecnología asociada a la fabricación del bien o servicio</option> 
-								   <option value= "Tendencias del bien o servicio">Tendencias del bien o servicio</option> 
-								{{ old('tipo',$ante->tipo) }}
+								   <option {{ $ante->tipo == "Historia del bien o servicio" ? 'selected=selected':null}} value= "Historia del bien o servicio"> Historia del bien o servicio </option> 
+								   <option {{ $ante->tipo == "Uso de aplicaciones del bien o servicio" ? 'selected=selected':null}} value= "Uso de aplicaciones del bien o servicio"> Uso de aplicaciones del bien o servicio </option> 
+								   <option {{ $ante->tipo == "Consumo: tasas y frecuencia" ? 'selected=selected':null}} value= "Consumo: tasas y frecuencia"> Consumo: tasas y frecuencia </option> 
+								   <option {{ $ante->tipo == "Principales consumidores o clientes" ? 'selected=selected':null}} value= "Principales consumidores o clientes"> Principales consumidores o clientes </option> 
+								   <option {{ $ante->tipo == "Principales fabricantes o prestadores" ? 'selected=selected':null}} value= "Principales fabricantes o prestadores"> Principales fabricantes o prestadores </option> 
+								   <option {{ $ante->tipo == "Tecnología asociada a la fabricación del bien o servicio" ? 'selected=selected':null}} value= "Tecnología asociada a la fabricación del bien o servicio"> Tecnología asociada a la fabricación del bien o servicio </option> 
+								   <option {{ $ante->tipo == "Tendencias del bien o servicio" ? 'selected=selected':null}} value= "Tendencias del bien o servicio"> Tendencias del bien o servicio </option> 
+	
 								</select></p>
 								
                                 

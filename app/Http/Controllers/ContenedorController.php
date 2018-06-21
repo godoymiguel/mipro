@@ -12,7 +12,6 @@ use App\Models\Arbol_Objetivo;
 use App\Models\MediosFin;
 use App\Models\Interesados;
 
-
 class ContenedorController extends Controller
 {
     /**

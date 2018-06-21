@@ -13,7 +13,7 @@
                         <p><h3 style="text-align:center">Editar Interesados</h3></p>
                        
                         <div class="form-group row">
-                            <label for="fuente" class="col-md-4 col-form-label text-md-right">{{ __('Grupo') }}</label>
+                            <label for="grupo" class="col-md-4 col-form-label text-md-right">{{ __('Grupo') }}</label>
                             <div class="col-md-6">
                                 <input id="grupo" type="text" class="form-control{{ $errors->has('grupo') ? ' is-invalid' : '' }}" name="grupo" value="{{ old('grupo', $inte->grupo) }}" required autofocus>
                             </div>
