@@ -67,6 +67,86 @@
             </div>
         </nav>
 
+
+
+
+
+
+@auth
+<!--Inicio Menu deslizable -->
+  <div id="menu-container">
+   <div id="menu-wrapper">
+      <div id="hamburger-menu"><span></span><span></span><span></span></div>
+      <!-- hamburger-menu -->
+   </div>
+   <!-- menu-wrapper -->
+   <ul class="menu-list accordion">
+      <li id="nav1" class="toggle accordion-toggle"> 
+         <span class="icon-plus"></span>
+         <a class="menu-link" href="#">Gestión del Proyecto</a>
+      </li>
+      <!-- accordion-toggle -->
+      <ul class="menu-submenu accordion-content">        
+         <li><a class="head" href="{{ route('proyectos.index') }}">Proyectos</a></li>
+         <li><a class="head" href="{{ route('promotor.index') }}">Datos Emprendimiento</a></li>
+         @if(Auth::user()->rol->value == 'ADMIN')
+         <li><a class="head" href="{{ route('usuario.index') }}">Usuarios</a></li>
+         <li><a class="head" href="{{ route('rol.index') }}">Roles</a></li>
+        @endif
+      </ul>
+     
+     
+      <!-- menu-submenu accordon-content-->
+      <li id="nav2" class="toggle accordion-toggle"> 
+         <span class="icon-plus"></span>
+         <a class="menu-link" href="#">Idea de Negocios</a>
+      </li>
+      <!-- accordion-toggle -->
+      <ul class="menu-submenu accordion-content">
+         <li><a class="head" href="{{ route('idea.tabla') }}">Idea</a></li>
+         <li><a class="head" href="{{ route('canvas.create') }}">Canvas</a></li>
+      </ul>
+    
+      <!-- menu-submenu accordon-content-->
+      <li id="nav3" class="toggle accordion-toggle"> 
+         <span class="icon-plus"></span>
+         <a class="menu-link" href="#">Estudio de Mercado</a>
+      </li>
+      
+      <!-- accordion-toggle -->
+      <ul class="menu-submenu accordion-content">
+         <li><a class="head" href="{{ route('a.tabla') }}">Antecedentes</a></li>
+         <li><a class="head" href="{{ route('contenedor.index') }}">Marco Lógico</a></li>
+         <li><a class="head" href="{{ route('pastel.index') }}">Análisis de Entorno</a></li>
+         <li><a class="head" href="{{ route('foda.tabla') }}">Análisis de Empresa</a></li>
+         <li><a class="head">Investigación de Mercado</a></li>
+         <li><a class="head">Enfoque Cuantitativo</a></li>
+         <li><a class="head" href="{{ route('serietemporal.index') }}">- Serie Temporales</a></li>
+         <li><a class="head" href="{{ route('regresion.index') }}">- Regresión</a></li>
+         <li><a class="head" href="{{ route('proyeccion.index') }}">- Proyección</a></li>
+         <li><a class="head" href="{{ route('marketGap') }}">- Brecha de Mercado</a></li>
+         <li><a class="head">Enfoque Cualitativo</a></li>
+         <li><a class="head" href="{{ route('investigation.index') }}">- Ficha de Campo</a></li>
+		 <li><a class="head" href="{{ route('contenedorprod.index') }}">Plan de Marketing</a></li>
+      </ul> 
+      
+         
+         
+      </ul>
+      <!-- menu-submenu accordon-content-->
+   </ul>
+   <!-- menu-list accordion-->
+</div>
+@endif
+
+
+<div>
+<!--Fin Menu deslizable -->
+
+
+
+
+	<div>
         <main class="py-4">
             @yield('content')
         </main>
